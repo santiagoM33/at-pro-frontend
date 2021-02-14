@@ -131,5 +131,82 @@ export class FormPublish extends Component {
         )
     }
 }
+
+export class FormRegister extends Component {
+    state= { }
+    render() {
+        return (
+            <form>
+                <Row className='col-12 input-group'>
+                    <FormGroup 
+                        attribute = {{
+                            type: 'text',
+                            id: 'fName',
+                            name: 'fName',
+                            className: 'form-control col-',
+                            placeholder: 'Ingrese su nombre',
+                            help: 'fName-error'
+                        }}
+
+                        helpId='fName-error'
+                    >
+                    Su nombre debe contener mas de 3 letras.</FormGroup>
+                    <FormGroup 
+                        attribute = {{
+                            type: 'text',
+                            id: 'lName',
+                            name: 'lName',
+                            className: 'form-control col-12',
+                            placeholder: 'Ingrese su Apellido',
+                            help: 'lName-error'
+                        }}
+
+                        helpId='lName-error'
+                    >
+                    Su apellido debe contener mas de 4 letras.</FormGroup>
+                </Row>
+                <FormGroup 
+                    attribute = {{
+                        type: 'email',
+                        id: 'email',
+                        name: 'email',
+                        className: 'form-control col-12',
+                        placeholder: 'Ingrese su Email',
+                        help: 'email-error'
+                    }}
+
+                    helpId='email-error'
+                >
+                El email es invalido.</FormGroup>
+                <FormGroup 
+                    attribute = {{
+                        type: 'password',
+                        id: 'password',
+                        name: 'password',
+                        className: 'form-control col-12',
+                        placeholder: 'Ingrese un Password',
+                        help: 'pass-error'
+                    }}
+
+                    helpId='pass-error'
+                >
+                El password debe contener numeros, signos, mayúsculas y minúsculas</FormGroup>
+                <FormSelect
+                attribute = {{
+                    htmlFor: 'category_id',
+                    label: 'Categoria',
+                    id: 'category_id'
+                }}
+                >Escort</FormSelect>
+                <Row className='col'>
+                    <Button
+                        type='submit'
+                        style='primary btn-block'
+                    >Registrarse</Button>
+                </Row>
+            </form>
+        )
+    }
+}
  
 export default FormEmail;

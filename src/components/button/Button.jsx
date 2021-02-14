@@ -4,7 +4,7 @@ import classnames from 'classnames';
 
 
 
-const Button = ({type, style, children}) => {
+const Button = ({type, style, btn,children}) => {
     return ( 
         <button type={type} className={classnames('btn',{
             [`btn-${style}`] : style
@@ -15,7 +15,7 @@ const Button = ({type, style, children}) => {
 
 Button.propTypes = {
     children: PropTypes.node.isRequired,
-    style: PropTypes.oneOf(['primary', 'secondary'])
+    //style: PropTypes.oneOf(['primary', 'secondary'])
 }
 
 Button.defautProps = {
