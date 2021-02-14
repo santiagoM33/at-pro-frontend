@@ -19,15 +19,19 @@ const Header = (props) => {
                 </Collapse>
             </div>
             <nav>
-                <form className="my-1 my-lg-0">
+                <form className="pl-4 ml-2 my-1 my-lg-0">
                     <div className="row  input-group">
                         <input className="form-control col-8 col-md-10" type="search" placeholder="¿Donde estas?" aria-label="Search" />
                         <select className="form-control col-4 col-md-2">
                             <option>+ 0 km</option>
+                            <option>+ 5 km</option>
+                            <option>+ 10 km</option>
+                            <option>+ 15 km</option>
+                            <option>+ 20 km</option>
                         </select>
                     </div>
                 </form>
-                <form className="my-1 my-lg-0">
+                <form className="pl-4 ml-2 my-1 my-lg-0">
                 <div className="row input-group">
                         <input className="form-control mr-sm-2 col-10 col-md-11" type="search" placeholder="Search" aria-label="Search" />                       
                         <button className="btn btn-success my-sm-0 col-2 col-md-1" type="submit"><GoSearch /></button>

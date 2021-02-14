@@ -21,19 +21,20 @@ class Home extends Component {
             .then(res => res.json())
             .then(resJson => this.setState({users: resJson}))
     }
+    
     render() { 
         return ( 
             <Fragment>
                 <Header>AltoGato</Header>
-                    <main className='Container'>
+                    <main className='container-fluid'>
                         <HeaderMain />
                         <article className='row'>
                             { 
-                                this.state.users.map((user) => {                             
+                                Object.keys(this.state.users).map((key) => {                             
                                     return <section className='col-12 col-sm-6 col-md-4 my-1'>
                                     <Card
-                                        key={user.id}
-                                        user={user} 
+                                        key={key}
+                                        user={this.state.users[key]} 
                                     />
                                     </section>
                                 })

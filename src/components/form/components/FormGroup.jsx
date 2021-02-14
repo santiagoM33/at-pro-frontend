@@ -1,8 +1,8 @@
 import React from 'react'
 import Input from '../../../partials/input/Input'
-import HelpInput from '../../../partials/help/Help'
+import SpanError from '../../../partials/help/Help'
  
-const FormGroup = ({attribute, helpId, children, onHandleChange}, props) => {
+const FormGroup = ({attribute, spanError, children, onHandleChange}, props) => {
     return ( 
         <div className="form-group">
             <Input 
@@ -18,9 +18,9 @@ const FormGroup = ({attribute, helpId, children, onHandleChange}, props) => {
                 help={attribute.help}
 
             />
-            <HelpInput
-                id={helpId}
-            >{children}</HelpInput>
+            <SpanError
+                id={spanError}
+            >{children}</SpanError>
         </div>
      );
 }

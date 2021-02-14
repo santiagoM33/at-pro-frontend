@@ -35,10 +35,10 @@ class FormEmail extends Component {
 export class FormLogin extends Component {
     state = {
         user: '',
-        password: ''
+        password: '',
     }
 
-    onHandleChange = (e) => {
+    onHandleChange = e => {
         this.setState({
             [e.target.name]: e.target.value
         })

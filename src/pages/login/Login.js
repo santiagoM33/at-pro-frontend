@@ -8,7 +8,7 @@ import Title from '../../partials/title/Title';
 
 class Login extends Component {
     state = { 
-        login: {}
+        login: []
     }
 
     saveData= (user, password) => {
@@ -25,8 +25,8 @@ class Login extends Component {
                 <HeaderLog>AltoGato</HeaderLog>
                 <div className='container-fluid'>
                     <Title
-                        className='text-center my-3 h3'
-                    >Panel de control</Title>
+                        className='text-center my-3 h4'
+                    >Ingreso al Panel de control</Title>
                     <Row className='col'>
                         <FormLogin saveData={this.saveData}/>
                     </Row>
