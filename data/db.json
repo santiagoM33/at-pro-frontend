@@ -54,6 +54,12 @@
             "descripcion": "Flaquita completa delgadita de 28 años a tu disposicion",
             "thumbnails": "https://i.pinimg.com/originals/9a/ed/c3/9aedc37475ddefba72f164fa68801995.jpg"
         }
+    ],
+
+    "categories": [
+        {"id": 1, "name": "Admin", "label": "admin"},
+        {"id": 2, "name": "Escort", "label": "escort"},
+        {"id": 3, "name": "User", "label": "user"}
     ]
 }
         

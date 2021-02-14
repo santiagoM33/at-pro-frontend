@@ -6,8 +6,22 @@ import Row from '../../partials/row/Row';
 import Title from '../../partials/title/Title';
 
 class Register extends Component {
-    state = {  }
+    state = { 
+        categories: []
+    }
+
+    componentDidMount() {
+        const BASE_URI = 'http://localhost:8005';
+        const ep = '/categories';
+
+        fetch(`${BASE_URI}${ep}`)
+            .then(res => res.json())
+            .then(resJson => this.setState({categories: resJson}))
+        
+    }
+
     render() { 
+        //console.log(this.state.categories)
         return ( 
             <Fragment>
                 <HeaderLog>AltoGato</HeaderLog>
@@ -18,7 +32,7 @@ class Register extends Component {
                     <Row
                         className='col-12'
                     >
-                        <FormRegister />
+                        <FormRegister categories={this.state.categories}/>
                     </Row>
                 </div>
             </Fragment>

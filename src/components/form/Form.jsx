@@ -133,10 +133,27 @@ export class FormPublish extends Component {
 }
 
 export class FormRegister extends Component {
-    state= { }
+    state= { 
+        fName: '',
+        fNameError: false,
+        lName: '',
+        lNameError: false,
+        email: '',
+        emailError: false,
+        password: '',
+        passError: false,
+        today: new Date()
+    }
+
+    onHandleSubmit(e) {
+        e.preventDefault();
+        console.log('Enviando...')
+    }
+
     render() {
+        //let today = new Date();
         return (
-            <form>
+            <form onSubmit={this.onHandleSubmit.bind(this)}>
                 <Row className='col-12 input-group'>
                     <FormGroup 
                         attribute = {{
@@ -147,8 +164,8 @@ export class FormRegister extends Component {
                             placeholder: 'Ingrese su nombre',
                             help: 'fName-error'
                         }}
-
-                        helpId='fName-error'
+                        onHandleChange={this.onHandleChange}
+                        spanError='fName-error'
                     >
                     Su nombre debe contener mas de 3 letras.</FormGroup>
                     <FormGroup 
@@ -160,44 +177,61 @@ export class FormRegister extends Component {
                             placeholder: 'Ingrese su Apellido',
                             help: 'lName-error'
                         }}
-
-                        helpId='lName-error'
+                        onHandleChange={this.onHandleChange}
+                        spanError='lName-error'
                     >
                     Su apellido debe contener mas de 4 letras.</FormGroup>
                 </Row>
+                <Row className='col-12'>
+                    <FormGroup 
+                        attribute = {{
+                            type: 'email',
+                            id: 'email',
+                            name: 'email',
+                            className: 'form-control col-12',
+                            placeholder: 'Ingrese su Email',
+                            help: 'email-error'
+                        }}
+                        onHandleChange={this.onHandleChange}
+                        spanError='email-error'
+                    >
+                    El email es invalido.</FormGroup>
+                </Row>
+                <Row className='col-12'>
+                    <FormGroup 
+                        attribute = {{
+                            type: 'password',
+                            id: 'password',
+                            name: 'password',
+                            className: 'form-control col-12',
+                            placeholder: 'Ingrese un Password',
+                            help: 'pass-error'
+                        }}
+                        onHandleChange={this.onHandleChange}
+                        spanError='pass-error'
+                    >
+                    El password debe contener numeros, signos, mayúsculas y minúsculas</FormGroup>
+                </Row>
+                <Row className='col-12'>
+                    <FormSelect 
+                        attribute = {{
+                            htmlFor: 'category_id',
+                            id: 'category_id'
+                        }}
+                        multiple= {false}
+                        categories={this.props.categories}
+                        
+                    />
+                </Row>
                 <FormGroup 
-                    attribute = {{
-                        type: 'email',
-                        id: 'email',
-                        name: 'email',
-                        className: 'form-control col-12',
-                        placeholder: 'Ingrese su Email',
-                        help: 'email-error'
-                    }}
-
-                    helpId='email-error'
-                >
-                El email es invalido.</FormGroup>
-                <FormGroup 
-                    attribute = {{
-                        type: 'password',
-                        id: 'password',
-                        name: 'password',
-                        className: 'form-control col-12',
-                        placeholder: 'Ingrese un Password',
-                        help: 'pass-error'
-                    }}
-
-                    helpId='pass-error'
-                >
-                El password debe contener numeros, signos, mayúsculas y minúsculas</FormGroup>
-                <FormSelect
-                attribute = {{
-                    htmlFor: 'category_id',
-                    label: 'Categoria',
-                    id: 'category_id'
-                }}
-                >Escort</FormSelect>
+                        attribute = {{
+                            type: 'hidden',
+                            name: 'createAt',
+                            className: 'form-control col-12',
+                        }}
+                        value={this.state.today}
+                        
+                    />
                 <Row className='col'>
                     <Button
                         type='submit'
