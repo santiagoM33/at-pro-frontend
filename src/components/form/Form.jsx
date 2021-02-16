@@ -1,27 +1,35 @@
 import React, {Component} from 'react'
-import FormGroup from './components/FormGroup'
 import FormCheck from './components/FormCheck'
-import FormSelect from './components/FormSelect'
+import SpanError from '../../partials/help/SpanError'
 import Button from '../button/Button'
 import Link from '../../partials/link/Link'
 import Row from '../../partials/row/Row'
+//import { v4 as uuidv4 } from 'uuid';
+import { uid } from 'uid';
 
 
 class FormEmail extends Component {
     render() {
         return (
             <form>
-                <FormGroup 
-                    attribute = {{
-                        type: 'email',
-                        id: 'getEmail',
-                        className: 'form-control col-10',
-                        placeholder: 'Ingrese su email',
-                        help: 'user-error'
-                    }}
-                    helpId='user-error'
-                >
-                Por favor ingrese una direccion valida</FormGroup>
+                <Row className='col-12'>
+                    <div className="col-12 form-group">
+                        <input
+                            type='email'
+                            placeholder='Ingrese su email'
+                            className='form-control col'
+
+                            name='email'
+                            aria-describedby={'email-error'} 
+
+                            //value={this.props.email}
+                            //onChange={this.onHandleChange}
+                        />
+                        
+                            <SpanError id='email-error'>Por favor ingrese una direccion valida</SpanError>
+                        
+                    </div>
+                </Row>
                 <Button
                     type='button'
                     style='primary'
@@ -33,9 +41,12 @@ class FormEmail extends Component {
 }
 
 export class FormLogin extends Component {
-    state = {
-        user: '',
-        password: '',
+    constructor(...props) {
+        super(...props)
+        this.state = {
+            email: '',
+            password: '',
+        }
     }
 
     onHandleChange = e => {
@@ -46,8 +57,8 @@ export class FormLogin extends Component {
     
     onHandleSubmit(e) {
         e.preventDefault();
-        this.props.saveData(
-            this.state.user,
+        this.props.getDataL(
+            this.state.email,
             this.state.password
         )
     }
@@ -56,60 +67,74 @@ export class FormLogin extends Component {
         
         return ( 
             <form onSubmit={this.onHandleSubmit.bind(this)}>
-                <FormGroup 
-                    attribute = {{
-                        type: 'text',
-                        id: 'user',
-                        name: 'user',
-                        className: 'form-control col-10',
-                        placeholder: 'Ingrese su nombre de usuario',
-                        help: 'user-error'
-                    }}
+                <Row className='col-12'>
+                    <div className="col-12 form-group">
+                        <input
+                            type='email'
+                            placeholder='Ingrese su email'
+                            className='form-control col'
 
-                    helpId='user-error'
-                    onHandleChange={this.onHandleChange}
-                    value={this.state.user}
-                    
-                >
-                El usuario debe contener mas de 3 letras como min</FormGroup>
+                            name='email'
+                            aria-describedby={'email-error'} 
+                            //ref={this.emailRef}
 
-                <FormGroup 
-                    attribute = {{
-                        type: 'password',
-                        id: 'password',
-                        name: 'password',
-                        className: 'form-control col-10',
-                        placeholder: 'Ingrese su password',
-                        help: 'pass-error'
-                    }}
-                    helpId='pass-error'
-                    onHandleChange={this.onHandleChange}
-                    value={this.state.password}
-                    
-                >
-                La password es invalida</FormGroup>
-                <FormCheck
-                    attribute = {{
-                        type: 'checkbox',
-                        id: 'rememberMe',
-                        className: 'form-check-input',
-                    }}
-                    className='form-check-label'
-                    htmlFor='rememberMe'
-                >
-                Remember Me    
-                </FormCheck>
-                <Row className='col mb-3'>
-                    <Link
-                        href='#'
-                        className='text-primary font-weight-italic h6'
-                    >You forgot your password?</Link>
+                            value={this.state.email}
+                            onChange={this.onHandleChange}
+                        />
+                        
+                            <SpanError id='email-error'>El email es invalido.</SpanError>
+                        
+                    </div>
                 </Row>
-                <Row className='col'>
-                    <Button
-                        type='submit'
-                        style='secondary'
-                    >Ingresar</Button>
+                <Row className='col-12'>
+                    <div className="col-12 form-group">
+                        <input
+                            type='password'
+                            placeholder='Ingrese su password'
+                            className='form-control col'
+
+                            name='password'
+                            aria-describedby={'pass-error'} 
+                            //ref={this.emailRef}
+
+                            value={this.state.password}
+                            onChange={this.onHandleChange}
+                        />
+                        
+                            <SpanError id='pass-error'>El password es invalido.</SpanError>
+                        
+                    </div>
+                </Row>
+                <Row className='col-12'>
+                    <div className="col-12 form-group">
+                        <FormCheck
+                            attribute = {{
+                                type: 'checkbox',
+                                id: 'rememberMe',
+                                className: 'form-check-input',
+                            }}
+                            className='form-check-label'
+                            htmlFor='rememberMe'
+                        >
+                        Remember Me    
+                        </FormCheck>
+                    </div>
+                </Row>
+                <Row className='col-12 mb-2'>
+                    <div className="col-12">
+                        <Link
+                            href='#'
+                            className='text-primary font-weight-italic h6'
+                        >You forgot your password?</Link>
+                    </div>
+                </Row>
+                <Row className='col-12'>
+                    <div className="col-12 form-group">
+                        <Button
+                            type='submit'
+                            style='secondary'
+                        >Ingresar</Button>
+                    </div>
                 </Row>
             </form>
         );
@@ -120,117 +145,242 @@ export class FormPublish extends Component {
     render() {
         return (
             <form>
-                <FormSelect
-                attribute = {{
-                    htmlFor: 'provId',
-                    label: 'Provincia',
-                    id: 'provId'
-                }}
-                >Provincia de Buenos Aires</FormSelect>
+                <Row className='col-12'>
+                    <div className='input-group mb-3'>
+                        <label
+                            htmlFor='prov_id'
+                        >Provincia</label>
+                        <select
+                            className="custom-select col-11 col-sm-12 ml-3" 
+                            id='prov_id'
+                            name='provincia'
+                            
+                            multiple= {false}
+                            //categories={this.props.categories}
+                            //onChange={this.onHandleChange}     
+                        >
+                        </select>
+                    </div>
+                </Row>
             </form>
         )
     }
 }
 
 export class FormRegister extends Component {
-    state= { 
-        fName: '',
-        fNameError: false,
-        lName: '',
-        lNameError: false,
-        email: '',
-        emailError: false,
-        password: '',
-        passError: false,
-        today: new Date()
+    constructor(...props) {
+        super(...props)
+        this.state= {
+            id: 0, 
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
+            category: 0,
+            //Manejo de errores en cada campo
+            fNameError: false,
+            lNameError: false,
+            emailError: false,
+            passError: false,
+            //Manejo de errores generales
+            hasError: false,
+            //Login
+            isLogin: false,
+            //Muestra el dia de hoy
+            today: new Date()
+        }
+        this.onHandleChange = this.onHandleChange.bind(this)
+        this.isMatch = this.isMatch.bind(this)
+    } 
+
+    //Metodos que utilizan name y value
+    onHandleChange(e) {
+        //this.setState({hasError: false})
+        
+        switch (e.target.name) {
+            case 'firstName':
+                if (e.target.value.length < 3 ){
+                    this.setState({fNameError: true})
+                    
+                } else {
+                    this.setState({fNameError: false})
+                }
+                this.setState({firstName: e.target.value})
+                break;
+            case 'lastName':
+                if (e.target.value.length < 4 ){
+                    this.setState({lNameError: true})
+                    
+                } else {
+                    this.setState({lNameError: false})
+                }
+                this.setState({lastName: e.target.value})
+                break;
+            case 'email':
+                const patternEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+                if (!patternEmail.test(e.target.value)) {
+                    this.setState({emailError: true})
+                } else {
+                    this.setState({emailError: false})
+                }
+
+                this.setState({email: e.target.value})
+                break;    
+            case 'password':
+                if (e.target.value.length < 6 ){
+                    this.setState({passError: true})
+                    
+                } else {
+                    this.setState({passError: false})
+                }
+                this.setState({password: e.target.value})
+                break;
+            case 'category':
+                this.setState({category: e.target.value})
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    isMatch = (param) => {
+        if (param.firstName.length > 0 && param.lastName.length > 0 && param.email.length > 0 && param.password.length > 0) {
+            //const {id, firstName, lastName, email, password, category} = param;
+
+            this.setState({
+                id: uid(10)
+            })
+            
+            this.props.getDataR(
+                this.state.id,
+                this.state.firstName,
+                this.state.lastName,
+                this.state.email,
+                this.state.password,
+                this.state.category,
+            )
+            //sendAccount(newAccount);
+        }
     }
 
     onHandleSubmit(e) {
         e.preventDefault();
-        console.log('Enviando...')
+        const {id, firstName, lastName, email, password, category} = this.state;
+        let account = {id, firstName, lastName, email, password, category};
+        if (account) {
+            this.isMatch(account)
+        }
     }
 
     render() {
-        //let today = new Date();
+        const fCategories = this.props.categories.filter(elem => elem.id !== 1);
         return (
             <form onSubmit={this.onHandleSubmit.bind(this)}>
                 <Row className='col-12 input-group'>
-                    <FormGroup 
-                        attribute = {{
-                            type: 'text',
-                            id: 'fName',
-                            name: 'fName',
-                            className: 'form-control col-',
-                            placeholder: 'Ingrese su nombre',
-                            help: 'fName-error'
-                        }}
-                        onHandleChange={this.onHandleChange}
-                        spanError='fName-error'
-                    >
-                    Su nombre debe contener mas de 3 letras.</FormGroup>
-                    <FormGroup 
-                        attribute = {{
-                            type: 'text',
-                            id: 'lName',
-                            name: 'lName',
-                            className: 'form-control col-12',
-                            placeholder: 'Ingrese su Apellido',
-                            help: 'lName-error'
-                        }}
-                        onHandleChange={this.onHandleChange}
-                        spanError='lName-error'
-                    >
-                    Su apellido debe contener mas de 4 letras.</FormGroup>
+                    <div className="col-12 form-group">
+                        <input 
+                            type='text'
+                            placeholder='Ingrese su nombre'
+                            className='form-control col'
+
+                            name='firstName'
+                            aria-describedby={'fName-error'} 
+                            ref={this.fNameRef}
+
+                            value={this.name}
+                            onChange={this.onHandleChange}
+                        />
+            
+                        { this.state.fNameError &&
+                            <SpanError id='fName-error' className="form-text text-muted">Su nombre debe contener mas de 3 letras.</SpanError>
+                        }
+                        <input
+                            type='text'
+                            placeholder='Ingrese su apellido'
+                            className='form-control mt-3 col'
+
+                            name='lastName'
+                            aria-describedby={'lName-error'} 
+                            ref={this.lNameRef}
+
+                            value={this.name}
+                            onChange={this.onHandleChange}
+                        />
+                        { this.state.lNameError &&
+                            <SpanError id='lName-error' className="form-text text-muted">Su apellido debe contener mas de 4 letras.</SpanError>
+                        }
+                    </div>
                 </Row>
                 <Row className='col-12'>
-                    <FormGroup 
-                        attribute = {{
-                            type: 'email',
-                            id: 'email',
-                            name: 'email',
-                            className: 'form-control col-12',
-                            placeholder: 'Ingrese su Email',
-                            help: 'email-error'
-                        }}
-                        onHandleChange={this.onHandleChange}
-                        spanError='email-error'
-                    >
-                    El email es invalido.</FormGroup>
+                    <div className="col-12 form-group">
+                        <input
+                            type='email'
+                            placeholder='Ingrese su email'
+                            className='form-control col'
+
+                            name='email'
+                            aria-describedby={'email-error'} 
+                            ref={this.emailRef}
+
+                            value={this.name}
+                            onChange={this.onHandleChange}
+                        />
+                        { this.state.emailError &&
+                            <SpanError id='email-error'>El email es invalido.</SpanError>
+                        }
+                    </div>
                 </Row>
                 <Row className='col-12'>
-                    <FormGroup 
-                        attribute = {{
-                            type: 'password',
-                            id: 'password',
-                            name: 'password',
-                            className: 'form-control col-12',
-                            placeholder: 'Ingrese un Password',
-                            help: 'pass-error'
-                        }}
-                        onHandleChange={this.onHandleChange}
-                        spanError='pass-error'
-                    >
-                    El password debe contener numeros, signos, mayúsculas y minúsculas</FormGroup>
+                    <div className="col-12 form-group">
+                        <input 
+                            type='password'
+                            placeholder='Ingrese su password'
+                            className='form-control col'
+
+                            name='password'
+                            aria-describedby={'pass-error'} 
+                            ref={this.passRef}
+
+                            value={this.name}
+                            onChange={this.onHandleChange}
+                        />
+                        { this.state.passError &&
+                            <SpanError id='pass-error'>El password debe contener numeros, signos, mayúsculas y minúsculas</SpanError>
+                        }
+                    </div>
                 </Row>
                 <Row className='col-12'>
-                    <FormSelect 
-                        attribute = {{
-                            htmlFor: 'category_id',
-                            id: 'category_id'
-                        }}
-                        multiple= {false}
-                        categories={this.props.categories}
+                    <div className='input-group mb-3'>
                         
-                    />
+                        <select
+                            className="custom-select col-11 col-sm-12 ml-3" 
+                            id='category_id'
+                            name='category'
+                            
+                            multiple= {false}
+                            categories={this.props.categories}
+                            onChange={this.onHandleChange}
+                            
+                        >
+                            {
+                                fCategories.map(elem => (
+                                    <option key={elem.id} value={elem.id}>{elem.name}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
                 </Row>
-                <FormGroup 
-                        attribute = {{
-                            type: 'hidden',
-                            name: 'createAt',
-                            className: 'form-control col-12',
-                        }}
+                    <input 
+                        type='hidden'
+                        className='form-control col-12'
+    
+                        name='createAt'
+                         
                         value={this.state.today}
-                        
+                        onChange={this.onHandleChange}
+                            
                     />
                 <Row className='col'>
                     <Button

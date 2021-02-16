@@ -5,30 +5,37 @@ import Row from '../../partials/row/Row';
 import Title from '../../partials/title/Title';
 
 
-
 class Login extends Component {
     state = { 
-        login: []
+        login: ''
     }
 
-    saveData= (user, password) => {
+    getDataL= (email, password) => {
         const sData = {
-            user: user,
+            email: email,
             password: password
         }
-        this.setState({login: sData})
+        this.setState({
+            login: sData
+        })
+        console.log(this.state.login)
     }
+
+    componentDidMount() {
+        
+    }
+
+   
 
     render() { 
         return ( 
             <Fragment>
-                <HeaderLog>AltoGato</HeaderLog>
                 <div className='container-fluid'>
                     <Title
                         className='text-center my-3 h4'
                     >Ingreso al Panel de control</Title>
                     <Row className='col'>
-                        <FormLogin saveData={this.saveData}/>
+                        <FormLogin getDataL={this.getDataL}/>
                     </Row>
                     <Title
                         className='h5 mt-4'
@@ -37,7 +44,7 @@ class Login extends Component {
                         Si ya has publicado un anuncio, pero no has accedido nunca a tu panel de control, indícanos el email del anuncio que deseas gestionar y te enviaremos el enlace para entrar.
                     </Row>
                     <Row className='col'>
-                        <FormEmail />
+                        <FormEmail/>
                     </Row>
                 </div>
             </Fragment>

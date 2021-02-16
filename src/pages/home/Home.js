@@ -23,24 +23,25 @@ class Home extends Component {
     }
     
     render() { 
+        //console.log(this.state.users)
         return ( 
             <Fragment>
-                <Header>AltoGato</Header>
-                    <main className='container-fluid'>
-                        <HeaderMain />
-                        <article className='row'>
-                            { 
-                                Object.keys(this.state.users).map((key) => {                             
-                                    return <section className='col-12 col-sm-6 col-md-4 my-1'>
-                                    <Card
-                                        key={key}
-                                        user={this.state.users[key]} 
-                                    />
-                                    </section>
-                                })
-                            }                       
-                        </article>
-                    </main>
+                
+                <main className='container-fluid'>
+                    <HeaderMain />
+                    <article className='row'>
+                        { 
+                            this.state.users.map((user, i)=> {                             
+                                return <section className='col-12 col-sm-6 col-md-4 my-1'>
+                                <Card
+                                    key={user.id}
+                                    user={this.state.users[i]} 
+                                />
+                                </section>
+                            })
+                        }                       
+                    </article>
+                </main>
                 <Footer />
             </Fragment>
          );

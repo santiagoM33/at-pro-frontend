@@ -1,7 +1,7 @@
 import React from 'react';
 import Hamburguer from './components/Hamburguer';
-import Collapse from './components/Collapse';
-import NavLink from './components/NavLink';
+import {Switch, Route, Redirect} from 'react-router';
+import {Link} from 'react-router-dom';
 import { GoSearch } from "react-icons/go";
 
 const Header = (props) => {
@@ -14,9 +14,13 @@ const Header = (props) => {
                     controls='navbarNav'
                 >
                 </Hamburguer>
-                <Collapse id='navbarNav'>
-                    
-                </Collapse>
+                <div className="collapse navbar-collapse" id='navbarNav'>
+                    <div className='navbar-nav'>
+                        <Link to='/'>Home</Link>
+                        <Link to='/register'>Register</Link>
+                        <Link to='/login'>Login</Link>
+                    </div>
+                </div>
             </div>
             <nav>
                 <form className="pl-4 ml-2 my-1 my-lg-0">

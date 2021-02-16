@@ -6,7 +6,7 @@ const NavLink = (props) => {
     return ( 
         <a className={classnames('nav-link', {
             'active' : true
-        })} href="#">{props}</a>
+        })} href="#">{props.children}</a>
      );
 }
  

@@ -1,0 +1,11 @@
+{
+    "register": [
+        {
+            "id": 1,
+            "firstName": "Nano",
+            "lastName": "Monaco",
+            "email": "nano.mc@gmail.com",
+            "password": "hgt478f10"
+        }
+    ]
+}

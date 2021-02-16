@@ -5,7 +5,7 @@ import Label from '../../../partials/label/Label';
 
 const FormCheck = ({attribute, children, className, htmlFor}) => {
     return ( 
-        <div className="form-group form-check">
+        <div className="form-check">
             <Input 
                 type={attribute.type}
                 placeholder={attribute.placeholder}

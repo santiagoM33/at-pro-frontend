@@ -1,10 +1,8 @@
-import React from 'react'
-//import Input from '../../../partials/input/Input'
-import SpanError from '../../../partials/help/SpanError'
+import React, {Fragment} from 'react'
  
-const FormGroup = ({attribute, spanError, children, onHandleChange}, props) => {
+const FormGroup = ({attribute, onHandleChange, value}) => {
     return ( 
-        <div className="col-12 form-group">
+        <Fragment>
             <input 
                 type={attribute.type}
                 placeholder={attribute.placeholder}
@@ -14,15 +12,10 @@ const FormGroup = ({attribute, spanError, children, onHandleChange}, props) => {
                 name={attribute.name}
                 aria-describedby={attribute.help} 
 
-                value={props.value}
+                value={value}
                 onChange={onHandleChange}
-                
-
             />
-            <SpanError
-                id={spanError}
-            >{children}</SpanError>
-        </div>
+        </Fragment>
      );
 }
  

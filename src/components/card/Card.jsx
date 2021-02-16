@@ -12,13 +12,13 @@ const Card = (props) => {
     return ( 
         <div className="card mt-4 mx-2">
             <CardImg 
-                src={props.user.thumbnails}
+                src={props.user.publish.thumbnails}
                 type='top'
             />
-            <CardHeader>{props.user.name}</CardHeader>
+            <CardHeader>{props.user.publish.name}</CardHeader>
             <CardBody>
-                <CardTitle>{props.user.titulo}</CardTitle>
-                <CardText>{props.user.descripcion}</CardText>
+                <CardTitle>{props.user.publish.titulo}</CardTitle>
+                <CardText>{props.user.publish.descripcion}</CardText>
             </CardBody>
         </div>
      );
