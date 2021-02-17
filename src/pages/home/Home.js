@@ -23,10 +23,9 @@ class Home extends Component {
     }
     
     render() { 
-        //console.log(this.state.users)
+        console.log(this.state.users)
         return ( 
             <Fragment>
-                
                 <main className='container-fluid'>
                     <HeaderMain />
                     <article className='row'>

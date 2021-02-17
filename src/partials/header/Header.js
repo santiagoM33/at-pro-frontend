@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Hamburguer from './components/Hamburguer';
-import {Switch, Route, Redirect} from 'react-router';
 import {Link} from 'react-router-dom';
 import { GoSearch } from "react-icons/go";
 
@@ -17,11 +16,31 @@ const Header = (props) => {
                 <div className="collapse navbar-collapse" id='navbarNav'>
                     <div className='navbar-nav'>
                         <Link to='/'>Home</Link>
-                        <Link to='/register'>Register</Link>
-                        <Link to='/login'>Login</Link>
+                        {
+                            props.authed
+                            ?
+                                <Fragment>
+                                    <Link to='/panel'>Panel de control</Link>
+                                    <Link 
+                                        to='/logout'
+                                        onClick={()=> {
+                                            //logout();
+                                            this.setState({authed:false})
+                                            this.props.onHandleClick()
+                                        }}
+                                    >Logout</Link>
+                                </Fragment>
+                            :
+                                <Fragment>
+                                    <Link to='/register'>Register</Link>
+                                    <Link to='/login'>Login</Link>
+                                </Fragment>
+                        }
+                        
                     </div>
                 </div>
             </div>
+            
             <nav>
                 <form className="pl-4 ml-2 my-1 my-lg-0">
                     <div className="row  input-group">

@@ -22,3 +22,21 @@ export const loginAccountAuth = async data => {
     })
     return res;
 }
+
+export const signIn = data => {
+    const requestData = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: new Headers({'Content-type': 'application/json'})
+    }
+
+    fetch(`${BASE_URI}/login`, requestData)
+        .then(res => {
+            if (res.ok) {
+                return res.json()
+            }
+            throw new Error('Login invalido...')
+        })
+        .then(token=> console.log(token))
+        .catch(err => console.log(err))
+}

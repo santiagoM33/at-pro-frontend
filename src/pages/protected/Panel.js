@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 
-class Dashboard extends Component {
+class Panel extends Component {
     state = {  }
     render() { 
         return ( 
@@ -10,4 +10,4 @@ class Dashboard extends Component {
     }
 }
  
-export default Dashboard;
+export default Panel;

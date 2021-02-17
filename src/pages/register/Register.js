@@ -1,11 +1,9 @@
 import React, {Fragment, Component} from 'react';
 import {FormRegister} from '../../components/form/Form';
 
-import {HeaderLog} from '../../partials/header/Header';
 import Row from '../../partials/row/Row';
 import Title from '../../partials/title/Title';
 
-import jwt from 'jsonwebtoken';
 import {registerDataAccount} from '../../services/api'
 
 class Register extends Component {
@@ -16,15 +14,9 @@ class Register extends Component {
             account: ''
         }
         this.getDataR = this.getDataR.bind(this)
-        this.generateToken = this.generateToken.bind(this);
     }
 
     componentDidMount() {
-        /*const categories = {
-            id: 1, name: "Admin", label: "admin",
-            id: 2, name: "Escort", label: "escort",
-            id: 3, name: "User", label: "user"
-        }*/
         const BASE_URI = 'http://localhost:8005';
         const ep = '/categories';
 
@@ -39,7 +31,7 @@ class Register extends Component {
             lastName: lName,
             email: email,
             password: password,
-            category: category
+            roleId: category
         }
         registerDataAccount(sData)
         /*this.setState({
@@ -48,20 +40,6 @@ class Register extends Component {
     }
 
     
-
-    generateToken(account){
-        let user = {
-            firstName: account.firstName,
-            lastName: account.lastName,
-            email: account.email,
-            password: account.password,
-            category: account.category
-        }
-        let token;
-        return token = jwt.sign(user, 'atpro', {
-            expiresIn: 60*60*24
-        })
-    }
 
     render() { 
         

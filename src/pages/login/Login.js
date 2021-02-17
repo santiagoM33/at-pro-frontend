@@ -1,31 +1,20 @@
 import React, {Fragment, Component} from 'react';
-import {HeaderLog} from '../../partials/header/Header';
 import FormEmail, {FormLogin} from '../../components/form/Form';
 import Row from '../../partials/row/Row';
 import Title from '../../partials/title/Title';
+import {loginAccountAuth} from '../../services/api';
 
 
 class Login extends Component {
-    state = { 
-        login: ''
-    }
-
+    
     getDataL= (email, password) => {
-        const sData = {
+        const user = {
             email: email,
             password: password
         }
-        this.setState({
-            login: sData
-        })
-        console.log(this.state.login)
-    }
+        loginAccountAuth(user)
+    }  
 
-    componentDidMount() {
-        
-    }
-
-   
 
     render() { 
         return ( 
@@ -35,7 +24,9 @@ class Login extends Component {
                         className='text-center my-3 h4'
                     >Ingreso al Panel de control</Title>
                     <Row className='col'>
-                        <FormLogin getDataL={this.getDataL}/>
+                        <FormLogin 
+                            getDataL={this.getDataL}
+                        />
                     </Row>
                     <Title
                         className='h5 mt-4'

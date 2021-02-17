@@ -2,10 +2,13 @@ import React, {Fragment, Component} from 'react';
 import Home from '../pages/home/Home';
 import Register from '../pages/register/Register';
 import Login from '../pages/login/Login';
-import Publish from '../pages/publish/Publish';
-import {Switch, Route, Link, Redirect} from 'react-router';
-import { BrowserRouter} from 'react-router-dom';
-import Header from '../partials/header/Header'
+import Publish from '../pages/protected/publish/Publish';
+import Panel from '../pages/protected/Panel';
+import Error404 from '../pages/404/Error404';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import Header from '../partials/header/Header';
+
+import {PrivateRoute, PublicRoute} from '../helpers/routeRedirectAuth';
 
 
 class Routes extends Component {
@@ -13,24 +16,32 @@ class Routes extends Component {
     super(...props);
     this.state = {
       authed: false,
-      loading: false
+      loading: false,
+      isHome: false
     }
   }
 
   render() {
     return this.state.loading === true 
-    ? <h2>Cargando...</h2>
+    ?  <h2>Cargando...</h2>       
     : (
       <BrowserRouter>
         <Fragment>
-          <Header onHandleClick={this.onHandleClick}>AT PRO</Header>
+          <Header 
+            onHandleClick={this.onHandleClick} 
+            authed={this.state.authed}
+            isHome={this.state.isHome}
+            >
+            AT PRO</Header>
         </Fragment>
         <main>
           <Switch>
             <Route exact path='/'component={Home}/>
-            <Route path='/register'component={Register}/>
-            <Route path='/login'component={Login}/>
-            <Route path='/publish'component={Publish}/>
+            <PublicRoute authed={this.state.authed} path='/register'component={Register}/>
+            <PublicRoute authed={this.state.authed} path='/login'component={Login}/>
+            <PrivateRoute authed={this.state.authed} path='/publish'component={Publish}/>
+            <PrivateRoute authed={this.state.authed} path='/panel'component={Panel}/>
+            <Route component={Error404}/>
           </Switch>
         </main>
       </BrowserRouter>

@@ -40,7 +40,16 @@ export const AlertInfo = ({pos, children}) => {
 
 Alert.propTypes = {
     children: PropTypes.node.isRequired,
-    type: PropTypes.oneOf(['primary', 'secondary'])
+    type: PropTypes.oneOf([
+        'primary', 
+        'secondary',
+        'success',
+        'danger',
+        'warning',
+        'info',
+        'light',
+        'dark'
+    ])
 };
 
 Alert.defaultProps = {

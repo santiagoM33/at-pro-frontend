@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
 import FormCheck from './components/FormCheck'
+import Alert from '../alert/Alert'
 import SpanError from '../../partials/help/SpanError'
 import Button from '../button/Button'
 import Link from '../../partials/link/Link'
 import Row from '../../partials/row/Row'
 //import { v4 as uuidv4 } from 'uuid';
-import { uid } from 'uid';
+//import { uid } from 'uid';
 
 
 class FormEmail extends Component {
@@ -46,29 +47,59 @@ export class FormLogin extends Component {
         this.state = {
             email: '',
             password: '',
+            emailError: false,
+            passwordError: false,
+            hasError: false,
+            isLogin: false
         }
     }
 
     onHandleChange = e => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
+        if (e.target.name == 'email') {
+            this.setState({email: e.target.value})
+            this.setState({hasError: false})
+        } else {
+            if (e.target.value < 6) {
+                this.setState({passwordError: true})
+                this.setState({hasError: false})
+            } else {
+                this.setState({passwordError: false})
+                this.setState({password: e.target.value})
+                this.setState({hasError: false})
+            }
+        }
     }
     
     onHandleSubmit(e) {
         e.preventDefault();
-        this.props.getDataL(
-            this.state.email,
-            this.state.password
-        )
+        //const {email, password} = this.state;
+        if (this.state.email.length > 0 && this.state.password.length > 0) {
+
+            this.props.getDataL(
+                this.state.email,
+                this.state.password
+            )
+            this.setState({isLogin: true})
+            console.log(this.state.isLogin)
+        } else {
+            this.setState({isLogin: false})
+            this.setState({hasError: true})
+        }
     }
 
     render() {
-        
-        return ( 
+        return this.state.isLogin
+        ?  <h2>Estas logueado</h2>
+        : ( 
             <form onSubmit={this.onHandleSubmit.bind(this)}>
                 <Row className='col-12'>
                     <div className="col-12 form-group">
+                        {
+                            this.state.hasError &&
+                            <Alert 
+                                type='danger'
+                            >Su password o email no son correctos y/o no existen en nuestra base de datos</Alert>
+                        }
                         <input
                             type='email'
                             placeholder='Ingrese su email'
@@ -81,9 +112,9 @@ export class FormLogin extends Component {
                             value={this.state.email}
                             onChange={this.onHandleChange}
                         />
-                        
+                        { this.state.emailError &&
                             <SpanError id='email-error'>El email es invalido.</SpanError>
-                        
+                        }
                     </div>
                 </Row>
                 <Row className='col-12'>
@@ -97,12 +128,12 @@ export class FormLogin extends Component {
                             aria-describedby={'pass-error'} 
                             //ref={this.emailRef}
 
-                            value={this.state.password}
+                            value={this.password}
                             onChange={this.onHandleChange}
                         />
-                        
+                        { this.state.passwordError &&
                             <SpanError id='pass-error'>El password es invalido.</SpanError>
-                        
+                        }
                     </div>
                 </Row>
                 <Row className='col-12'>
@@ -133,6 +164,7 @@ export class FormLogin extends Component {
                         <Button
                             type='submit'
                             style='secondary'
+                            signIn={this.props.signIn}
                         >Ingresar</Button>
                     </div>
                 </Row>
@@ -171,7 +203,6 @@ export class FormRegister extends Component {
     constructor(...props) {
         super(...props)
         this.state= {
-            id: 0, 
             firstName: '',
             lastName: '',
             email: '',
@@ -249,19 +280,13 @@ export class FormRegister extends Component {
         if (param.firstName.length > 0 && param.lastName.length > 0 && param.email.length > 0 && param.password.length > 0) {
             //const {id, firstName, lastName, email, password, category} = param;
 
-            this.setState({
-                id: uid(10)
-            })
-            
             this.props.getDataR(
-                this.state.id,
                 this.state.firstName,
                 this.state.lastName,
                 this.state.email,
                 this.state.password,
                 this.state.category,
             )
-            //sendAccount(newAccount);
         }
     }
 

@@ -4,9 +4,9 @@ import classnames from 'classnames';
 
 
 
-const Button = ({type, style, btn,children}) => {
+const Button = ({type, style, signIn,children}) => {
     return ( 
-        <button type={type} className={classnames('btn',{
+        <button type={type} onClick={signIn} className={classnames('btn',{
             [`btn-${style}`] : style
         })}>
         {children}</button>
