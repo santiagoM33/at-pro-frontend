@@ -14,8 +14,6 @@ class Login extends Component {
         }
         loginAccountAuth(user)
     }
-        
-    }
     
 
     render() { 
