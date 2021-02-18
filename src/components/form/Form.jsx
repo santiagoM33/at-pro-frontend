@@ -5,6 +5,7 @@ import SpanError from '../../partials/help/SpanError'
 import Button from '../button/Button'
 import Link from '../../partials/link/Link'
 import Row from '../../partials/row/Row'
+import {loginAccountAuth} from '../../services/api'
 //import { v4 as uuidv4 } from 'uuid';
 //import { uid } from 'uid';
 
@@ -74,13 +75,14 @@ export class FormLogin extends Component {
         e.preventDefault();
         //const {email, password} = this.state;
         if (this.state.email.length > 0 && this.state.password.length > 0) {
-
+            
             this.props.getDataL(
                 this.state.email,
                 this.state.password
             )
+                            
             this.setState({isLogin: true})
-            console.log(this.state.isLogin)
+            //console.log(this.state.isLogin)
         } else {
             this.setState({isLogin: false})
             this.setState({hasError: true})
@@ -88,7 +90,7 @@ export class FormLogin extends Component {
     }
 
     render() {
-        return this.state.isLogin
+        return this.state.isLogin === true
         ?  <h2>Estas logueado</h2>
         : ( 
             <form onSubmit={this.onHandleSubmit.bind(this)}>

@@ -13,8 +13,10 @@ class Login extends Component {
             password: password
         }
         loginAccountAuth(user)
-    }  
-
+    }
+        
+    }
+    
 
     render() { 
         return ( 
