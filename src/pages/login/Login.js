@@ -12,11 +12,12 @@ class Login extends Component {
             email: email,
             password: password
         }
-        loginAccountAuth(user)
+        //loginAccountAuth(user).then((res, err) => )
     }
     
 
     render() { 
+        console.log('Errors ', this.props.errors);
         return ( 
             <Fragment>
                 <div className='container-fluid'>
@@ -25,9 +26,10 @@ class Login extends Component {
                     >Ingreso al Panel de control</Title>
                     <Row className='col'>
                         <FormLogin 
-                            getDataL={this.getDataL}
+                            onLogin={this.props.onLogin}
                         />
                     </Row>
+                    { this.props.errors.length > 0 ? <span>Hay error</span> : null }
                     <Title
                         className='h5 mt-4'
                     >Aun no tengo acceso</Title>

@@ -4,6 +4,18 @@ export const loginAccountAuth = data => {
     const requestData = {
         method: 'POST',
         body: JSON.stringify(data),
+        headers: new Headers({ 'Content-type': 'application/json' })
+    }
+
+    return fetch(`${BASE_URI}/login`, requestData)
+        .then(resp => {
+            return resp.json()
+        })
+        .catch(err => err);
+
+    /* const requestData = {
+        method: 'POST',
+        body: JSON.stringify(data),
         headers: new Headers({'Content-type': 'application/json'})
     }
     fetch(`${BASE_URI}/login`, requestData)
@@ -14,7 +26,7 @@ export const loginAccountAuth = data => {
             throw new Error('Login invalido...')
         })
         .then(token=> console.log(token))
-        .catch(err => console.log(err))
+        .catch(err => console.log(err)) */
 }
 
 export const registerDataAccount = async data => {

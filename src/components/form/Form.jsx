@@ -76,7 +76,7 @@ export class FormLogin extends Component {
         //const {email, password} = this.state;
         if (this.state.email.length > 0 && this.state.password.length > 0) {
             
-            this.props.getDataL(
+            this.props.onLogin(
                 this.state.email,
                 this.state.password
             )
