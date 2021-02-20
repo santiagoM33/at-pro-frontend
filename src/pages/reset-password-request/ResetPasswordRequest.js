@@ -3,7 +3,7 @@ import Title from '../../partials/title/Title';
 import { resetPasswordRequest } from '../../services/api';
 import toast from 'react-hot-toast';
 import { Redirect as RouterRedirect } from 'react-router-dom';
-
+ 
 function Redirect({ to }) {
   if (to) {
     return (

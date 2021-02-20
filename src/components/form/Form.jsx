@@ -156,7 +156,7 @@ export class FormLogin extends Component {
                 <Row className='col-12 mb-2'>
                     <div className="col-12">
                         <Link
-                            href='#'
+                            href='/reset-password-request'
                             className='text-primary font-weight-italic h6'
                         >You forgot your password?</Link>
                     </div>
