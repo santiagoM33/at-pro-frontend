@@ -10,19 +10,9 @@ class Register extends Component {
     constructor(...props) {
         super(...props);
         this.state = { 
-            categories: [],
             account: ''
         }
         this.getDataR = this.getDataR.bind(this)
-    }
-
-    componentDidMount() {
-        const BASE_URI = 'http://localhost:8005';
-        const ep = '/categories';
-
-        fetch(`${BASE_URI}${ep}`)
-            .then(res => res.json())
-            .then(resJson => this.setState({categories: resJson}))
     }
 
     getDataR(fName, lName, email, password, category) {
@@ -42,7 +32,6 @@ class Register extends Component {
     
 
     render() { 
-        
         return ( 
             <Fragment>
                 <div className='container-fluid'>
@@ -53,7 +42,7 @@ class Register extends Component {
                         className='col-12'
                     >
                         <FormRegister 
-                            categories={this.state.categories}
+                            roles={this.props.roles}
                             getDataR={this.getDataR}
                         />
                     </Row>

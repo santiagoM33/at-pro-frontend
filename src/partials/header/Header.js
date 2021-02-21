@@ -6,22 +6,25 @@ import { GoSearch } from "react-icons/go";
 const Header = (props) => {
     return ( 
         <header>
-            <div className="navbar navbar-expand-lg navbar-light bg-light">
-                <h1><a className="navbar-brand" href="#">{props.children}</a></h1>
+            <div className="navbar navbar-expand-lg navbar-light bg-secondary">
+                <h1><Link className="navbar-brand text-light" to="/home">{props.children}</Link></h1>
                 <Hamburguer 
+                    classNames='light'
                     target='#navbarNav'
                     controls='navbarNav'
+                    toggle='collapse'
                 >
                 </Hamburguer>
                 <div className="collapse navbar-collapse" id='navbarNav'>
                     <div className='navbar-nav'>
-                        <Link to='/'>Home</Link>
+                        <Link className='text-light' to='/'>Home</Link>
                         {
                             props.authed
                             ?
                                 <Fragment>
-                                    <Link to='/panel'>Panel de control</Link>
+                                    <Link className='text-light' to='/panel'>Panel de control</Link>
                                     <Link 
+                                        className='text-light' 
                                         to='/logout'
                                         onClick={()=> {
                                             //logout();
@@ -32,8 +35,8 @@ const Header = (props) => {
                                 </Fragment>
                             :
                                 <Fragment>
-                                    <Link to='/register'>Register</Link>
-                                    <Link to='/login'>Login</Link>
+                                    <Link className='text-light' to='/register'>Register</Link>
+                                    <Link className='text-light' to='/login'>Login</Link>
                                 </Fragment>
                         }
                         
@@ -69,7 +72,7 @@ export const HeaderLog = (props) => {
     return ( 
         <header>
             <div className="navbar navbar-expand-lg navbar-light bg-light">
-                <h1><a className="navbar-brand" href="#">{props.children}</a></h1>
+                <h1><Link className="navbar-brand" to="#">{props.children}</Link></h1>
             </div>
         </header>
      );

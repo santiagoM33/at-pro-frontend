@@ -1,9 +1,10 @@
 import React from 'react'
+import classNames from 'classnames'
 
 const Hamburguer = (props) => {
     return ( 
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target={props.target} aria-controls={props.controls} aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
+        <button className={classNames('navbar-toggler', {[`text-${props.color}`] : props.color})} type='button' data-toggle={props.toggle} data-target={props.target} aria-controls={props.controls} aria-expanded="false" aria-label="Toggle navigation" onClick={props.onBtnClose}>
+            <span className='navbar-toggler-icon'></span>
         </button>
      );
 }

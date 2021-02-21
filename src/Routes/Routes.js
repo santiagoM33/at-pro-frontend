@@ -11,6 +11,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from '../partials/header/Header';
 
 import { PrivateRoute, PublicRoute } from '../helpers/routeRedirectAuth';
+import { loginAccountAuth } from '../services/api';
 /* import ResetPasswordRoutes from '../pages/reset-password'; */
 
 import { Toaster } from 'react-hot-toast';
@@ -22,9 +23,37 @@ class Routes extends Component {
     this.state = {
       authed: false,
       loading: false,
-      isHome: false
+      isHome: false,
+      user: null,
+      errors: [],
+      roles: []
     }
+    this.login = this.login.bind(this)
   }
+
+  componentDidMount(){
+    fetch('http://159.65.218.115/roles')
+        .then(res => res.json())
+        .then(resJson => this.setState({roles: resJson}))
+        .catch(err => console.log(err))
+}
+
+  login(email, password) {
+    loginAccountAuth({email, password}).then(user => {
+      if (!user.errors) {
+        localStorage.setItem('user', JSON.stringify(user));
+        this.setState({ user: user })
+        this.setState({ errors:[] })
+        this.setState({ authed: true })
+      } 
+    })
+    .catch(err => {
+      this.setState({ user:null })
+      this.setState({ errors: err.errors })
+      this.setState({ authed: false })
+    })
+  }
+
 
   render() {
     return this.state.loading === true
@@ -32,19 +61,32 @@ class Routes extends Component {
       : (
         <BrowserRouter>
           <Fragment>
-            <Header
-              onHandleClick={this.onHandleClick}
-              authed={this.state.authed}
-              isHome={this.state.isHome}
-            >
-              AT PRO</Header>
+          
           </Fragment>
           <main>
             <Toaster></Toaster>
             <Switch>
               <Route exact path='/' component={Home} />
-              <PublicRoute authed={this.state.authed} path='/register' component={Register} />
-              <PublicRoute authed={this.state.authed} path='/login' component={Login} />
+              <Route  path='/register'>
+                <Header
+                  onHandleClick={this.onHandleClick}
+                  authed={this.state.authed}
+                >
+                AT PRO</Header>
+                <Register 
+                  authed={this.state.authed}
+                  roles={this.state.roles}
+                />
+              </Route>
+              
+              <Route exact path='/login'>
+                <Header
+                  onHandleClick={this.onHandleClick}
+                  authed={this.state.authed}
+                >
+                AT PRO</Header>
+                <Login authed={this.state.authed} onLogin={this.login} errors={this.state.errors}></Login>
+              </Route>
               
               <PublicRoute exact authed={this.state.authed} path='/reset-password-request'
                 component={ResetPasswordRequest} />
@@ -52,7 +94,13 @@ class Routes extends Component {
                 component={ResetPassword} />
               
             <PrivateRoute authed={this.state.authed} path='/publish'component={Publish}/>
-            <PrivateRoute authed={this.state.authed} path='/panel' component={Panel} />
+            
+            <Route path='/panel'>
+              <Panel 
+                roles={this.state.roles}
+                authed={this.state.authed}
+              />
+            </Route>
               <Route component={Error404} />
             </Switch>
           </main>

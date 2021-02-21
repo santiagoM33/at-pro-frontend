@@ -1,16 +1,40 @@
-import React, {Component} from 'react'
+import React, {Fragment, Component} from 'react'
+import {Redirect} from 'react-router-dom'
 import FormCheck from './components/FormCheck'
 import Alert from '../alert/Alert'
 import SpanError from '../../partials/help/SpanError'
 import Button from '../button/Button'
 import Link from '../../partials/link/Link'
 import Row from '../../partials/row/Row'
-import {loginAccountAuth} from '../../services/api'
+import {resetPasswordRequest} from '../../services/api'
 //import { v4 as uuidv4 } from 'uuid';
 //import { uid } from 'uid';
 
+import { Redirect as RouterRedirect } from 'react-router-dom';
+ 
+function Redirecting({ to }) {
+  if (to) {
+    return (
+      <RouterRedirect to={to} />
+    )
+  } else {
+    return null;
+  }
+}
+
 
 class FormEmail extends Component {
+
+    constructor(...props){
+        super(...props)
+        this.state = {
+            resetEmmail: ''
+        }
+    }
+
+
+
+
     render() {
         return (
             <form>
@@ -35,6 +59,7 @@ class FormEmail extends Component {
                 <Button
                     type='button'
                     style='primary'
+                    onHandleClick={this.props.onHandleClick}
                 >
                 Enviar enlace</Button>
             </form>
@@ -51,7 +76,7 @@ export class FormLogin extends Component {
             emailError: false,
             passwordError: false,
             hasError: false,
-            isLogin: false
+            to: null
         }
     }
 
@@ -73,35 +98,35 @@ export class FormLogin extends Component {
     
     onHandleSubmit(e) {
         e.preventDefault();
-        //const {email, password} = this.state;
         if (this.state.email.length > 0 && this.state.password.length > 0) {
+            if (!this.props.errors.length) {
+                this.props.onLogin(
+                    this.state.email,
+                    this.state.password
+                )
+                this.setState({hasError: false})
+                this.setState({ to: '/panel' });
+            } else {
+                this.setState({hasError: true})
+            }
             
-            this.props.getDataL(
-                this.state.email,
-                this.state.password
-            )
-                            
-            this.setState({isLogin: true})
-            //console.log(this.state.isLogin)
-        } else {
-            this.setState({isLogin: false})
-            this.setState({hasError: true})
-        }
+        } 
     }
 
     render() {
-        return this.state.isLogin === true
-        ?  <h2>Estas logueado</h2>
-        : ( 
+        return (
+        <>
+            <Redirecting to={this.state.to}></Redirecting>
+
             <form onSubmit={this.onHandleSubmit.bind(this)}>
                 <Row className='col-12'>
-                    <div className="col-12 form-group">
                         {
                             this.state.hasError &&
                             <Alert 
                                 type='danger'
                             >Su password o email no son correctos y/o no existen en nuestra base de datos</Alert>
                         }
+                    <div className="col-12 form-group">
                         <input
                             type='email'
                             placeholder='Ingrese su email'
@@ -128,7 +153,6 @@ export class FormLogin extends Component {
 
                             name='password'
                             aria-describedby={'pass-error'} 
-                            //ref={this.emailRef}
 
                             value={this.password}
                             onChange={this.onHandleChange}
@@ -166,11 +190,12 @@ export class FormLogin extends Component {
                         <Button
                             type='submit'
                             style='secondary'
-                            signIn={this.props.signIn}
+                            //signIn={this.props.signIn}
                         >Ingresar</Button>
                     </div>
                 </Row>
             </form>
+        </>
         );
     }
 }
@@ -218,9 +243,7 @@ export class FormRegister extends Component {
             //Manejo de errores generales
             hasError: false,
             //Login
-            isLogin: false,
-            //Muestra el dia de hoy
-            today: new Date()
+            isLogin: false
         }
         this.onHandleChange = this.onHandleChange.bind(this)
         this.isMatch = this.isMatch.bind(this)
@@ -302,7 +325,8 @@ export class FormRegister extends Component {
     }
 
     render() {
-        const fCategories = this.props.categories.filter(elem => elem.id !== 1);
+        //console.log(this.state.category)
+        const categories = this.props.roles.filter(elem => elem.id !== 1);
         return (
             <form onSubmit={this.onHandleSubmit.bind(this)}>
                 <Row className='col-12 input-group'>
@@ -383,32 +407,20 @@ export class FormRegister extends Component {
                         
                         <select
                             className="custom-select col-11 col-sm-12 ml-3" 
-                            id='category_id'
                             name='category'
                             
                             multiple= {false}
-                            categories={this.props.categories}
                             onChange={this.onHandleChange}
                             
                         >
                             {
-                                fCategories.map(elem => (
+                                categories.map(elem => (
                                     <option key={elem.id} value={elem.id}>{elem.name}</option>
                                 ))
                             }
                         </select>
                     </div>
                 </Row>
-                    <input 
-                        type='hidden'
-                        className='form-control col-12'
-    
-                        name='createAt'
-                         
-                        value={this.state.today}
-                        onChange={this.onHandleChange}
-                            
-                    />
                 <Row className='col'>
                     <Button
                         type='submit'
