@@ -78,6 +78,7 @@ export class FormLogin extends Component {
             hasError: false,
             to: null
         }
+        this.onHandleChange = this.onHandleChange.bind(this)
     }
 
     onHandleChange = e => {
@@ -98,12 +99,10 @@ export class FormLogin extends Component {
     
     onHandleSubmit(e) {
         e.preventDefault();
+        const {email, password} = this.state;
         if (this.state.email.length > 0 && this.state.password.length > 0) {
             if (!this.props.errors.length) {
-                this.props.onLogin(
-                    this.state.email,
-                    this.state.password
-                )
+                this.props.onLogin(email,password)
                 this.setState({hasError: false})
                 this.setState({ to: '/panel' });
             } else {

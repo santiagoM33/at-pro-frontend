@@ -15,6 +15,7 @@ import { loginAccountAuth } from '../services/api';
 /* import ResetPasswordRoutes from '../pages/reset-password'; */
 
 import { Toaster } from 'react-hot-toast';
+import { parse } from 'uuid';
 
 
 class Routes extends Component {
@@ -23,20 +24,23 @@ class Routes extends Component {
     this.state = {
       authed: false,
       loading: false,
+      loginMessage: null,
       isHome: false,
       user: null,
       errors: [],
-      roles: []
+      roles: [],
+      errorRoles: '',
     }
     this.login = this.login.bind(this)
+    this.setMessage = this.setMessage.bind(this)
   }
 
   componentDidMount(){
     fetch('http://159.65.218.115/roles')
         .then(res => res.json())
         .then(resJson => this.setState({roles: resJson}))
-        .catch(err => console.log(err))
-}
+        .catch(err => this.setState({errorRoles: 'No se pueden obtener los roles'}));
+  }
 
   login(email, password) {
     loginAccountAuth({email, password}).then(user => {
@@ -45,17 +49,24 @@ class Routes extends Component {
         this.setState({ user: user })
         this.setState({ errors:[] })
         this.setState({ authed: true })
+        this.setState({ loginMessage: null })
       } 
     })
     .catch(err => {
       this.setState({ user:null })
       this.setState({ errors: err.errors })
       this.setState({ authed: false })
+      this.setState(this.setMessage('Usuario o Password incorrectos.'))
     })
   }
 
+  setMessage(err) {
+    return {loginMessage: err}
+}
+
 
   render() {
+    //console.log(this.state.authenticated)
     return this.state.loading === true
       ? <h2>Cargando...</h2>
       : (
@@ -84,6 +95,7 @@ class Routes extends Component {
                 <Register 
                   authed={this.state.authed}
                   roles={this.state.roles}
+                  data={this.state.data}
                 />
               </Route>
               
@@ -105,7 +117,7 @@ class Routes extends Component {
             
             <Route path='/panel'>
               <Panel 
-                roles={this.state.roles}
+                user={this.state.user}
                 authed={this.state.authed}
               />
             </Route>

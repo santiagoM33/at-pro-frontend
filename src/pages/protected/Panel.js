@@ -2,6 +2,7 @@ import React, { Fragment, Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Sling as Hamburger } from 'hamburger-react'
 import { OffCanvas, OffCanvasMenu, OffCanvasBody } from "react-offcanvas";
+import {logout} from '../../data/config'
 
 class Panel extends Component {
 
@@ -14,6 +15,7 @@ class Panel extends Component {
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleHamburguer = this.handleHamburguer.bind(this);
+        this.getDataUser = this.getDataUser.bind(this);
     }
 
     handleClick() {
@@ -24,17 +26,21 @@ class Panel extends Component {
         this.setState({isOpen: !this.state.isOpen})
     }
 
-    componentDidMount(){
-        let data = JSON.parse(localStorage.getItem('user'));
+    getDataUser(){
+        let data= this.props.user;
         if (data.user.roleId === 2) {
             this.setState({authenticated: true})
-        } else {
+        }else {
             this.setState({authenticated: false})
         }
     }
+
+    componentDidMount(){
+        this.getDataUser()
+    }
     
     render() {
-        //console.log(this.state.authenticated)
+        console.log(this.props.user)
         return (
             <Fragment>
                 <header className='container'>
@@ -310,7 +316,7 @@ class Panel extends Component {
                     </div>    
                                
                         <ul className="navbar-nav mr-auto">
-                            {this.state.authenticated &&
+                            {this.state.authenticated === true &&
                             <Fragment>
                                 <li className="nav-item active">
                                     <NavLink
@@ -375,7 +381,7 @@ class Panel extends Component {
                                     className='nav-link text-light'
                                     to='/login'
                                     onClick={()=> {
-                                            //logout();
+                                        logout();
                                         this.setState({authed:false})
                                         //this.props.onHandleClick()
                                     }}
