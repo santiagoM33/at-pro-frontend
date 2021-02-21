@@ -24,16 +24,17 @@ class Panel extends Component {
         this.setState({isOpen: !this.state.isOpen})
     }
 
-    /*componentDidMount(){
-        let user = JSON.parse(localStorage.getItem('user'));
-        if (this.props.roles.id === user.roleId) {
+    componentDidMount(){
+        let data = JSON.parse(localStorage.getItem('user'));
+        if (data.user.roleId === 2) {
             this.setState({authenticated: true})
         } else {
             this.setState({authenticated: false})
         }
-    }*/
+    }
     
     render() {
+        //console.log(this.state.authenticated)
         return (
             <Fragment>
                 <header className='container'>
@@ -309,7 +310,7 @@ class Panel extends Component {
                     </div>    
                                
                         <ul className="navbar-nav mr-auto">
-                            {// this.state.authenticated &&
+                            {this.state.authenticated &&
                             <Fragment>
                                 <li className="nav-item active">
                                     <NavLink

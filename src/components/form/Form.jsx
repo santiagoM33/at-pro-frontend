@@ -122,7 +122,7 @@ export class FormLogin extends Component {
             <form onSubmit={this.onHandleSubmit.bind(this)}>
                 <Row className='col-12'>
                         {
-                            this.state.hasError &&
+                            this.state.hasError === true &&
                             <Alert 
                                 type='danger'
                             >Su password o email no son correctos y/o no existen en nuestra base de datos</Alert>
