@@ -108,6 +108,7 @@ export class FormLogin extends Component {
                 this.setState({ to: '/panel' });
             } else {
                 this.setState({hasError: true})
+                this.setState({ to: null });
             }
             
         } 

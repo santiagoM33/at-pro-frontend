@@ -9,7 +9,8 @@ class Panel extends Component {
         super(...props)
         this.state= {
             isMenuOpened: false,
-            isOpen: false
+            isOpen: false,
+            authenticated: false
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleHamburguer = this.handleHamburguer.bind(this);
@@ -22,9 +23,17 @@ class Panel extends Component {
     handleHamburguer() {
         this.setState({isOpen: !this.state.isOpen})
     }
+
+    /*componentDidMount(){
+        let user = JSON.parse(localStorage.getItem('user'));
+        if (this.props.roles.id === user.roleId) {
+            this.setState({authenticated: true})
+        } else {
+            this.setState({authenticated: false})
+        }
+    }*/
     
     render() {
-        console.log()
         return (
             <Fragment>
                 <header className='container'>
@@ -300,7 +309,7 @@ class Panel extends Component {
                     </div>    
                                
                         <ul className="navbar-nav mr-auto">
-                            {this.props.roles.id === 2 &&
+                            {// this.state.authenticated &&
                             <Fragment>
                                 <li className="nav-item active">
                                     <NavLink

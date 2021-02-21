@@ -1,13 +1,31 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, Component } from 'react';
 import Hamburguer from './components/Hamburguer';
 import {Link} from 'react-router-dom';
 import { GoSearch } from "react-icons/go";
 
-const Header = (props) => {
+class Header extends Component {
+
+    state = {
+        isHome: false
+    }
+
+    componentDidMount() {
+        // Actualiza el título del documento usando la API del navegador
+        if (window.location.pathname === '/') {
+            this.setState({isHome: true})
+        } else {
+            this.setState({isHome: false})
+        }
+      };
+    
+        
+    
+    render() {
+        //console.log(this.state.isHome)
     return ( 
         <header>
             <div className="navbar navbar-expand-lg navbar-light bg-secondary">
-                <h1><Link className="navbar-brand text-light" to="/home">{props.children}</Link></h1>
+                <h1><Link className="navbar-brand text-light" to="/home">{this.props.children}</Link></h1>
                 <Hamburguer 
                     classNames='light'
                     target='#navbarNav'
@@ -19,7 +37,7 @@ const Header = (props) => {
                     <div className='navbar-nav'>
                         <Link className='text-light' to='/'>Home</Link>
                         {
-                            props.authed
+                            this.props.authed
                             ?
                                 <Fragment>
                                     <Link className='text-light' to='/panel'>Panel de control</Link>
@@ -43,7 +61,7 @@ const Header = (props) => {
                     </div>
                 </div>
             </div>
-            
+            { this.state.home &&
             <nav>
                 <form className="pl-4 ml-2 my-1 my-lg-0">
                     <div className="row  input-group">
@@ -64,8 +82,10 @@ const Header = (props) => {
                     </div>                    
                 </form>
             </nav>
+            }
         </header>
      );
+    }
 }
 
 export const HeaderLog = (props) => {
@@ -77,6 +97,7 @@ export const HeaderLog = (props) => {
         </header>
      );
 }
+
  
  
  

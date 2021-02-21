@@ -66,11 +66,19 @@ class Routes extends Component {
           <main>
             <Toaster></Toaster>
             <Switch>
-              <Route exact path='/' component={Home} />
+              <Route exact path='/'>
+                <Header
+                    onHandleClick={this.onHandleClick}
+                    authed={this.state.authed}
+                    isHome={this.state.isHome}
+                >AT PRO</Header>
+                <Home />
+              </Route>
               <Route  path='/register'>
                 <Header
                   onHandleClick={this.onHandleClick}
                   authed={this.state.authed}
+                  isHome={this.state.isHome}
                 >
                 AT PRO</Header>
                 <Register 
