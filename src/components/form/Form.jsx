@@ -100,9 +100,9 @@ export class FormLogin extends Component {
         if (this.state.email.length > 0 && this.state.password.length > 0) {
             if (this.props.errors.length == 0) {
                 this.props.onLogin(email,password)
-                this.setState({ to: '/panel' });
+                //this.setState({ to: '/panel' });
             } else {
-                this.setState({ to: null });
+                //this.setState({ to: null });
             }
             
         } 
@@ -112,7 +112,7 @@ export class FormLogin extends Component {
         console.log(this.props.errors.length)
         return (
         <>
-            <Redirecting to={this.state.to}></Redirecting>
+            <Redirecting to={this.state.redirect}></Redirecting>
 
             <form onSubmit={this.onHandleSubmit.bind(this)}>
                 <Row className='col-12'>

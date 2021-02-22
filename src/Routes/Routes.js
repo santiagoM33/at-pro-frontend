@@ -29,6 +29,7 @@ class Routes extends Component {
       errors: [],
       roles: [],
       errorRoles: '',
+      to: null
     }
     this.login = this.login.bind(this)
     this.setMessage = this.setMessage.bind(this)
@@ -46,12 +47,14 @@ class Routes extends Component {
         localStorage.setItem('user', JSON.stringify(user));
         this.setState({ user: user })
         this.setState({ errors:[] })
-        this.setState({ loginMessage: null }) 
+        this.setState({ loginMessage: null })
+        this.setState({ to: '/panel' }); 
     })
     .catch(err => {
       this.setState({ user:null })
       this.setState({ errors: err.errors })
       this.setState(this.setMessage('Usuario o Password incorrectos.'))
+      this.setState({ to: null });
     })
   }
 
@@ -61,7 +64,7 @@ class Routes extends Component {
 
 
   render() {
-    console.log(this.state.errors)
+    console.log(this.state.to)
     return this.state.loading === true
       ? <h2>Cargando...</h2>
       : (
@@ -102,7 +105,7 @@ class Routes extends Component {
             <Route path='/panel'>
               <Panel 
                 user={this.state.user}
-                authed={this.state.authed}
+                redirect={this.state.to}
               />
             </Route>
               <Route component={Error404} />
