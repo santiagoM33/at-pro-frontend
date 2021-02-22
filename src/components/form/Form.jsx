@@ -32,9 +32,6 @@ class FormEmail extends Component {
         }
     }
 
-
-
-
     render() {
         return (
             <form>
@@ -101,12 +98,10 @@ export class FormLogin extends Component {
         e.preventDefault();
         const {email, password} = this.state;
         if (this.state.email.length > 0 && this.state.password.length > 0) {
-            if (!this.props.errors.length) {
+            if (this.props.errors.length == 0) {
                 this.props.onLogin(email,password)
-                this.setState({hasError: false})
                 this.setState({ to: '/panel' });
             } else {
-                this.setState({hasError: true})
                 this.setState({ to: null });
             }
             
@@ -114,6 +109,7 @@ export class FormLogin extends Component {
     }
 
     render() {
+        console.log(this.props.errors.length)
         return (
         <>
             <Redirecting to={this.state.to}></Redirecting>
@@ -121,10 +117,10 @@ export class FormLogin extends Component {
             <form onSubmit={this.onHandleSubmit.bind(this)}>
                 <Row className='col-12'>
                         {
-                            this.state.hasError === true &&
+                            this.props.errors &&
                             <Alert 
                                 type='danger'
-                            >Su password o email no son correctos y/o no existen en nuestra base de datos</Alert>
+                            >{this.props.errors[0]}</Alert>
                         }
                     <div className="col-12 form-group">
                         <input

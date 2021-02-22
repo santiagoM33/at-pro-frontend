@@ -43,12 +43,10 @@ class Routes extends Component {
 
   login(email, password) {
     loginAccountAuth({email, password}).then(user => {
-      if (!user.errors) {
         localStorage.setItem('user', JSON.stringify(user));
         this.setState({ user: user })
         this.setState({ errors:[] })
-        this.setState({ loginMessage: null })
-      } 
+        this.setState({ loginMessage: null }) 
     })
     .catch(err => {
       this.setState({ user:null })
@@ -63,7 +61,7 @@ class Routes extends Component {
 
 
   render() {
-    //console.log(this.state.user)
+    console.log(this.state.errors)
     return this.state.loading === true
       ? <h2>Cargando...</h2>
       : (
