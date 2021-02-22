@@ -30,8 +30,8 @@ class Panel extends Component {
     //Buckup de getDataUser
      /*------------------- */
 
-    
-    componentDidUpdate(prevProps){
+    componentDidUpdate(prevProps,prevState){
+        console.log(this.props,'----------', prevProps)
         if(this.props.user !== prevProps.user) {
             let data = JSON.parse(localStorage.getItem('user'))
             if(data.user.roleId === 2) {
@@ -41,7 +41,7 @@ class Panel extends Component {
     }
     
     render() {
-        //console.log(this.props.user)
+        //console.log(this.state.authenticated)
         return (
             <Fragment>
                 <header className='container'>
@@ -383,8 +383,6 @@ class Panel extends Component {
                                     to='/login'
                                     onClick={()=> {
                                         logout();
-                                        this.setState({to:'/login'})
-                                        //this.props.onHandleClick()
                                     }}
                                 >
                                 Logout</NavLink>

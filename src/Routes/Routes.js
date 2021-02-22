@@ -15,7 +15,6 @@ import { loginAccountAuth } from '../services/api';
 /* import ResetPasswordRoutes from '../pages/reset-password'; */
 
 import { Toaster } from 'react-hot-toast';
-import { parse } from 'uuid';
 
 import { Redirect as RouterRedirect } from 'react-router-dom';
 
@@ -39,8 +38,8 @@ class Routes extends Component {
     console.log('Logged in user ', user);
 
     this.state = {
+      authed: false,
       loading: false,
-      loginMessage: null,
       isHome: false,
       user,
       token,
@@ -50,7 +49,6 @@ class Routes extends Component {
       to: null
     }
     this.login = this.login.bind(this)
-    this.setMessage = this.setMessage.bind(this)
   }
 
   componentDidMount() {
@@ -87,12 +85,14 @@ class Routes extends Component {
     return { loginMessage: err }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.to !== this.state.to) {
-      this.setState({ to: null });
-    }
+componentDidUpdate(prevProps, prevState){
+  if(prevState.to !== this.state.to){
+    this.setState({ to: null }); 
   }
-
+}
+componentWillUnmount(){
+  this.setState({user:null})
+}
 
   render() {
     return this.state.loading === true
