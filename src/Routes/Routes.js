@@ -92,6 +92,7 @@ class Routes extends Component {
                   onLogin={this.login} 
                   errors={this.state.errors}
                   user={this.state.user}
+                  to={this.state.to}
                 />
               </Route>
               
@@ -105,7 +106,6 @@ class Routes extends Component {
             <Route path='/panel'>
               <Panel 
                 user={this.state.user}
-                redirect={this.state.to}
               />
             </Route>
               <Route component={Error404} />

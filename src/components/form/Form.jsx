@@ -1,26 +1,10 @@
 import React, {Fragment, Component} from 'react'
-import {Redirect} from 'react-router-dom'
 import FormCheck from './components/FormCheck'
 import Alert from '../alert/Alert'
 import SpanError from '../../partials/help/SpanError'
 import Button from '../button/Button'
 import Link from '../../partials/link/Link'
 import Row from '../../partials/row/Row'
-import {resetPasswordRequest} from '../../services/api'
-//import { v4 as uuidv4 } from 'uuid';
-//import { uid } from 'uid';
-
-import { Redirect as RouterRedirect } from 'react-router-dom';
- 
-function Redirecting({ to }) {
-  if (to) {
-    return (
-      <RouterRedirect to={to} />
-    )
-  } else {
-    return null;
-  }
-}
 
 
 class FormEmail extends Component {
@@ -72,8 +56,7 @@ export class FormLogin extends Component {
             password: '',
             emailError: false,
             passwordError: false,
-            hasError: false,
-            to: null
+            hasError: false
         }
         this.onHandleChange = this.onHandleChange.bind(this)
     }
@@ -109,11 +92,7 @@ export class FormLogin extends Component {
     }
 
     render() {
-        console.log(this.props.errors.length)
         return (
-        <>
-            <Redirecting to={this.state.redirect}></Redirecting>
-
             <form onSubmit={this.onHandleSubmit.bind(this)}>
                 <Row className='col-12'>
                         {
@@ -191,7 +170,6 @@ export class FormLogin extends Component {
                     </div>
                 </Row>
             </form>
-        </>
         );
     }
 }
