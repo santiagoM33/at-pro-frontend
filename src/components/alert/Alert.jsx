@@ -53,7 +53,8 @@ Alert.propTypes = {
 };
 
 Alert.defaultProps = {
-    type: 'primary'
+    type: 'primary',
+    children: ''
 };
 
 AlertInfo.defaultProps = {

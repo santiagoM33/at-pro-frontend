@@ -117,7 +117,7 @@ export class FormLogin extends Component {
             <form onSubmit={this.onHandleSubmit.bind(this)}>
                 <Row className='col-12'>
                         {
-                            this.props.errors &&
+                            this.props.errors.length > 0 &&
                             <Alert 
                                 type='danger'
                             >{this.props.errors[0]}</Alert>
