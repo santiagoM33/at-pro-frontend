@@ -22,7 +22,6 @@ class Routes extends Component {
   constructor(...props) {
     super(...props);
     this.state = {
-      authed: false,
       loading: false,
       loginMessage: null,
       isHome: false,
@@ -48,14 +47,12 @@ class Routes extends Component {
         localStorage.setItem('user', JSON.stringify(user));
         this.setState({ user: user })
         this.setState({ errors:[] })
-        this.setState({ authed: true })
         this.setState({ loginMessage: null })
       } 
     })
     .catch(err => {
       this.setState({ user:null })
       this.setState({ errors: err.errors })
-      this.setState({ authed: false })
       this.setState(this.setMessage('Usuario o Password incorrectos.'))
     })
   }
@@ -66,7 +63,7 @@ class Routes extends Component {
 
 
   render() {
-    //console.log(this.state.authenticated)
+    //console.log(this.state.user)
     return this.state.loading === true
       ? <h2>Cargando...</h2>
       : (
@@ -78,42 +75,31 @@ class Routes extends Component {
             <Toaster></Toaster>
             <Switch>
               <Route exact path='/'>
-                <Header
-                    onHandleClick={this.onHandleClick}
-                    authed={this.state.authed}
-                    isHome={this.state.isHome}
-                >AT PRO</Header>
+                <Header isHome={this.state.isHome}>AT PRO</Header>
                 <Home />
               </Route>
-              <Route  path='/register'>
-                <Header
-                  onHandleClick={this.onHandleClick}
-                  authed={this.state.authed}
-                  isHome={this.state.isHome}
-                >
-                AT PRO</Header>
+              <Route path='/register'>
+                <Header>AT PRO</Header>
                 <Register 
-                  authed={this.state.authed}
                   roles={this.state.roles}
-                  data={this.state.data}
                 />
               </Route>
               
               <Route exact path='/login'>
-                <Header
-                  onHandleClick={this.onHandleClick}
-                  authed={this.state.authed}
-                >
-                AT PRO</Header>
-                <Login authed={this.state.authed} onLogin={this.login} errors={this.state.errors}></Login>
+                <Header>AT PRO</Header>
+                <Login 
+                  onLogin={this.login} 
+                  errors={this.state.errors}
+                  user={this.state.user}
+                />
               </Route>
               
-              <PublicRoute exact authed={this.state.authed} path='/reset-password-request'
+              <PublicRoute exact authed={this.state.user} path='/reset-password-request'
                 component={ResetPasswordRequest} />
-              <PublicRoute exact authed={this.state.authed} path='/reset-password'
+              <PublicRoute exact authed={this.state.user} path='/reset-password'
                 component={ResetPassword} />
               
-            <PrivateRoute authed={this.state.authed} path='/publish'component={Publish}/>
+            <PrivateRoute authed={this.state.user} path='/publish'component={Publish}/>
             
             <Route path='/panel'>
               <Panel 

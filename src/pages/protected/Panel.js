@@ -15,7 +15,6 @@ class Panel extends Component {
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleHamburguer = this.handleHamburguer.bind(this);
-        this.getDataUser = this.getDataUser.bind(this);
     }
 
     handleClick() {
@@ -26,21 +25,23 @@ class Panel extends Component {
         this.setState({isOpen: !this.state.isOpen})
     }
 
-    getDataUser(){
-        let data= this.props.user;
-        if (data.user.roleId === 2) {
-            this.setState({authenticated: true})
-        }else {
-            this.setState({authenticated: false})
-        }
-    }
+    
+    /*------------------- */
+    //Buckup de getDataUser
+     /*------------------- */
 
-    componentDidMount(){
-        this.getDataUser()
+    
+    componentDidUpdate(prevProps){
+        if(this.props.user !== prevProps.user) {
+            let data = JSON.parse(localStorage.getItem('user'))
+            if(data.user.roleId === 2) {
+                this.setState({authenticated: true})
+            } 
+        }
     }
     
     render() {
-        console.log(this.props.user)
+        //console.log(this.props.user)
         return (
             <Fragment>
                 <header className='container'>

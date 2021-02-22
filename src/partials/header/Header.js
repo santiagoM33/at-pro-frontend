@@ -2,6 +2,7 @@ import React, { Fragment, Component } from 'react';
 import Hamburguer from './components/Hamburguer';
 import {Link} from 'react-router-dom';
 import { GoSearch } from "react-icons/go";
+import { logout } from "../../data/config";
 
 class Header extends Component {
 
@@ -36,8 +37,10 @@ class Header extends Component {
                 <div className="collapse navbar-collapse" id='navbarNav'>
                     <div className='navbar-nav'>
                         <Link className='text-light' to='/'>Home</Link>
-                        {
-                            this.props.authed
+                        <Link className='text-light' to='/register'>Register</Link>
+                        <Link className='text-light' to='/login'>Login</Link>
+                        {/*
+                            this.props.user
                             ?
                                 <Fragment>
                                     <Link className='text-light' to='/panel'>Panel de control</Link>
@@ -45,8 +48,8 @@ class Header extends Component {
                                         className='text-light' 
                                         to='/logout'
                                         onClick={()=> {
-                                            //logout();
-                                            this.setState({authed:false})
+                                            logout();
+                                            //this.setState({authed:false})
                                             this.props.onHandleClick()
                                         }}
                                     >Logout</Link>
@@ -56,12 +59,12 @@ class Header extends Component {
                                     <Link className='text-light' to='/register'>Register</Link>
                                     <Link className='text-light' to='/login'>Login</Link>
                                 </Fragment>
-                        }
+                                    */}
                         
                     </div>
                 </div>
             </div>
-            { this.state.home &&
+            { this.state.isHome === true &&
             <nav>
                 <form className="pl-4 ml-2 my-1 my-lg-0">
                     <div className="row  input-group">
