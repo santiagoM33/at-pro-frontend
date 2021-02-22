@@ -53,13 +53,19 @@ class Routes extends Component {
     .catch(err => {
       this.setState({ user:null })
       this.setState({ errors: err.errors })
-      this.setState(this.setMessage('Usuario o Password incorrectos.'))
       this.setState({ to: null });
+      this.setState(this.setMessage('Usuario o Password incorrectos.'))
     })
   }
 
   setMessage(err) {
     return {loginMessage: err}
+}
+
+componentDidUpdate(prevProps, prevState){
+  if(prevState.to !== this.state.to){
+    this.setState({ to: null }); 
+  }
 }
 
 
@@ -106,6 +112,7 @@ class Routes extends Component {
             <Route path='/panel'>
               <Panel 
                 user={this.state.user}
+                to={this.state.to}
               />
             </Route>
               <Route component={Error404} />

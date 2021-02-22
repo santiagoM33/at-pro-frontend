@@ -383,7 +383,7 @@ class Panel extends Component {
                                     to='/login'
                                     onClick={()=> {
                                         logout();
-                                        //this.setState({authed:false})
+                                        this.setState({to:'/login'})
                                         //this.props.onHandleClick()
                                     }}
                                 >
