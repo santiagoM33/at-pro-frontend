@@ -35,7 +35,7 @@ class Routes extends Component {
     const user = localStorage.getItem('user') ?? null;
     const token = localStorage.getItem('token') ?? null;
     
-    console.log('Logged in user ', user);
+    //console.log('Logged in user ', user);
 
     this.state = {
       authed: false,
@@ -62,7 +62,7 @@ class Routes extends Component {
     loginAccountAuth({ email, password }).then(({ token, user }) => {
       localStorage.setItem('token', JSON.stringify(token));
       localStorage.setItem('user', JSON.stringify(user));
-      console.log('User data ', token, user);
+      //console.log('User data ', token, user);
       this.setState({
         user,
         token,
@@ -86,15 +86,17 @@ class Routes extends Component {
   }
 
 componentDidUpdate(prevProps, prevState){
+  console.log(this.state.to)
   if(prevState.to !== this.state.to){
     this.setState({ to: null }); 
   }
 }
-componentWillUnmount(){
+/*componentWillUnmount(){
   this.setState({user:null})
-}
+}*/
 
   render() {
+    console.log(this.state.to)
     return this.state.loading === true
       ? <h2>Cargando...</h2>
       : (

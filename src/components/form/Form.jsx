@@ -295,7 +295,7 @@ export class FormRegister extends Component {
     }
 
     render() {
-        console.log(this.state.category)
+        //console.log(this.state.category)
         const categories = this.props.roles.filter(elem => elem.id !== 1);
         return (
             <form onSubmit={this.onHandleSubmit.bind(this)}>

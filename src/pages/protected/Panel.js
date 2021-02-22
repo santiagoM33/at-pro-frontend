@@ -31,7 +31,7 @@ class Panel extends Component {
      /*------------------- */
 
     componentDidUpdate(prevProps,prevState){
-        console.log(this.props,'----------', prevProps)
+        //console.log(this.props,'----------', prevProps)
         if(this.props.user !== prevProps.user) {
             let data = JSON.parse(localStorage.getItem('user'))
             if(data.user.roleId === 2) {
@@ -383,6 +383,7 @@ class Panel extends Component {
                                     to='/login'
                                     onClick={()=> {
                                         logout();
+                                        this.setState({to:'/login'})
                                     }}
                                 >
                                 Logout</NavLink>
