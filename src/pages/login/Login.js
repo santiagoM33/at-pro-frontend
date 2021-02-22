@@ -3,26 +3,11 @@ import {FormLogin} from '../../components/form/Form';
 import Row from '../../partials/row/Row';
 import Title from '../../partials/title/Title';
 
-import { Redirect as RouterRedirect } from 'react-router-dom';
-
-function Redirecting({ to }) {
-    if (to) {
-      return (
-        <RouterRedirect to={to} />
-      )
-    } else {
-      return null;
-    }
-  }
-
 class Login extends Component {
-
-    
 
     render() { 
         return ( 
             <Fragment>
-                <Redirecting to={this.props.to}></Redirecting>
 
                 <div className='container-fluid'>
                     <Title
