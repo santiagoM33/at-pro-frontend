@@ -1,17 +1,17 @@
 import React, { Fragment, Component } from 'react';
-import Home from '../pages/home/Home';
-import Register from '../pages/register/Register';
-import Login from '../pages/login/Login';
-import ResetPasswordRequest from '../pages/reset-password-request/ResetPasswordRequest';
-import ResetPassword from '../pages/reset-password/ResetPassword';
-import Publish from '../pages/protected/publish/Publish';
-import Panel from '../pages/protected/Panel';
-import Error404 from '../pages/404/Error404';
+import Home from 'pages/home/Home';
+import Register from 'pages/register/Register';
+import Login from 'pages/login/Login';
+import ResetPasswordRequest from 'pages/reset-password-request/ResetPasswordRequest';
+import ResetPassword from 'pages/reset-password/ResetPassword';
+import Publish from 'pages/protected/publish/Publish';
+import Panel from 'pages/protected/Panel';
+import Error404 from 'pages/404/Error404';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Header from '../partials/header/Header';
+import Header from 'partials/header/Header';
 
-import { PrivateRoute, PublicRoute } from '../helpers/routeRedirectAuth';
-import { loginAccountAuth } from '../services/api';
+import { PrivateRoute, PublicRoute } from 'helpers/routeRedirectAuth';
+import { loginAccountAuth } from 'services/api';
 /* import ResetPasswordRoutes from '../pages/reset-password'; */
 
 import { Toaster } from 'react-hot-toast';

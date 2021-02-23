@@ -1,0 +1,11 @@
+img.disabled{
+    opacity: 0.3;
+}
+
+img.is-small{
+    width: 50px;
+}
+
+img.is-large{
+    width: 200px;
+}

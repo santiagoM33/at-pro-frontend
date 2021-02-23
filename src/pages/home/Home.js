@@ -1,25 +1,28 @@
 import React, { Fragment, Component } from 'react';
-import Header from '../../partials/header/Header';
-import Footer from '../../partials/footer/Footer';
-
+import Footer from 'partials/footer/Footer';
 import HeaderMain from './components/HeaderMain';
-import Card from '../../components/card/Card';
-
-import Alert, {AlertLink} from '../../components/alert/Alert';
-import Button from '../../components/button/Button';
+import Card from 'components/card/Card';
 
 class Home extends Component {
-    state = {
-        users: [],
-        isFetch: true
+    constructor(...props) {
+        super(...props)
+        this.state = {
+            users: [],
+            isFetch: true
+        }
+        this.getUsers = this.getUsers.bind(this)
+    }
+    
+
+    getUsers() {
+        const URI = 'http://localhost:8005';
+        fetch(`${URI}/users`)
+            .then(res => res.json())
+            .then(resJson => this.setState({users: resJson}))
     }
 
     componentDidMount() {
-        const URI = 'http://localhost:8005';
-        const ep = '/users';
-        fetch(`${URI}${ep}`)
-            .then(res => res.json())
-            .then(resJson => this.setState({users: resJson}))
+        this.getUsers()
     }
     
     render() { 

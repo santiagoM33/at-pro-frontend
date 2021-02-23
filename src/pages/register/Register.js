@@ -1,17 +1,14 @@
 import React, {Fragment, Component} from 'react';
-import {FormRegister} from '../../components/form/Form';
+import {FormRegister} from 'components/form/Form';
 
-import Row from '../../partials/row/Row';
-import Title from '../../partials/title/Title';
+import Row from 'partials/row/Row';
+import Title from 'partials/title/Title';
 
-import {registerDataAccount} from '../../services/api'
+import {registerDataAccount} from 'services/api'
 
 class Register extends Component {
     constructor(...props) {
         super(...props);
-        this.state = { 
-            account: ''
-        }
         this.getDataR = this.getDataR.bind(this)
     }
 
@@ -24,12 +21,8 @@ class Register extends Component {
             roleId: category
         }
         registerDataAccount(sData)
-        /*this.setState({
-            account: sData
-        })*/
     }
 
-    
 
     render() { 
         return ( 

@@ -2,7 +2,7 @@ import React, { Fragment, Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Sling as Hamburger } from 'hamburger-react'
 import { OffCanvas, OffCanvasMenu, OffCanvasBody } from "react-offcanvas";
-import {logout} from '../../data/config'
+import {logout} from 'data/config'
 
 class Panel extends Component {
 
