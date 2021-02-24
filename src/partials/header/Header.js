@@ -38,29 +38,7 @@ class Header extends Component {
                     <div className='navbar-nav'>
                         <Link className='text-dark' to='/'>Home</Link>
                         <Link className='text-dark' to='/register'>Register</Link>
-                        <Link className='text-dark' to='/login'>Login</Link>
-                        {/*
-                            this.props.user
-                            ?
-                                <Fragment>
-                                    <Link className='text-light' to='/panel'>Panel de control</Link>
-                                    <Link 
-                                        className='text-light' 
-                                        to='/logout'
-                                        onClick={()=> {
-                                            logout();
-                                            //this.setState({authed:false})
-                                            this.props.onHandleClick()
-                                        }}
-                                    >Logout</Link>
-                                </Fragment>
-                            :
-                                <Fragment>
-                                    <Link className='text-light' to='/register'>Register</Link>
-                                    <Link className='text-light' to='/login'>Login</Link>
-                                </Fragment>
-                                    */}
-                        
+                        <Link className='text-dark' to='/login'>Login</Link>                        
                     </div>
                 </div>
             </div>

@@ -17,7 +17,7 @@ class Login extends Component {
                         <FormLogin 
                             onLogin={this.props.onLogin}
                             errors={this.props.errors}
-                            smooth={this.props.smooth}
+                            //onHandleChange={this.props.onHandleChange}
                         />
                     </Row>
                 </div>

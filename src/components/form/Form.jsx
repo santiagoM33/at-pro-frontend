@@ -60,6 +60,7 @@ export class FormLogin extends Component {
             hasError: false
         }
         this.onHandleChange = this.onHandleChange.bind(this)
+        //this.handleChange = this.handleChange.bind(this)
     }
   
 
@@ -75,6 +76,10 @@ export class FormLogin extends Component {
             }
         }
     }
+
+    /*handleChange(e){
+        this.props.onHandleChange(e.target.name, e.target.value)
+    }*/
     
     onHandleSubmit(e) {
         e.preventDefault();
@@ -87,7 +92,6 @@ export class FormLogin extends Component {
     }
 
     render() {
-        //const smooth = this.props.smooth && 'hide'
         return (
             <form onSubmit={this.onHandleSubmit.bind(this)}>
                 <Row className='col-12'>
@@ -105,8 +109,8 @@ export class FormLogin extends Component {
 
                             name='email'
                             aria-describedby={'email-error'} 
-                            
                             onChange={this.onHandleChange}
+                            //onChange={this.handleChange}
                         />
                         { this.state.emailError &&
                             <SpanError id='email-error'>El email es invalido.</SpanError>
@@ -124,6 +128,7 @@ export class FormLogin extends Component {
                             aria-describedby={'pass-error'} 
 
                             onChange={this.onHandleChange}
+                            //onChange={this.handleChange}
                         />
                         { this.state.passwordError &&
                             <SpanError id='pass-error'>El password es invalido.</SpanError>
@@ -217,10 +222,7 @@ export class FormRegister extends Component {
         this.isMatch = this.isMatch.bind(this)
     } 
 
-    //Metodos que utilizan name y value
     onHandleChange(e) {
-        //this.setState({hasError: false})
-        
         switch (e.target.name) {
             case 'firstName':
                 if (e.target.value.length < 3 ){
@@ -293,7 +295,6 @@ export class FormRegister extends Component {
     }
 
     render() {
-        //console.log(this.state.category)
         const categories = this.props.roles.filter(elem => elem.id !== 1);
         return (
             <form onSubmit={this.onHandleSubmit.bind(this)}>
@@ -371,17 +372,17 @@ export class FormRegister extends Component {
                     </div>
                 </Row>
                 <Row className='col-12'>
-                    <div className='input-group mb-3'>
+                    <div className='col-12 input-group mb-3'>
                         
                         <select
-                            className="custom-select col-11 col-sm-12 ml-3" 
+                            className="custom-select col col-sm-12" 
                             name='category'
                             
                             multiple= {false}
                             onChange={this.onHandleChange}
                             
                         >
-                            <option value=''>--- Seleccione una opción ---</option>
+                            <option value=''>-- Seleccione una opción --</option>
                             {
                                 categories.map((elem, i) => (
                                     <option key={i} value={elem.id}>{elem.name}</option>
@@ -391,10 +392,12 @@ export class FormRegister extends Component {
                     </div>
                 </Row>
                 <Row className='col'>
-                    <Button
-                        type='submit'
-                        style='primary btn-block'
-                    >Registrarse</Button>
+                    <div className='col-12 mb-3'>
+                        <Button
+                            type='submit'
+                            style='primary btn-block'
+                        >Registrarse</Button>
+                    </div>
                 </Row>
             </form>
         )

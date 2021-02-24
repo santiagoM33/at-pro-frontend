@@ -27,9 +27,9 @@ class Register extends Component {
     render() { 
         return ( 
             <Fragment>
-                <div className='container-fluid'>
+                <div className='container card mt-5 p-5 shadow-sm rounded bg-dark'>
                     <Title
-                        className='text-center my-3 h4'
+                        className='text-center my-3 h4 text-warning'
                     >Registro de Usuario</Title>
                     <Row
                         className='col-12'

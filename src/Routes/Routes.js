@@ -5,7 +5,7 @@ import Login from 'pages/login/Login';
 import ResetPasswordRequest from 'pages/reset-password-request/ResetPasswordRequest';
 import ResetPassword from 'pages/reset-password/ResetPassword';
 import Publish from 'pages/protected/publish/Publish';
-import Panel from 'pages/protected/Panel';
+import Panel from 'pages/protected/panel/Panel';
 import Error404 from 'pages/404/Error404';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from 'partials/header/Header';
@@ -40,17 +40,16 @@ class Routes extends Component {
 
     this.state = {
       authed: false,
-      loading: false,
       isHome: false,
       user,
       token,
       errors: [],
       roles: [],
       errorRoles: '',
-      to: null,
-      smooth: false
+      to: null
     }
     this.login = this.login.bind(this)
+    //this.onHandleChange = this.onHandleChange.bind(this)
   }
 
   componentDidMount() {
@@ -84,10 +83,9 @@ class Routes extends Component {
       //Se queda pegado el lugin si no se reinicia el state errors
       setTimeout(() => {
         this.setState({
-          errors: [],
-          smooth: true
+          errors: []
         })
-      }, 2000);
+      }, 1500);
   }
 
   setMessage(err) {
@@ -95,10 +93,13 @@ class Routes extends Component {
   }
 
 
+  /*onHandleChange(name, value){
+    console.log('Input: ', name)
+    console.log('Value: ', value)
+  }*/
+
   render() {
-    return this.state.loading === true
-      ? <h2>Cargando...</h2>
-      : (
+    return (
         <BrowserRouter>
           <Fragment>
 
@@ -127,7 +128,7 @@ class Routes extends Component {
                     onLogin={this.login}
                     errors={this.state.errors}
                     user={this.state.user}
-                    smooth={this.state.smooth}
+                    //onHandleChange={this.onHandleChange}
                   />
                 </>
               )} />
