@@ -18,6 +18,7 @@ import { Toaster } from 'react-hot-toast';
 
 import { Redirect as RouterRedirect } from 'react-router-dom';
 
+
 function Redirecting({ to }) {
   if (to) {
     return (
@@ -46,7 +47,8 @@ class Routes extends Component {
       errors: [],
       roles: [],
       errorRoles: '',
-      to: null
+      to: null,
+      smooth: false
     }
     this.login = this.login.bind(this)
   }
@@ -79,24 +81,21 @@ class Routes extends Component {
           ...this.setMessage('Usuario o Password incorrectos.')
         })
       })
+      //Se queda pegado el lugin si no se reinicia el state errors
+      setTimeout(() => {
+        this.setState({
+          errors: [],
+          smooth: true
+        })
+      }, 2000);
   }
 
   setMessage(err) {
     return { loginMessage: err }
   }
 
-componentDidUpdate(prevProps, prevState){
-  console.log(this.state.to)
-  if(prevState.to !== this.state.to){
-    this.setState({ to: null }); 
-  }
-}
-/*componentWillUnmount(){
-  this.setState({user:null})
-}*/
 
   render() {
-    console.log(this.state.to)
     return this.state.loading === true
       ? <h2>Cargando...</h2>
       : (
@@ -128,6 +127,7 @@ componentDidUpdate(prevProps, prevState){
                     onLogin={this.login}
                     errors={this.state.errors}
                     user={this.state.user}
+                    smooth={this.state.smooth}
                   />
                 </>
               )} />

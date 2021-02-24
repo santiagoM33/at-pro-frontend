@@ -2,7 +2,7 @@ import React, { Fragment, Component } from 'react';
 import Hamburguer from './components/Hamburguer';
 import {Link} from 'react-router-dom';
 import { GoSearch } from "react-icons/go";
-import { logout } from "../../data/config";
+import { logout } from "data/config";
 
 class Header extends Component {
 
@@ -25,10 +25,10 @@ class Header extends Component {
         //console.log(this.state.isHome)
     return ( 
         <header>
-            <div className="navbar navbar-expand-lg navbar-light bg-secondary">
-                <h1><Link className="navbar-brand text-light" to="/home">{this.props.children}</Link></h1>
+            <div className="navbar navbar-expand-lg navbar-light bg-light">
+                <h1><Link className="navbar-brand text-dark" to="/home">{this.props.children}</Link></h1>
                 <Hamburguer 
-                    classNames='light'
+                    classNames='dark'
                     target='#navbarNav'
                     controls='navbarNav'
                     toggle='collapse'
@@ -36,9 +36,9 @@ class Header extends Component {
                 </Hamburguer>
                 <div className="collapse navbar-collapse" id='navbarNav'>
                     <div className='navbar-nav'>
-                        <Link className='text-light' to='/'>Home</Link>
-                        <Link className='text-light' to='/register'>Register</Link>
-                        <Link className='text-light' to='/login'>Login</Link>
+                        <Link className='text-dark' to='/'>Home</Link>
+                        <Link className='text-dark' to='/register'>Register</Link>
+                        <Link className='text-dark' to='/login'>Login</Link>
                         {/*
                             this.props.user
                             ?

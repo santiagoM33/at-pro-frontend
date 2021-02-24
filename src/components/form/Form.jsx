@@ -1,4 +1,5 @@
 import React, {Fragment, Component} from 'react'
+//import './Form.css'
 import FormCheck from './components/FormCheck'
 import Alert from '../alert/Alert'
 import SpanError from 'partials/help/SpanError'
@@ -60,19 +61,17 @@ export class FormLogin extends Component {
         }
         this.onHandleChange = this.onHandleChange.bind(this)
     }
+  
 
     onHandleChange = e => {
         if (e.target.name == 'email') {
             this.setState({email: e.target.value})
-            this.setState({hasError: false})
         } else {
-            if (e.target.value < 6) {
+            if (e.target.value.length < 6) {
                 this.setState({passwordError: true})
-                this.setState({hasError: false})
             } else {
                 this.setState({passwordError: false})
                 this.setState({password: e.target.value})
-                this.setState({hasError: false})
             }
         }
     }
@@ -88,11 +87,12 @@ export class FormLogin extends Component {
     }
 
     render() {
+        //const smooth = this.props.smooth && 'hide'
         return (
             <form onSubmit={this.onHandleSubmit.bind(this)}>
                 <Row className='col-12'>
                         {
-                            this.props.errors.length > 0 &&
+                            this.props.errors.length &&
                             <Alert 
                                 type='danger'
                             >{this.props.errors[0]}</Alert>
@@ -105,9 +105,7 @@ export class FormLogin extends Component {
 
                             name='email'
                             aria-describedby={'email-error'} 
-                            //ref={this.emailRef}
-
-                            value={this.state.email}
+                            
                             onChange={this.onHandleChange}
                         />
                         { this.state.emailError &&
@@ -125,7 +123,6 @@ export class FormLogin extends Component {
                             name='password'
                             aria-describedby={'pass-error'} 
 
-                            value={this.password}
                             onChange={this.onHandleChange}
                         />
                         { this.state.passwordError &&
@@ -160,7 +157,8 @@ export class FormLogin extends Component {
                     <div className="col-12 form-group">
                         <Button
                             type='submit'
-                            style='secondary'
+                            color='primary'
+                            block='block'
                             //signIn={this.props.signIn}
                         >Ingresar</Button>
                     </div>

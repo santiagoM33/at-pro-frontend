@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, Redirect } from "react-router-dom";
 import { Sling as Hamburger } from 'hamburger-react'
 import { OffCanvas, OffCanvasMenu, OffCanvasBody } from "react-offcanvas";
 import {logout} from 'data/config'
@@ -44,7 +44,7 @@ class Panel extends Component {
         //console.log(this.state.authenticated)
         return (
             <Fragment>
-                <header className='container'>
+                <header className='container bg-light'>
                 <div className='row align-items-center'>
                         <div className='col-6 pt-2'>
                                 <div className="navbar navbar-expand-lg">
@@ -383,8 +383,10 @@ class Panel extends Component {
                                     to='/login'
                                     onClick={()=> {
                                         logout();
-                                        this.setState({to:'/login'})
-                                    }}
+                                        //<Redirect to='login'/>
+                                        window.location.href ='/login';
+                                        }
+                                    }
                                 >
                                 Logout</NavLink>
                             </li>

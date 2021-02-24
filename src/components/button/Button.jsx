@@ -4,10 +4,13 @@ import classnames from 'classnames';
 
 
 
-const Button = ({type, style, signIn,children}) => {
+const Button = ({type, style, block, color, signIn,children}) => {
     return ( 
         <button type={type} onClick={signIn} className={classnames('btn',{
-            [`btn-${style}`] : style
+            [`btn-${style}`] : style,
+            [`btn-${block}`] : block,
+            [`bg-${color}`] : color
+
         })}>
         {children}</button>
      );
@@ -20,7 +23,8 @@ Button.propTypes = {
 
 Button.defautProps = {
     type: 'button',
-    style: 'primary'
+    style: 'primary',
+    block: 'block'
 }
  
 export default Button;
