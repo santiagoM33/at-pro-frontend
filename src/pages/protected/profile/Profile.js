@@ -15,7 +15,7 @@ import HomeCards from "../panel/components/HomeCards";
 import HeaderPanel from "../panel/components/HeaderPanel";
 import HeaderMenuOffcanvas from "../panel/components/HeaderMenuOffcanvas";
 
-class Publish extends Component {
+class Profile extends Component {
     constructor(...props) {
         super(...props);
         this.state = {
@@ -56,10 +56,25 @@ class Publish extends Component {
                     >
                         <div className="container-fluid">
                             <Title className="text-center my-3 h3">
-                                Publicar Anuncio
+                                Informacion Personal
                             </Title>
                             <Row className="col">
                                 <form>
+                                    <Row className="col-12 mb-3">
+                                        <div className="input-group">
+                                            <input
+                                                type="text"
+                                                placeholder="Ingresa tu Alias"
+                                                className="form-control col-12 ml-3"
+                                                name="alias"
+
+                                                //aria-describedby={"fName-error"}
+                                                //ref={this.fNameRef}
+
+                                                //onChange={this.onHandleChange}
+                                            />
+                                        </div>
+                                    </Row>
                                     <Row className="col-12">
                                         <div className="input-group mb-3">
                                             <select
@@ -68,12 +83,58 @@ class Publish extends Component {
                                                 multiple={false}
                                             >
                                                 <option selected>
-                                                    -- Elige una Provincia --
+                                                    -- Nacionalidad --
                                                 </option>
                                                 <option value="1">One</option>
                                                 <option value="2">Two</option>
                                                 <option value="3">Three</option>
                                             </select>
+                                        </div>
+                                    </Row>
+                                    <Row className="col-12 mb-3">
+                                        <div className="input-group">
+                                            <input
+                                                type="number"
+                                                placeholder="Documento"
+                                                className="form-control col-12 ml-3"
+                                                name="documento"
+
+                                                //aria-describedby={"fName-error"}
+                                                //ref={this.fNameRef}
+
+                                                //onChange={this.onHandleChange}
+                                            />
+                                        </div>
+                                    </Row>
+                                    <Row className="col-12">
+                                        <div className="input-group mb-3">
+                                            <select
+                                                className="custom-select col-11 col-sm-12 ml-3"
+                                                name="barrio"
+                                                multiple={false}
+                                            >
+                                                <option selected>
+                                                    --Edad --
+                                                </option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </div>
+                                    </Row>
+                                    <Row className="col-12 mb-3">
+                                        <div className="input-group">
+                                            <input
+                                                type="number"
+                                                placeholder="Ingresa tu numero de contacto"
+                                                className="form-control col-12 ml-3"
+                                                name="celular"
+
+                                                //aria-describedby={"fName-error"}
+                                                //ref={this.fNameRef}
+
+                                                //onChange={this.onHandleChange}
+                                            />
                                         </div>
                                     </Row>
                                     <Row className="col-12">
@@ -84,7 +145,7 @@ class Publish extends Component {
                                                 multiple={false}
                                             >
                                                 <option selected>
-                                                -- Elige una Ciudad --
+                                                    -- Medidas Pecho --
                                                 </option>
                                                 <option value="1">One</option>
                                                 <option value="2">Two</option>
@@ -100,7 +161,7 @@ class Publish extends Component {
                                                 multiple={false}
                                             >
                                                 <option selected>
-                                                -- Elige un Barrio --
+                                                    -- Medidas Cintura --
                                                 </option>
                                                 <option value="1">One</option>
                                                 <option value="2">Two</option>
@@ -108,37 +169,20 @@ class Publish extends Component {
                                             </select>
                                         </div>
                                     </Row>
-                                    <Row className="col-12 mb-3">
-                                        <div className="input-group">
-                                            <input
-                                                type="text"
-                                                placeholder="Ingrese un título a su anuncio"
-                                                className="form-control col-12 ml-3"
-                                                name="firstName"
-
-                                                //aria-describedby={"fName-error"}
-                                                //ref={this.fNameRef}
-
-                                                //onChange={this.onHandleChange}
-                                            />
-                                        </div>
-                                    </Row>
                                     <Row className="col-12">
-                                        <div class="form-group">
-                                            <textarea
-                                                className="form-control col-12 ml-3"
-                                                rows="3"
-                                                placeholder="Ingrese una descripción a su anuncio"
-                                            ></textarea>
-                                        </div>
-                                    </Row>
-                                    <Row className="col-12">
-                                        <div class="form-group">
-                                            <textarea
-                                                className="form-control col-12 ml-3"
-                                                rows="3"
-                                                placeholder="Servicios ofrecidos. Ej: Atención a parejas, Bucal al natural, Hasta el final..."
-                                            ></textarea>
+                                        <div className="input-group mb-3">
+                                            <select
+                                                className="custom-select col-11 col-sm-12 ml-3"
+                                                name="barrio"
+                                                multiple={false}
+                                            >
+                                                <option selected>
+                                                    -- Medidas Cadera --
+                                                </option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
                                         </div>
                                     </Row>
                                 </form>
@@ -248,4 +292,4 @@ class Publish extends Component {
     }
 }
 
-export default Publish;
+export default Profile;

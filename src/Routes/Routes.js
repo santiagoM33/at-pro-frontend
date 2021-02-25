@@ -6,6 +6,8 @@ import ResetPasswordRequest from 'pages/reset-password-request/ResetPasswordRequ
 import ResetPassword from 'pages/reset-password/ResetPassword';
 import Publish from 'pages/protected/publish/Publish';
 import Panel from 'pages/protected/panel/Panel';
+import Profile from 'pages/protected/profile/Profile';
+import Gallery from 'pages/protected/gallery/Gallery';
 import Error404 from 'pages/404/Error404';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from 'partials/header/Header';
@@ -138,13 +140,13 @@ class Routes extends Component {
               <PublicRoute exact authed={this.state.user} path='/reset-password'
                 component={ResetPassword} />
 
-              <PrivateRoute authed={this.state.user} path='/publish' component={Publish} />
-
+              <PrivateRoute authed={!!this.state.user} path='/publish' component={Publish} />
+              <PrivateRoute authed={!!this.state.user} path='/profile' component={Profile} />
+              <PrivateRoute authed={!!this.state.user} path='/gallery' component={Gallery} />
               <PrivateRoute path='/panel' authed={!!this.state.user} component={routeProps => (
                 <Panel
                   {...routeProps}
                   user={this.state.user}
-                  to={this.state.to}
                 />
               )} />
               <Route component={Error404} />

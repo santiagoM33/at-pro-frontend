@@ -13,7 +13,7 @@ const HeaderPanel = (props) => {
                         </Link>
                     </div>
                 </div>
-                <div className="offset-3 col-3 offset-md-5 col-md-1 align-self-end">
+                <div className="offset-4 col-2 offset-md-5 col-md-1 align-self-end">
                     <Hamburger
                         size={20}
                         label="Show menu"

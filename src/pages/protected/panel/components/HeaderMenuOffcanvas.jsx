@@ -8,10 +8,10 @@ const HeaderMenuOffcanvas = () => {
                 <div className="col pt-2">
                     <div className="navbar navbar-expand-lg">
                         <Link
-                            className="navbar-brand ml-1 text-dark"
+                            className="navbar-brand ml-1 text-light"
                             to="/panel"
                         >
-                            {/*<h3 className="h6">AT PRO</h3>*/}
+                            <h3 className="h6">.</h3>
                         </Link>
                     </div>
                 </div>

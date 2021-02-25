@@ -274,7 +274,7 @@ export class FormRegister extends Component {
     isMatch = (param) => {
         if (param.firstName.length > 0 && param.lastName.length > 0 && param.email.length > 0 && param.password.length > 0) {
             const {firstName, lastName, email, password, category} = param;
-            console.log(category)
+            //console.log(category)
             this.props.getDataR(
                 firstName,
                 lastName,

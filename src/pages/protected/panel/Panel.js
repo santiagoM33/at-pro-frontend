@@ -64,10 +64,9 @@ class Panel extends Component {
             >
                 <OffCanvasBody
                     className='container'
-                    style={{ fontSize: "1.4em" }}
+                    style={{ fontSize: "1.2em" }}
                 >
-                    
-                    <HomeCards/>
+                    <HomeCards />
 
                     <Comments />
 
@@ -80,30 +79,30 @@ class Panel extends Component {
                                
                         <ul className="navbar-nav mr-auto">
                             {this.state.authenticated === true &&
-                            <Fragment>
-                                <li className="nav-item active mt-3">
-                                    <NavLink
-                                        className="nav-link text-dark"
-                                        to="#"
-                                        activeClassName="active"
-                                    >
-                                        Dashboard{" "}
-                                        <span className="sr-only">(current)</span>
-                                    </NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink className="nav-link text-dark" to="#">
-                                        Notifications
-                                    </NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink className="nav-link text-dark" to="#">
-                                        Publish
-                                    </NavLink>
-                                </li>
-                            </Fragment>
+                                <Fragment>
+                                    <li className="nav-item active mt-3">
+                                        <NavLink
+                                            className="nav-link text-dark"
+                                            to="/panel"
+                                            activeClassName="active"
+                                        >
+                                            Dashboard{" "}
+                                            <span className="sr-only">(current)</span>
+                                        </NavLink>
+                                    </li>
+                                    <li className="nav-item">
+                                        <NavLink className="nav-link text-dark" to="#">
+                                            Notifications
+                                        </NavLink>
+                                    </li>
+                                    <li className="nav-item">
+                                        <NavLink className="nav-link text-dark" to="/publish">
+                                            Publish
+                                        </NavLink>
+                                    </li>
+                                </Fragment>
                             }
-                            <li className="nav-item mt-4">
+                            <li className="nav-item">
                                 <NavLink className="nav-link text-dark" to="#">
                                     Favorites
                                 </NavLink>
@@ -145,7 +144,8 @@ class Panel extends Component {
                                     to='/login'
                                     onClick={()=> {
                                         logout();
-                                        //<Redirect to='login'/>
+                                        //Funciona pero me detecta el null en roleID al cerrar session
+                                        //<Redirect to='/login'/>
                                         window.location.href ='/login';
                                         }
                                     }

@@ -1,21 +1,16 @@
 import React, { Fragment, Component } from "react";
 import Title from "partials/title/Title";
 import Row from "partials/row/Row";
-import { FormPublish } from "components/form/Form";
 
 import { NavLink, Redirect } from "react-router-dom";
 
 import { OffCanvas, OffCanvasMenu, OffCanvasBody } from "react-offcanvas";
 import { logout } from "data/config";
 
-import Comments from "../panel/components/Comments";
-import Suggestions from "../panel/components/Suggestions";
-import HomeCards from "../panel/components/HomeCards";
-
 import HeaderPanel from "../panel/components/HeaderPanel";
 import HeaderMenuOffcanvas from "../panel/components/HeaderMenuOffcanvas";
 
-class Publish extends Component {
+class Gallery extends Component {
     constructor(...props) {
         super(...props);
         this.state = {
@@ -56,89 +51,33 @@ class Publish extends Component {
                     >
                         <div className="container-fluid">
                             <Title className="text-center my-3 h3">
-                                Publicar Anuncio
+                                Informacion Personal
                             </Title>
                             <Row className="col">
                                 <form>
-                                    <Row className="col-12">
-                                        <div className="input-group mb-3">
-                                            <select
-                                                className="custom-select col-11 col-sm-12 ml-3"
-                                                name="provincia"
-                                                multiple={false}
-                                            >
-                                                <option selected>
-                                                    -- Elige una Provincia --
-                                                </option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
-                                        </div>
-                                    </Row>
-                                    <Row className="col-12">
-                                        <div className="input-group mb-3">
-                                            <select
-                                                className="custom-select col-11 col-sm-12 ml-3"
-                                                name="ciudad"
-                                                multiple={false}
-                                            >
-                                                <option selected>
-                                                -- Elige una Ciudad --
-                                                </option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
-                                        </div>
-                                    </Row>
-                                    <Row className="col-12">
-                                        <div className="input-group mb-3">
-                                            <select
-                                                className="custom-select col-11 col-sm-12 ml-3"
-                                                name="barrio"
-                                                multiple={false}
-                                            >
-                                                <option selected>
-                                                -- Elige un Barrio --
-                                                </option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
-                                        </div>
-                                    </Row>
                                     <Row className="col-12 mb-3">
                                         <div className="input-group">
-                                            <input
-                                                type="text"
-                                                placeholder="Ingrese un título a su anuncio"
-                                                className="form-control col-12 ml-3"
-                                                name="firstName"
-
-                                                //aria-describedby={"fName-error"}
-                                                //ref={this.fNameRef}
-
-                                                //onChange={this.onHandleChange}
-                                            />
-                                        </div>
-                                    </Row>
-                                    <Row className="col-12">
-                                        <div class="form-group">
-                                            <textarea
-                                                className="form-control col-12 ml-3"
-                                                rows="3"
-                                                placeholder="Ingrese una descripción a su anuncio"
-                                            ></textarea>
-                                        </div>
-                                    </Row>
-                                    <Row className="col-12">
-                                        <div class="form-group">
-                                            <textarea
-                                                className="form-control col-12 ml-3"
-                                                rows="3"
-                                                placeholder="Servicios ofrecidos. Ej: Atención a parejas, Bucal al natural, Hasta el final..."
-                                            ></textarea>
+                                            <div class="input-group-prepend">
+                                                <button
+                                                    class="btn btn-outline-secondary"
+                                                    type="button"
+                                                >
+                                                    Button
+                                                </button>
+                                            </div>
+                                            <div class="custom-file">
+                                                <input
+                                                    type="file"
+                                                    class="custom-file-input"
+                                                    id="inputGroupFile03"
+                                                />
+                                                <label
+                                                    class="custom-file-label"
+                                                    for="inputGroupFile03"
+                                                >
+                                                    Choose file
+                                                </label>
+                                            </div>
                                         </div>
                                     </Row>
                                 </form>
@@ -248,4 +187,4 @@ class Publish extends Component {
     }
 }
 
-export default Publish;
+export default Gallery;
