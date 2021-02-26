@@ -8,6 +8,7 @@ import Publish from 'pages/protected/publish/Publish';
 import Panel from 'pages/protected/panel/Panel';
 import Profile from 'pages/protected/profile/Profile';
 import Gallery from 'pages/protected/gallery/Gallery';
+import Logout from 'pages/protected/logout/Logout';
 import Error404 from 'pages/404/Error404';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from 'partials/header/Header';
@@ -51,7 +52,8 @@ class Routes extends Component {
       to: null
     }
     this.login = this.login.bind(this)
-    //this.onHandleChange = this.onHandleChange.bind(this)
+    this.clearErrors = this.clearErrors.bind(this)
+    this.resetUser = this.resetUser.bind(this)
   }
 
   componentDidMount() {
@@ -95,10 +97,13 @@ class Routes extends Component {
   }
 
 
-  /*onHandleChange(name, value){
-    console.log('Input: ', name)
-    console.log('Value: ', value)
-  }*/
+  clearErrors(){
+    this.setState({errors:[]})
+  }
+
+  resetUser(){
+    this.setState({user:null})
+  }
 
   render() {
     return (
@@ -128,9 +133,9 @@ class Routes extends Component {
                   <Header>AT PRO</Header>
                   <Login
                     onLogin={this.login}
-                    errors={this.state.errors}
                     user={this.state.user}
-                    //onHandleChange={this.onHandleChange}
+                    errors={this.state.errors}
+                    clearErrors={this.clearErrors}
                   />
                 </>
               )} />
@@ -143,10 +148,12 @@ class Routes extends Component {
               <PrivateRoute authed={!!this.state.user} path='/publish' component={Publish} />
               <PrivateRoute authed={!!this.state.user} path='/profile' component={Profile} />
               <PrivateRoute authed={!!this.state.user} path='/gallery' component={Gallery} />
+              <PrivateRoute authed={!!this.state.user} path='/logout' component={Logout} />
               <PrivateRoute path='/panel' authed={!!this.state.user} component={routeProps => (
                 <Panel
                   {...routeProps}
                   user={this.state.user}
+                  resetUser={this.resetUser}
                 />
               )} />
               <Route component={Error404} />

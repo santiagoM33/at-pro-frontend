@@ -7,22 +7,22 @@ class Login extends Component {
 
     render() { 
         return ( 
-            <Fragment>
-                <div className='container card mt-5 p-5 shadow-sm rounded bg-dark'>
+            <div className='container'>
+                <div className='offset-md-2 col-md-8 card my-3 mt-sm-5 p-2 shadow-sm rounded-sm'>
                     <Title
-                        className='text-center my-3 h4 text-warning'
-                    >Ingreso al Panel de control</Title>
+                        className='text-center my-3 h5 text-dark'
+                    >Ingresar</Title>
                     
-                    <Row className='col'>
+                    <Row className='col-12'>
                         <FormLogin 
                             onLogin={this.props.onLogin}
                             errors={this.props.errors}
-                            //onHandleChange={this.props.onHandleChange}
+                            clearErrors={this.props.clearErrors}
                         />
                     </Row>
                 </div>
              
-            </Fragment>
+            </div>
          );
     }
 }

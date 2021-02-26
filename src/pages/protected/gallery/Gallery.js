@@ -10,6 +10,8 @@ import { logout } from "data/config";
 import HeaderPanel from "../panel/components/HeaderPanel";
 import HeaderMenuOffcanvas from "../panel/components/HeaderMenuOffcanvas";
 
+import Photos from "./components/Photos";
+
 class Gallery extends Component {
     constructor(...props) {
         super(...props);
@@ -57,23 +59,23 @@ class Gallery extends Component {
                                 <form>
                                     <Row className="col-12 mb-3">
                                         <div className="input-group">
-                                            <div class="input-group-prepend">
+                                            <div className="input-group-prepend">
                                                 <button
-                                                    class="btn btn-outline-secondary"
+                                                    className="btn btn-outline-secondary"
                                                     type="button"
                                                 >
-                                                    Button
+                                                    Add Image
                                                 </button>
                                             </div>
-                                            <div class="custom-file">
+                                            <div className="custom-file">
                                                 <input
                                                     type="file"
-                                                    class="custom-file-input"
+                                                    className="custom-file-input"
                                                     id="inputGroupFile03"
                                                 />
                                                 <label
-                                                    class="custom-file-label"
-                                                    for="inputGroupFile03"
+                                                    className="custom-file-label"
+                                                    htmlFor="inputGroupFile03"
                                                 >
                                                     Choose file
                                                 </label>
@@ -81,6 +83,9 @@ class Gallery extends Component {
                                         </div>
                                     </Row>
                                 </form>
+                            </Row>
+                            <Row className="col">
+                                <Photos />
                             </Row>
                         </div>
                     </OffCanvasBody>

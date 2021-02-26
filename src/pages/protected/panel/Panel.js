@@ -66,8 +66,7 @@ class Panel extends Component {
                     className='container'
                     style={{ fontSize: "1.2em" }}
                 >
-                    <HomeCards />
-
+                    
                     <Comments />
 
                     <Suggestions />
@@ -145,7 +144,9 @@ class Panel extends Component {
                                     onClick={()=> {
                                         logout();
                                         //Funciona pero me detecta el null en roleID al cerrar session
-                                        //<Redirect to='/login'/>
+                                        /*this.props.resetUser();
+                                        <Redirect to='/logout'/>*/
+                    
                                         window.location.href ='/login';
                                         }
                                     }

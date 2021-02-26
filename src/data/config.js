@@ -1,4 +1,6 @@
+//import {Redirect} from 'react-router-dom';
 
 export const logout = () =>{
-    localStorage.removeItem('user')
+    localStorage.clear('user')
+    {/*<Redirect to='/login'/>*/}
 }

@@ -22,11 +22,17 @@ class Header extends Component {
         
     
     render() {
-        //console.log(this.state.isHome)
+        const logo = '/images/logo_at_pro.png'
     return ( 
-        <header>
+        <header className='border-bottom border-danger'>
             <div className="navbar navbar-expand-lg navbar-light bg-light">
-                <h1><Link className="navbar-brand text-dark" to="/home">{this.props.children}</Link></h1>
+                <h1>
+                    <Link className="navbar-brand text-dark" to="/home">
+                    <img src={logo} width="90" height="60"></img>
+                    {this.props.children}
+                       
+                    </Link>
+                </h1>
                 <Hamburguer 
                     classNames='dark'
                     target='#navbarNav'
@@ -34,15 +40,15 @@ class Header extends Component {
                     toggle='collapse'
                 >
                 </Hamburguer>
-                <div className="collapse navbar-collapse" id='navbarNav'>
-                    <div className='navbar-nav'>
-                        <Link className='text-dark' to='/'>Home</Link>
-                        <Link className='text-dark' to='/register'>Register</Link>
-                        <Link className='text-dark' to='/login'>Login</Link>                        
+                <div className="collapse navbar-collapse row" id='navbarNav'>
+                    <div className='navbar-nav offset-lg-8'>
+                        <Link className='text-dark col-lg-4' to='/'>Home</Link>
+                        <Link className='text-dark col-lg-4' to='/register'>Register</Link>
+                        <Link className='text-dark col-lg-4' to='/login'>Login</Link>                        
                     </div>
                 </div>
             </div>
-            { this.state.isHome === true &&
+            {/* this.state.isHome === true &&
             <nav>
                 <form className="pl-4 ml-2 my-1 my-lg-0">
                     <div className="row  input-group">
@@ -63,7 +69,7 @@ class Header extends Component {
                     </div>                    
                 </form>
             </nav>
-            }
+            */}
         </header>
      );
     }
