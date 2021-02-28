@@ -1,16 +1,11 @@
 import React, { Fragment, Component } from "react";
 import Title from "partials/title/Title";
 import Row from "partials/row/Row";
-import { FormPublish } from "components/form/Form";
 
 import { NavLink, Redirect } from "react-router-dom";
-
+import { createBrowserHistory } from "history";
 import { OffCanvas, OffCanvasMenu, OffCanvasBody } from "react-offcanvas";
 import { logout } from "data/config";
-
-import Comments from "../panel/components/Comments";
-import Suggestions from "../panel/components/Suggestions";
-import HomeCards from "../panel/components/HomeCards";
 
 import HeaderPanel from "../panel/components/HeaderPanel";
 import HeaderMenuOffcanvas from "../panel/components/HeaderMenuOffcanvas";
@@ -36,6 +31,7 @@ class Publish extends Component {
         this.setState({ isOpen: !this.state.isOpen });
     }
     render() {
+        const history = createBrowserHistory();
         return (
             <Fragment>
                 <HeaderPanel
@@ -67,7 +63,7 @@ class Publish extends Component {
                                                 name="provincia"
                                                 multiple={false}
                                             >
-                                                <option selected>
+                                                <option defaultValue>
                                                     -- Elige una Provincia --
                                                 </option>
                                                 <option value="1">One</option>
@@ -83,7 +79,7 @@ class Publish extends Component {
                                                 name="ciudad"
                                                 multiple={false}
                                             >
-                                                <option selected>
+                                                <option defaultValue>
                                                 -- Elige una Ciudad --
                                                 </option>
                                                 <option value="1">One</option>
@@ -99,7 +95,7 @@ class Publish extends Component {
                                                 name="barrio"
                                                 multiple={false}
                                             >
-                                                <option selected>
+                                                <option defaultValue>
                                                 -- Elige un Barrio --
                                                 </option>
                                                 <option value="1">One</option>
@@ -124,7 +120,7 @@ class Publish extends Component {
                                         </div>
                                     </Row>
                                     <Row className="col-12">
-                                        <div class="form-group">
+                                        <div className="form-group">
                                             <textarea
                                                 className="form-control col-12 ml-3"
                                                 rows="3"
@@ -133,7 +129,7 @@ class Publish extends Component {
                                         </div>
                                     </Row>
                                     <Row className="col-12">
-                                        <div class="form-group">
+                                        <div className="form-group">
                                             <textarea
                                                 className="form-control col-12 ml-3"
                                                 rows="3"
@@ -234,7 +230,8 @@ class Publish extends Component {
                                         logout();
                                         //Funciona pero me detecta el null en roleID al cerrar session
                                         //<Redirect to='/login'/>
-                                        window.location.href = "/login";
+                                        history.push('/login')
+                                        //window.location.href = "/login";
                                     }}
                                 >
                                     Logout

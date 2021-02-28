@@ -250,7 +250,7 @@ export class FormRegister extends Component {
                 break;
         }
     }
-
+ 
 
     isMatch = (param) => {
         if (param.firstName.length > 0 && param.lastName.length > 0 && param.email.length > 0 && param.password.length > 0) {

@@ -1,4 +1,6 @@
 import React, { Fragment, Component } from "react";
+import {saveData} from "services/fakeApi";
+import uid from "uid";
 import Title from "partials/title/Title";
 import Row from "partials/row/Row";
 
@@ -10,6 +12,7 @@ import { logout } from "data/config";
 import HeaderPanel from "../panel/components/HeaderPanel";
 import HeaderMenuOffcanvas from "../panel/components/HeaderMenuOffcanvas";
 
+import {uploadImages} from "./upload/UploadFile";
 import Photos from "./components/Photos";
 
 class Gallery extends Component {
@@ -20,9 +23,13 @@ class Gallery extends Component {
             isMenuOpened: false,
             isOpen: false,
             authenticated: false,
+            nameImg: '',
+            imgSelected: ''
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleHamburguer = this.handleHamburguer.bind(this);
+        this.onHandleImg = this.onHandleImg.bind(this);
+        this.onSendData = this.onSendData.bind(this);
     }
 
     handleClick() {
@@ -32,6 +39,21 @@ class Gallery extends Component {
     handleHamburguer() {
         this.setState({ isOpen: !this.state.isOpen });
     }
+
+    onHandleImg(e){
+        this.setState({
+            nameImg: e.target.files[0].name,
+            imgSelected: e.target.files[0]
+        })
+    }
+
+    onSendData(){
+        uploadImages(this.state.imgSelected)
+            .then(resJson=> {
+                saveData(resJson)
+            })
+    }
+
     render() {
         return (
             <Fragment>
@@ -53,7 +75,7 @@ class Gallery extends Component {
                     >
                         <div className="container-fluid">
                             <Title className="text-center my-3 h3">
-                                Informacion Personal
+                                Galeria Personal
                             </Title>
                             <Row className="col">
                                 <form>
@@ -63,6 +85,7 @@ class Gallery extends Component {
                                                 <button
                                                     className="btn btn-outline-secondary"
                                                     type="button"
+                                                    onClick={this.onSendData}
                                                 >
                                                     Add Image
                                                 </button>
@@ -71,11 +94,12 @@ class Gallery extends Component {
                                                 <input
                                                     type="file"
                                                     className="custom-file-input"
-                                                    id="inputGroupFile03"
+                                                    id="gallery_input"
+                                                    onChange={this.onHandleImg}
                                                 />
                                                 <label
                                                     className="custom-file-label"
-                                                    htmlFor="inputGroupFile03"
+                                                    htmlFor="gallery_input"
                                                 >
                                                     Choose file
                                                 </label>
@@ -85,7 +109,7 @@ class Gallery extends Component {
                                 </form>
                             </Row>
                             <Row className="col">
-                                <Photos />
+                                <Photos/>
                             </Row>
                         </div>
                     </OffCanvasBody>
