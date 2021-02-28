@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Photos.css";
 //import Photo from "./Photo";
 import { Image, Transformation, CloudinaryContext, Placeholder } from "cloudinary-react";
 //import { makeCancelable, getData } from "services/api";
@@ -40,7 +41,7 @@ class Photos extends Component {
                 <CloudinaryContext cloudName="imagesatpro">
                     <div className='row'>
                         {this.state.dataImg.map((img, i) => {
-                            return <div className='col-10 col-sm-10 col-md-4 m-1 m-sm-0' key={img.id} >
+                            return <div className='col-12 col-sm-10 col-md-4 m-1 m-sm-0' key={img.id} >
                                 <Image 
                                     publicId={img.public_id} 
                                     version={img.version} 
@@ -48,12 +49,12 @@ class Photos extends Component {
                                     responsive
                                     width="auto"
                                     responsiveUseBreakpoints="true"
-                                    height="400" 
                                     crop="scale"
                                     loading = "lazy"
+                                    className='img-cloudinary'
                                 >
-                                    {/*<Transformation rawTransformation="h_200,w_120,c_fill,e_sepia,r_10" />*/}
-                                    <Placeholder  type = "blur"  /> 
+                                    {/*<Transformation rawTransformation="h_200,w_120,c_fill,e_sepia,r_10" />
+                                    <Placeholder  type = "blur"  /> */}
                                 </Image>
                             </div>
                         })}

@@ -95,6 +95,28 @@
       "access_mode": "public",
       "original_filename": "angy_2",
       "id": 4
+    },
+    {
+      "asset_id": "1391b39b7101e0bcda6906a03d96f4a5",
+      "public_id": "xub42u5krvjma6ahoa2t",
+      "version": 1614527622,
+      "version_id": "863f5d2bd4343a2c571b75f3a9a4c6fb",
+      "signature": "080c44a1238b0d041e9e993c33f30f1288f6ef6b",
+      "width": 475,
+      "height": 633,
+      "format": "jpg",
+      "resource_type": "image",
+      "created_at": "2021-02-28T15:53:42Z",
+      "tags": [],
+      "bytes": 27458,
+      "type": "upload",
+      "etag": "153a311f40cc5c4e54c2266a42cf55c5",
+      "placeholder": false,
+      "url": "http://res.cloudinary.com/imagesatpro/image/upload/v1614527622/xub42u5krvjma6ahoa2t.jpg",
+      "secure_url": "https://res.cloudinary.com/imagesatpro/image/upload/v1614527622/xub42u5krvjma6ahoa2t.jpg",
+      "access_mode": "public",
+      "original_filename": "angy_5",
+      "id": 5
     }
   ]
 }

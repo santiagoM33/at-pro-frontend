@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from "react";
 import { NavLink, Redirect } from "react-router-dom";
-
+import { createBrowserHistory } from "history";
 import { OffCanvas, OffCanvasMenu, OffCanvasBody } from "react-offcanvas";
 import {logout} from 'data/config'
 
@@ -46,6 +46,7 @@ class Panel extends Component {
     }
 
     render() {
+        const history = createBrowserHistory();
         return this.state.loading === true
         ? <h2>Cargando...</h2>
         : (
@@ -77,7 +78,7 @@ class Panel extends Component {
                     <HeaderMenuOffcanvas />    
                                
                         <ul className="navbar-nav mr-auto">
-                            {this.state.authenticated === true &&
+                            {this.state .authenticated === true &&
                                 <Fragment>
                                     <li className="nav-item active mt-3">
                                         <NavLink
@@ -97,6 +98,11 @@ class Panel extends Component {
                                     <li className="nav-item">
                                         <NavLink className="nav-link text-dark" to="/publish">
                                             Publish
+                                        </NavLink>
+                                    </li>
+                                    <li className="nav-item">
+                                        <NavLink className="nav-link text-dark" to="/gallery">
+                                            Gallery
                                         </NavLink>
                                     </li>
                                 </Fragment>
@@ -146,7 +152,7 @@ class Panel extends Component {
                                         //Funciona pero me detecta el null en roleID al cerrar session
                                         /*this.props.resetUser();
                                         <Redirect to='/logout'/>*/
-                    
+                                        //history.push('/login')
                                         window.location.href ='/login';
                                         }
                                     }

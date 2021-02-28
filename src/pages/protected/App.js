@@ -1,9 +1,13 @@
 import React, { Fragment, Component } from 'react';
 import Publish from 'pages/protected/publish/Publish';
+import Panel from 'pages/protected/panel/Panel';
+import Profile from 'pages/protected/profile/Profile';
+import Gallery from 'pages/protected/gallery/Gallery';
+import Logout from 'pages/protected/logout/Logout';
 
 import Error404 from 'pages/404/Error404';
 import { BrowserRouter, Route, Switch, Redirect as RouterRedirect } from 'react-router-dom';
-import { PrivateRoute, PublicRoute } from 'helpers/routeRedirectAuth';
+import { PrivateRoute } from 'helpers/routeRedirectAuth';
 import { Toaster } from 'react-hot-toast';
 
 
@@ -22,24 +26,38 @@ class App extends Component {
     super(...props);
 
     this.state = {
-      authed: false,
       isHome: false,
-      to: null
+      to: null,
+      authenticated: false
     }
+  }
+
+  componentDidMount(){
+    let data = JSON.parse(localStorage.getItem('user'))
+        if(data.roleId === 2) {
+            this.setState({authenticated: true})
+        }
   }
 
 
   render() {
     return (
         <BrowserRouter>
-          <Fragment>
-
-          </Fragment>
           <main>
             <Toaster></Toaster>
             <Switch>
-              <PrivateRoute authed={!!this.state.user} path='/publish' component={Publish} />
-
+              <PrivateRoute path='/panel' authed={!!this.props.user} component={routeProps => (
+                <Panel
+                  {...routeProps}
+                  user={this.props.user}
+                  resetUser={this.props.resetUser}
+                  authenticated={this.state.authenticated}
+                />
+              )} />
+              <PrivateRoute authed={!!this.props.user} path='/publish' component={Publish} />
+              <PrivateRoute authed={!!this.props.user} path='/profile' component={Profile} />
+              <PrivateRoute authed={!!this.props.user} path='/gallery' component={Gallery} />
+              <PrivateRoute authed={!!this.props.user} path='/logout' component={Logout} />
               <Route component={Error404} />
             </Switch>
           </main>
