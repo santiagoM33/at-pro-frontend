@@ -140,9 +140,9 @@ class Routes extends Component {
                 </>
               )} />
 
-              <PublicRoute exact authed={this.state.user} path='/reset-password-request'
+              <PublicRoute exact authed={!!this.state.user} path='/reset-password-request'
                 component={ResetPasswordRequest} />
-              <PublicRoute exact authed={this.state.user} path='/reset-password'
+              <PublicRoute exact authed={!!this.state.user} path='/reset-password'
                 component={ResetPassword} />
 
               <PrivateRoute authed={!!this.state.user} path='/app' component={App} />
