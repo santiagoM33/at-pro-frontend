@@ -14,7 +14,7 @@ export const uploadImages = (files) => {
             body: formData
         }
 
-        const URI =  'https://api.cloudinary.com/v1_1/imagesatpro/image/upload';
+        const URI =  'https://api.cloudinary.com/v1_1/imagesatpro/image/upload/';
         const promise = new Promise(async (response, reject) => {
             try{
                 const res = await fetch(URI, config)

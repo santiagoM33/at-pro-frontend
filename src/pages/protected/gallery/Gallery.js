@@ -1,4 +1,6 @@
 import React, { Fragment, Component } from "react";
+import {saveData} from "services/fakeApi";
+import uid from "uid";
 import Title from "partials/title/Title";
 import Row from "partials/row/Row";
 
@@ -47,7 +49,9 @@ class Gallery extends Component {
 
     onSendData(){
         uploadImages(this.state.imgSelected)
-            .then(res=> console.log(res))
+            .then(resJson=> {
+                saveData(resJson)
+            })
     }
 
     render() {
@@ -71,7 +75,7 @@ class Gallery extends Component {
                     >
                         <div className="container-fluid">
                             <Title className="text-center my-3 h3">
-                                Informacion Personal
+                                Galeria Personal
                             </Title>
                             <Row className="col">
                                 <form>
@@ -105,7 +109,7 @@ class Gallery extends Component {
                                 </form>
                             </Row>
                             <Row className="col">
-                                <Photos />
+                                <Photos/>
                             </Row>
                         </div>
                     </OffCanvasBody>

@@ -1,42 +1,100 @@
 {
-    "users": [
-        {
-            "id": 1,
-            "name": "Angeles",
-            "edad": 45,
-            "email": "angy.mdp@gmail.com",
-            "phone": 2236973575,
-            "password": "hgt478f10",
-            "publish": {
-                "publish_id": 1,
-                "titulo": "Milf completa",
-                "descripcion": "Milf delgadita de 45 años a tus ordenes",
-                "thumbnails": "https://i.pinimg.com/564x/af/5f/e0/af5fe0fa910537085b421664296425ab.jpg"
-            }
-            
-        },
-        {
-            "id": 2,
-            "name": "Luz",
-            "edad": 28,
-            "email": "luz28@gmail.com",
-            "phone": 2236554575,
-            "password": "hgt478f10",
-            "publish": {
-                "publish_id": 2,
-                "titulo": "Flaquita completa",
-                "descripcion": "Flaquita completa delgadita de 28 años a tu disposicion",
-                "thumbnails": "https://i.pinimg.com/originals/9a/ed/c3/9aedc37475ddefba72f164fa68801995.jpg"
-            }
-        }
-    ],
-
-    "categories": [
-        {"id": 1, "name": "Admin", "label": "admin"},
-        {"id": 2, "name": "Escort", "label": "escort"},
-        {"id": 3, "name": "User", "label": "user"}
-    ]
+  "users": [
+    {
+      "id": 1,
+      "name": "Angeles",
+      "edad": 45,
+      "email": "angy.mdp@gmail.com",
+      "phone": 2236973575,
+      "password": "hgt478f10",
+      "publish": {
+        "publish_id": 1,
+        "titulo": "Milf completa",
+        "descripcion": "Milf delgadita de 45 años a tus ordenes",
+        "thumbnails": "https://i.pinimg.com/564x/af/5f/e0/af5fe0fa910537085b421664296425ab.jpg"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Luz",
+      "edad": 28,
+      "email": "luz28@gmail.com",
+      "phone": 2236554575,
+      "password": "hgt478f10",
+      "publish": {
+        "publish_id": 2,
+        "titulo": "Flaquita completa",
+        "descripcion": "Flaquita completa delgadita de 28 años a tu disposicion",
+        "thumbnails": "https://i.pinimg.com/originals/9a/ed/c3/9aedc37475ddefba72f164fa68801995.jpg"
+      }
+    }
+  ],
+  "images": [
+    {
+      "asset_id": "81f1dcd91aae7bc60ad2b980bf5e995e",
+      "public_id": "ithb4gqycy9hlwkrgm5y",
+      "version": 1614468768,
+      "version_id": "30f7c5cc5af81fdf2534e3b38f80ecfa",
+      "signature": "ee86af280a2316bbf400ba0fef674c5f494fdbaf",
+      "width": 475,
+      "height": 734,
+      "format": "jpg",
+      "resource_type": "image",
+      "created_at": "2021-02-27T23:32:48Z",
+      "tags": [],
+      "bytes": 44873,
+      "type": "upload",
+      "etag": "cfcaa98bf0e6fce3caa0121ec9b5f50f",
+      "placeholder": false,
+      "url": "http://res.cloudinary.com/imagesatpro/image/upload/v1614468768/ithb4gqycy9hlwkrgm5y.jpg",
+      "secure_url": "https://res.cloudinary.com/imagesatpro/image/upload/v1614468768/ithb4gqycy9hlwkrgm5y.jpg",
+      "access_mode": "public",
+      "original_filename": "angy_3",
+      "id": 2
+    },
+    {
+      "asset_id": "9486cdc83d32166261bc80355d5ae91e",
+      "public_id": "ivqyjauqxsti64g9mqda",
+      "version": 1614478200,
+      "version_id": "220bec96cf41f6bcfd0acd6d9b920fbc",
+      "signature": "ad87421118588531b0eb9b73bb09b3c8f6fbaf42",
+      "width": 475,
+      "height": 633,
+      "format": "jpg",
+      "resource_type": "image",
+      "created_at": "2021-02-28T02:10:00Z",
+      "tags": [],
+      "bytes": 32622,
+      "type": "upload",
+      "etag": "fc9b8b284888c63d2f6cfadba733e77a",
+      "placeholder": false,
+      "url": "http://res.cloudinary.com/imagesatpro/image/upload/v1614478200/ivqyjauqxsti64g9mqda.jpg",
+      "secure_url": "https://res.cloudinary.com/imagesatpro/image/upload/v1614478200/ivqyjauqxsti64g9mqda.jpg",
+      "access_mode": "public",
+      "original_filename": "angy_1",
+      "id": 3
+    },
+    {
+      "asset_id": "60fa220e389dea3b3c36d9662bcc48f7",
+      "public_id": "vxcaxdat8nr21wdtqtwl",
+      "version": 1614478831,
+      "version_id": "f3cc669eef8067966fc954d6da447acb",
+      "signature": "662763be00f935df6408553b31d1ce8139c0bab3",
+      "width": 475,
+      "height": 656,
+      "format": "jpg",
+      "resource_type": "image",
+      "created_at": "2021-02-28T02:20:31Z",
+      "tags": [],
+      "bytes": 24795,
+      "type": "upload",
+      "etag": "572d65b96687a528cfbcb895ff512dd9",
+      "placeholder": false,
+      "url": "http://res.cloudinary.com/imagesatpro/image/upload/v1614478831/vxcaxdat8nr21wdtqtwl.jpg",
+      "secure_url": "https://res.cloudinary.com/imagesatpro/image/upload/v1614478831/vxcaxdat8nr21wdtqtwl.jpg",
+      "access_mode": "public",
+      "original_filename": "angy_2",
+      "id": 4
+    }
+  ]
 }
-        
-        
-    

@@ -10,19 +10,19 @@ class Home extends Component {
             users: [],
             isFetch: true
         }
-        this.getUsers = this.getUsers.bind(this)
+        //this.getUsers = this.getUsers.bind(this)
     }
     
 
-    getUsers() {
+    /*getUsers() {
         const URI = 'http://localhost:8005';
         fetch(`${URI}/users`)
             .then(res => res.json())
             .then(resJson => this.setState({users: resJson}))
-    }
+    }*/
 
     componentDidMount() {
-        this.getUsers()
+        //this.getUsers()
     }
     
     render() { 
