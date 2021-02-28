@@ -4,6 +4,7 @@ import Register from 'pages/register/Register';
 import Login from 'pages/login/Login';
 import ResetPasswordRequest from 'pages/reset-password-request/ResetPasswordRequest';
 import ResetPassword from 'pages/reset-password/ResetPassword';
+import App from 'pages/protected/App';
 import Publish from 'pages/protected/publish/Publish';
 import Panel from 'pages/protected/panel/Panel';
 import Profile from 'pages/protected/profile/Profile';
@@ -113,8 +114,7 @@ class Routes extends Component {
           </Fragment>
           <main>
             <Toaster></Toaster>
-            <Switch>
-              
+            <Switch>  
               <Route exact path='/'>
                 <Header isHome={this.state.isHome}>AT PRO</Header>
                 <Home />
@@ -145,6 +145,7 @@ class Routes extends Component {
               <PublicRoute exact authed={this.state.user} path='/reset-password'
                 component={ResetPassword} />
 
+              <PrivateRoute authed={!!this.state.user} path='/app' component={App} />
               <PrivateRoute authed={!!this.state.user} path='/publish' component={Publish} />
               <PrivateRoute authed={!!this.state.user} path='/profile' component={Profile} />
               <PrivateRoute authed={!!this.state.user} path='/gallery' component={Gallery} />
