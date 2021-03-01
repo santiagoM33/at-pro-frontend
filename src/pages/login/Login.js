@@ -6,7 +6,7 @@ import Title from '../../partials/title/Title';
 class Login extends Component {
 
     render() { 
-        return ( 
+        return (  
             <div className='container'>
                 <div className='offset-md-2 col-md-8 card my-3 mt-sm-5 p-2 shadow-sm rounded-sm'>
                     <Title

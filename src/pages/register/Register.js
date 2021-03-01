@@ -30,7 +30,7 @@ class Register extends Component {
                 <div className='offset-md-2 col-md-8 card my-3 mt-sm-5 p-2 shadow rounded-sm'>
                     <Title
                         className='text-center my-3 h5 text-dark'
-                    >Registrar cuenta</Title>
+                    >Registrar Usuario</Title>
                     <Row
                         className='col-12'
                     >
