@@ -33,7 +33,7 @@ class Announce extends Component {
         return (
             <div className="container">
                 <div className='offset-md-2 col-md-8 card my-3 mt-sm-5 p-2 shadow-sm rounded-sm'>
-                    <Title className="text-center my-3 h4">Publicar Anuncio</Title>
+                    <Title className="text-center my-3 h4">Crea tu anuncio</Title>
                     <Row className="col">
                         <form>
                             <Row className="col-12 mb-3">

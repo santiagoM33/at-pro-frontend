@@ -1,13 +1,14 @@
 import React, { Fragment, Component } from "react";
 import Home from "pages/home/Home";
-import Register from "pages/register/Register";
 import Login from "pages/login/Login";
+import Register from "pages/register/Register";
 import Announce from "pages/announce/Announce";
+import Escort from "pages/escort/Escort";
 import ResetPasswordRequest from "pages/reset-password-request/ResetPasswordRequest";
 import ResetPassword from "pages/reset-password/ResetPassword";
-import Publish from "pages/protected/publish/Publish";
 import Admin from "pages/protected/admin/Admin";
 import Panel from "pages/protected/panel/Panel";
+import Publish from "pages/protected/publish/Publish";
 import Profile from "pages/protected/profile/Profile";
 import Gallery from "pages/protected/gallery/Gallery";
 import Logout from "pages/protected/logout/Logout";
@@ -149,6 +150,13 @@ class Routes extends Component {
                         >  
                             <Header>AT PRO</Header>
                             <Announce />
+                        </Route>
+                        <Route
+                            authed={!!this.state.user}
+                            path="/escort"                            
+                        >  
+                            <Header>AT PRO</Header>
+                            <Escort />
                         </Route>
                         <Route
                             authed={!!this.state.user}

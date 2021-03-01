@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {FormLogin} from 'components/form/Form';
+import FormLogin from './form/FormLogin';
 import Row from '../../partials/row/Row';
 import Title from '../../partials/title/Title';
 
@@ -21,7 +21,6 @@ class Login extends Component {
                         />
                     </Row>
                 </div>
-             
             </div>
          );
     }

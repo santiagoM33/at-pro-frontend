@@ -43,9 +43,12 @@ class Header extends Component {
                 <div className="collapse navbar-collapse row" id='navbarNav'>
                     <div className='navbar-nav offset-lg-8'>
                         {/*<Link className='text-dark col-lg-4' to='/'>Home</Link>*/}
-                        <Link className='text-dark col-lg-4' to='/login'>Login</Link>  
-                        <Link className='text-dark col-lg-4' to='/register'>Register</Link>                      
-                        <Link className='text-dark col-lg-4 btn btn-danger text-white' to='/announce'>Announce</Link>                        
+                        <Link className='text-dark col-4 col-lg-4' to='/login'>Login</Link>  
+                        <Link className='text-dark col-4 col-lg-4' to='/register'>Register</Link>
+                        <div className='col-4 col-lg-4'>
+                            <Link className='text-light btn btn-danger pl-1' to='/announce'>Announce</Link>
+                        </div>                      
+                                                
                     </div>
                 </div>
             </div>

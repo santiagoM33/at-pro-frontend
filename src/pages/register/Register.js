@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {FormRegister} from '../../components/form/Form';
+import FormRegister from './form/FormRegister';
 
 import Row from '../../partials/row/Row';
 import Title from '../../partials/title/Title';
@@ -35,7 +35,6 @@ class Register extends Component {
                         className='col-12'
                     >
                         <FormRegister 
-                            roles={this.props.roles}
                             getDataR={this.getDataR}
                         />
                     </Row>
