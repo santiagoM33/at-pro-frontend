@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import "./announce.css";
-import Title from "partials/title/Title";
-import Row from "partials/row/Row";
+import Button from '../../components/button/Button'
+import Title from "../../partials/title/Title";
+import Row from "../../partials/row/Row";
 
 class Announce extends Component {
     constructor(props) {
         super(props);
         this.state = {
             flagImg: 'https://flagpedia.net/data/flags/w580/ar.png',
-            countryCodeValue:'',
+            countryCodeValue:'54',
             phone:''
         };
         this.onSelectCountry = this.onSelectCountry.bind(this)
@@ -109,10 +110,27 @@ class Announce extends Component {
                                     <option defaultValue>
                                         -- Selecciona tu País --
                                     </option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option value="1">Argentina</option>
+                                    <option value="2">Bolivia</option>
+                                    <option value="3">Brazil</option>
+                                    <option value="4">Chile</option>
+                                    <option value="5">Colombia</option>
+                                    <option value="6">Paraguay</option>
+                                    <option value="7">Peru</option>
+                                    <option value="8">Uruguay</option>
+                                    <option value="9">Venezuela</option>
                                 </select>
+                            </div>
+                        </Row>
+                        <Row className="col-12 mb-3">
+                            <div className="col input-group">
+                            <Button
+                                type='button'
+                                style='danger'
+                                block='block'
+                                //onHandleClick={this.props.onHandleClick}
+                            >
+                            Publicar</Button>
                             </div>
                         </Row>
                     </form>

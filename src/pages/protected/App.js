@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import Publish from 'pages/protected/publish/Publish';
 import Panel from 'pages/protected/panel/Panel';
 import Profile from 'pages/protected/profile/Profile';

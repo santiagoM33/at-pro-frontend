@@ -1,8 +1,7 @@
 import React, { Fragment, Component } from "react";
-import {saveData} from "services/fakeApi";
-import uid from "uid";
-import Title from "partials/title/Title";
-import Row from "partials/row/Row";
+import {saveData} from "../../../services/fakeApi";
+import Title from "../../../partials/title/Title";
+import Row from "../../../partials/row/Row";
 
 import { NavLink, Redirect } from "react-router-dom";
 

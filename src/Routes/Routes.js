@@ -142,11 +142,13 @@ class Routes extends Component {
                             )}
                         />
 
-                        <PublicRoute
+                        <Route
                             authed={!!this.state.user}
-                            path="/announce"
-                            component={Announce}
-                        />
+                            path="/announce"                            
+                        >  
+                            <Header>AT PRO</Header>
+                            <Announce />
+                        </Route>
                         <PublicRoute
                             exact
                             authed={!!this.state.user}

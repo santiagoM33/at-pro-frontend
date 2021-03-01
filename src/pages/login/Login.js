@@ -1,7 +1,7 @@
-import React, {Fragment, Component} from 'react';
+import React, {Component} from 'react';
 import {FormLogin} from 'components/form/Form';
-import Row from 'partials/row/Row';
-import Title from 'partials/title/Title';
+import Row from '../../partials/row/Row';
+import Title from '../../partials/title/Title';
 
 class Login extends Component {
 

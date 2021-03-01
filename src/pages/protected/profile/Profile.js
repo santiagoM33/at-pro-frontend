@@ -1,16 +1,11 @@
 import React, { Fragment, Component } from "react";
-import Title from "partials/title/Title";
-import Row from "partials/row/Row";
-import { FormPublish } from "components/form/Form";
+import Title from "../../../partials/title/Title";
+import Row from "../../../partials/row/Row";
 
 import { NavLink, Redirect } from "react-router-dom";
 
 import { OffCanvas, OffCanvasMenu, OffCanvasBody } from "react-offcanvas";
-import { logout } from "data/config";
-
-import Comments from "../panel/components/Comments";
-import Suggestions from "../panel/components/Suggestions";
-import HomeCards from "../panel/components/HomeCards";
+import { logout } from "../../../data/config";
 
 import HeaderPanel from "../panel/components/HeaderPanel";
 import HeaderMenuOffcanvas from "../panel/components/HeaderMenuOffcanvas";
