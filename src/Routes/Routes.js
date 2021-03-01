@@ -6,6 +6,7 @@ import Announce from "pages/announce/Announce";
 import ResetPasswordRequest from "pages/reset-password-request/ResetPasswordRequest";
 import ResetPassword from "pages/reset-password/ResetPassword";
 import Publish from "pages/protected/publish/Publish";
+import Admin from "pages/protected/admin/Admin";
 import Panel from "pages/protected/panel/Panel";
 import Profile from "pages/protected/profile/Profile";
 import Gallery from "pages/protected/gallery/Gallery";
@@ -148,6 +149,12 @@ class Routes extends Component {
                         >  
                             <Header>AT PRO</Header>
                             <Announce />
+                        </Route>
+                        <Route
+                            authed={!!this.state.user}
+                            path="/admin"                            
+                        >  
+                            <Admin />
                         </Route>
                         <PublicRoute
                             exact

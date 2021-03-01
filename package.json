@@ -19,14 +19,12 @@
     "react-hot-toast": "^1.0.2",
     "react-icons": "^4.2.0",
     "react-loader-spinner": "^4.0.0",
+    "react-modal": "^3.12.1",
     "react-offcanvas": "^0.4.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
     "react-spring": "^8.0.27",
-    "uid": "^2.0.0",
-    "universal-cookie": "^4.0.4",
-    "uuid": "^8.3.2",
-    "web-vitals": "^1.1.0"
+    "uid": "^2.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
