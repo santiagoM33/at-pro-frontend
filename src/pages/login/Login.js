@@ -1,12 +1,12 @@
-import React, {Fragment, Component} from 'react';
-import {FormLogin} from 'components/form/Form';
-import Row from 'partials/row/Row';
-import Title from 'partials/title/Title';
+import React, {Component} from 'react';
+import FormLogin from './form/FormLogin';
+import Row from '../../partials/row/Row';
+import Title from '../../partials/title/Title';
 
 class Login extends Component {
 
     render() { 
-        return ( 
+        return (  
             <div className='container'>
                 <div className='offset-md-2 col-md-8 card my-3 mt-sm-5 p-2 shadow-sm rounded-sm'>
                     <Title
@@ -21,7 +21,6 @@ class Login extends Component {
                         />
                     </Row>
                 </div>
-             
             </div>
          );
     }

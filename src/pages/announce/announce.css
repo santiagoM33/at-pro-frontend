@@ -1,0 +1,14 @@
+.flag-img{
+    width: 4.5rem;
+    height: 2.4rem;
+    padding: 0.3rem;
+    position: absolute;
+}
+
+.select-box select{
+    background: none;
+    border: none;
+    outline: none;
+    padding-left: 2rem;
+    -webkit-appearance: none;
+}

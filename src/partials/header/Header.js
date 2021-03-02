@@ -27,7 +27,7 @@ class Header extends Component {
         <header className='border-bottom border-danger'>
             <div className="navbar navbar-expand-lg navbar-light bg-light">
                 <h1>
-                    <Link className="navbar-brand text-dark" to="/home">
+                    <Link className="navbar-brand text-dark" to="/">
                     <img src={logo} width="90" height="60"></img>
                     {this.props.children}
                        
@@ -42,9 +42,13 @@ class Header extends Component {
                 </Hamburguer>
                 <div className="collapse navbar-collapse row" id='navbarNav'>
                     <div className='navbar-nav offset-lg-8'>
-                        <Link className='text-dark col-lg-4' to='/'>Home</Link>
-                        <Link className='text-dark col-lg-4' to='/register'>Register</Link>
-                        <Link className='text-dark col-lg-4' to='/login'>Login</Link>                        
+                        {/*<Link className='text-dark col-lg-4' to='/'>Home</Link>*/}
+                        <Link className='text-dark col-4 col-lg-4' to='/login'>Login</Link>  
+                        <Link className='text-dark col-4 col-lg-4' to='/register'>Register</Link>
+                        <div className='col-4 col-lg-4'>
+                            <Link className='text-light btn btn-danger pl-1' to='/announce'>Announce</Link>
+                        </div>                      
+                                                
                     </div>
                 </div>
             </div>

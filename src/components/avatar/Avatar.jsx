@@ -17,7 +17,7 @@ class Avatar extends Component {
             pictureClassName = 'is-large rounded-circle'
         }
 
-        const imgClassName = enabled ? '' : 'disabled';
+        const imgClassName = this.state.enabled ? '' : 'disabled';
     return ( 
             <picture className={pictureClassName}>
                 {id ? 
@@ -26,9 +26,9 @@ class Avatar extends Component {
                             onClick={() => {
                                 this.setState({enabled: !this.state.enabled})
                             }}
-                            className={imgClassName}
-                            src={src} 
-                            alt=""
+                            className={this.props.imgClassName}
+                            src={this.props.src} 
+                            size='small'
                         />
                     )
                     : 

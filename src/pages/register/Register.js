@@ -1,10 +1,10 @@
-import React, {Fragment, Component} from 'react';
-import {FormRegister} from 'components/form/Form';
+import React, {Component} from 'react';
+import FormRegister from './form/FormRegister';
 
-import Row from 'partials/row/Row';
-import Title from 'partials/title/Title';
+import Row from '../../partials/row/Row';
+import Title from '../../partials/title/Title';
 
-import {registerDataAccount} from 'services/api'
+import {registerDataAccount} from '../../services/api'
 
 class Register extends Component {
     constructor(...props) {
@@ -30,12 +30,11 @@ class Register extends Component {
                 <div className='offset-md-2 col-md-8 card my-3 mt-sm-5 p-2 shadow rounded-sm'>
                     <Title
                         className='text-center my-3 h5 text-dark'
-                    >Registrar cuenta</Title>
+                    >Registrar Usuario</Title>
                     <Row
                         className='col-12'
                     >
                         <FormRegister 
-                            roles={this.props.roles}
                             getDataR={this.getDataR}
                         />
                     </Row>

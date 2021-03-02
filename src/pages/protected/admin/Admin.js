@@ -1,20 +1,17 @@
 import React, { Fragment, Component } from "react";
-import {saveData} from "../../../services/fakeApi";
 import Title from "../../../partials/title/Title";
 import Row from "../../../partials/row/Row";
 
 import { NavLink, Redirect } from "react-router-dom";
+import ApprovedLists from "./approved/ApprovedLists";
 
 import { OffCanvas, OffCanvasMenu, OffCanvasBody } from "react-offcanvas";
-import { logout } from "data/config";
+import { logout } from "../../../data/config";
 
 import HeaderPanel from "../panel/components/HeaderPanel";
 import HeaderMenuOffcanvas from "../panel/components/HeaderMenuOffcanvas";
 
-import {uploadImages} from "./upload/UploadFile";
-import Photos from "./components/Photos";
-
-class Gallery extends Component {
+class Admin extends Component {
     constructor(...props) {
         super(...props);
         this.state = {
@@ -22,13 +19,9 @@ class Gallery extends Component {
             isMenuOpened: false,
             isOpen: false,
             authenticated: false,
-            nameImg: '',
-            imgSelected: ''
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleHamburguer = this.handleHamburguer.bind(this);
-        this.onHandleImg = this.onHandleImg.bind(this);
-        this.onSendData = this.onSendData.bind(this);
     }
 
     handleClick() {
@@ -38,21 +31,6 @@ class Gallery extends Component {
     handleHamburguer() {
         this.setState({ isOpen: !this.state.isOpen });
     }
-
-    onHandleImg(e){
-        this.setState({
-            nameImg: e.target.files[0].name,
-            imgSelected: e.target.files[0]
-        })
-    }
-
-    onSendData(){
-        uploadImages(this.state.imgSelected)
-            .then(resJson=> {
-                saveData(resJson)
-            })
-    }
-
     render() {
         return (
             <Fragment>
@@ -74,41 +52,10 @@ class Gallery extends Component {
                     >
                         <div className="container-fluid">
                             <Title className="text-center my-3 h3">
-                                Galeria Personal
+                                Admin
                             </Title>
                             <Row className="col">
-                                <form>
-                                    <Row className="col-12 mb-3">
-                                        <div className="input-group">
-                                            <div className="input-group-prepend">
-                                                <button
-                                                    className="btn btn-outline-secondary"
-                                                    type="button"
-                                                    onClick={this.onSendData}
-                                                >
-                                                    Add Image
-                                                </button>
-                                            </div>
-                                            <div className="custom-file">
-                                                <input
-                                                    type="file"
-                                                    className="custom-file-input"
-                                                    id="gallery_input"
-                                                    onChange={this.onHandleImg}
-                                                />
-                                                <label
-                                                    className="custom-file-label"
-                                                    htmlFor="gallery_input"
-                                                >
-                                                    Choose file
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </Row>
-                                </form>
-                            </Row>
-                            <Row className="col">
-                                <Photos/>
+                                <ApprovedLists />
                             </Row>
                         </div>
                     </OffCanvasBody>
@@ -116,18 +63,14 @@ class Gallery extends Component {
                         <HeaderMenuOffcanvas />
 
                         <ul className="navbar-nav mr-auto">
-                            {this.state.authenticated === true && (
                                 <Fragment>
                                     <li className="nav-item active mt-3">
                                         <NavLink
                                             className="nav-link text-dark"
-                                            to="/panel"
+                                            to="/admin"
                                             activeClassName="active"
                                         >
                                             Dashboard{" "}
-                                            <span className="sr-only">
-                                                (current)
-                                            </span>
                                         </NavLink>
                                     </li>
                                     <li className="nav-item">
@@ -138,21 +81,7 @@ class Gallery extends Component {
                                             Notifications
                                         </NavLink>
                                     </li>
-                                    <li className="nav-item">
-                                        <NavLink
-                                            className="nav-link text-dark"
-                                            to="/publish"
-                                        >
-                                            Publish
-                                        </NavLink>
-                                    </li>
                                 </Fragment>
-                            )}
-                            <li className="nav-item">
-                                <NavLink className="nav-link text-dark" to="#">
-                                    Favorites
-                                </NavLink>
-                            </li>
                             <li className="nav-item">
                                 <NavLink className="nav-link text-dark" to="#">
                                     Switch account
@@ -215,4 +144,4 @@ class Gallery extends Component {
     }
 }
 
-export default Gallery;
+export default Admin;

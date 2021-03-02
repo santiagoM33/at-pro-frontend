@@ -1,11 +1,11 @@
 import React, { Fragment, Component } from "react";
-import Title from "partials/title/Title";
-import Row from "partials/row/Row";
+import Title from "../../../partials/title/Title";
+import Row from "../../../partials/row/Row";
 
 import { NavLink, Redirect } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import { OffCanvas, OffCanvasMenu, OffCanvasBody } from "react-offcanvas";
-import { logout } from "data/config";
+import { logout } from "../../../data/config";
 
 import HeaderPanel from "../panel/components/HeaderPanel";
 import HeaderMenuOffcanvas from "../panel/components/HeaderMenuOffcanvas";

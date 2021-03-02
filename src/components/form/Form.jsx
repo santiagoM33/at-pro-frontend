@@ -1,11 +1,11 @@
 import React, {Fragment, Component} from 'react'
 //import './Form.css'
-import FormCheck from './components/FormCheck'
+
 import Alert from '../alert/Alert'
-import SpanError from 'partials/help/SpanError'
+import SpanError from '../../partials/help/SpanError'
 import Button from '../button/Button'
-import Link from 'partials/link/Link'
-import Row from 'partials/row/Row'
+import Link from '../../partials/link/Link'
+import Row from '../../partials/row/Row'
 
 
 class FormEmail extends Component {
@@ -136,7 +136,7 @@ export class FormLogin extends Component {
                     <div className="col-12">
                         <Link
                             href='/reset-password-request'
-                            className='text-muted font-weight-italic'
+                            className='text-dark font-weight-italic offset-sm-6 offset-lg-8'
                         >You forgot your password?</Link>
                     </div>
                 </Row>
