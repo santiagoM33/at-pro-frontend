@@ -28,7 +28,7 @@ class Avatar extends Component {
                             }}
                             className={this.props.imgClassName}
                             src={this.props.src} 
-                            alt="size"
+                            size='small'
                         />
                     )
                     : 
