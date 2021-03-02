@@ -5,6 +5,7 @@ import Row from 'partials/row/Row';
 import Avatar from './avatar/Avatar';
 import Contact from './contact/Contact';
 import Social from './social/Social';
+import PersonalData from './personalData/PersonalData';
 
 class Escort extends Component {
     constructor(props) {
@@ -26,7 +27,12 @@ class Escort extends Component {
                 </div>
                 <div className='offset-md-2 col-md-8 my-1 mt-sm-5 p-2 shadow-sm rounded-sm'>                    
                     <Row className='col-12'>
-                       
+                       <PersonalData />
+                    </Row>
+                </div>
+                <div className='offset-md-2 col-md-8 my-1 mt-sm-5 p-2 shadow-sm rounded-sm'>                    
+                    <Row className='col-12'>
+                    <Social />
                     </Row>
                 </div>
         </div>
