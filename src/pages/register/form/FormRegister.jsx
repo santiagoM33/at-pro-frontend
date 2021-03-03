@@ -27,7 +27,7 @@ class FormRegister extends Component {
         this.onHandleChange = this.onHandleChange.bind(this)
         this.isMatch = this.isMatch.bind(this)
     } 
-
+ 
     onHandleChange(e) {
         switch (e.target.name) {
             case 'firstName':
@@ -117,7 +117,7 @@ class FormRegister extends Component {
                         />
             
                         { this.state.fNameError &&
-                            <SpanError id='fName-error' className="form-text text-muted">Su nombre debe contener mas de 3 letras.</SpanError>
+                            <SpanError id='fName-error' styles='form-text text-danger'>Su nombre debe contener mas de 3 letras.</SpanError>
                         }
                         <input
                             type='text'
@@ -131,7 +131,7 @@ class FormRegister extends Component {
                             onChange={this.onHandleChange}
                         />
                         { this.state.lNameError &&
-                            <SpanError id='lName-error' className="form-text text-muted">Su apellido debe contener mas de 4 letras.</SpanError>
+                            <SpanError id='lName-error' styles='form-text text-danger'>Su apellido debe contener mas de 4 letras.</SpanError>
                         }
                     </div>
                 </Row>
@@ -149,7 +149,7 @@ class FormRegister extends Component {
                             onChange={this.onHandleChange}
                         />
                         { this.state.emailError &&
-                            <SpanError id='email-error'>El email es invalido.</SpanError>
+                            <SpanError id='email-error' styles='form-text text-danger'>El email es invalido.</SpanError>
                         }
                     </div>
                 </Row>
@@ -167,7 +167,7 @@ class FormRegister extends Component {
                             onChange={this.onHandleChange}
                         />
                         { this.state.passError &&
-                            <SpanError id='pass-error'>El password debe contener numeros, signos, mayúsculas y minúsculas</SpanError>
+                            <SpanError id='pass-error' styles='form-text text-danger'>El password debe contener numeros, signos, mayúsculas y minúsculas</SpanError>
                         }
                     </div>
                 </Row>

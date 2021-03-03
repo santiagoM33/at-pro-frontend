@@ -47,22 +47,11 @@ class Routes extends Component {
             user,
             token,
             errors: [],
-            roles: [],
-            errorRoles: "",
             to: null,
         };
         this.login = this.login.bind(this);
         this.clearErrors = this.clearErrors.bind(this);
         this.resetUser = this.resetUser.bind(this);
-    }
-
-    componentDidMount() {
-        fetch("http://159.65.218.115/roles")
-            .then((res) => res.json())
-            .then((resJson) => this.setState({ roles: resJson }))
-            .catch((err) =>
-                this.setState({ errorRoles: "No se pueden obtener los roles" })
-            );
     }
 
     login(email, password) {
@@ -120,7 +109,7 @@ class Routes extends Component {
                         </Route>
                         <Route path="/register">
                             <Header>AT PRO</Header>
-                            <Register roles={this.state.roles} />
+                            <Register />
                         </Route>
 
                         <PublicRoute

@@ -3,14 +3,19 @@ import './Avatar.css'
 
 import Title, {SubTitle} from 'partials/title/Title';
 
-const Avatar = () => {
+const Avatar = (props) => {
+    //console.log(props.dataImg[1].url)
     return ( 
         <div className='row'>
             <div className='mx-auto'>
-                <img 
-                    className='is-small circle'
-                    src="https://41.media.tumblr.com/239d35ff643a2bd62720c36b1aa7eefe/tumblr_ntsyumZcvh1twvy79o1_1280.jpg"
-                />
+                {props.loading 
+                        ? <div>Loading...</div>
+                        :   <img 
+                                className='is-small circle'
+                                src={props.dataImg[0].url}
+                            />
+                    }  
+                
                 <Title
                     className='text-center mt-3 h3 text-dark'
                 >Sofia Denise</Title>

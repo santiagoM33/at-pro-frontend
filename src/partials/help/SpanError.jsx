@@ -2,7 +2,7 @@ import React from 'react'
 
 const SpanError = (props) => {
     return ( 
-        <small id={props.id} className="form-text text-muted">{props.children}</small>
+        <small id={props.id} className={props.styles}>{props.children}</small>
      );
 }
  

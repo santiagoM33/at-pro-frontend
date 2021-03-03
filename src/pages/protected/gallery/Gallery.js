@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from "react";
-import {saveData} from "../../../services/fakeApi";
+import {saveImages} from "../../../services/fakeApi";
 import Title from "../../../partials/title/Title";
 import Row from "../../../partials/row/Row";
 
@@ -49,7 +49,7 @@ class Gallery extends Component {
     onSendData(){
         uploadImages(this.state.imgSelected)
             .then(resJson=> {
-                saveData(resJson)
+                saveImages(resJson)
             })
     }
 

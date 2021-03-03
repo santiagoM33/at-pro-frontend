@@ -1,6 +1,17 @@
-export const saveData = async data => {
+export const saveImages = async data => {
 
     const uri = 'http://localhost:8005/images';
+
+    await fetch(uri, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {'Content-type': 'application/json'}
+    });
+}
+
+export const saveUsers = async data => {
+
+    const uri = 'http://localhost:8005/users';
 
     await fetch(uri, {
         method: 'POST',

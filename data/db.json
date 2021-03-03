@@ -1,32 +1,13 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "Angeles",
-      "edad": 45,
-      "email": "angy.mdp@gmail.com",
-      "phone": 2236973575,
-      "password": "hgt478f10",
-      "publish": {
-        "publish_id": 1,
-        "titulo": "Milf completa",
-        "descripcion": "Milf delgadita de 45 años a tus ordenes",
-        "thumbnails": "https://i.pinimg.com/564x/af/5f/e0/af5fe0fa910537085b421664296425ab.jpg"
-      }
-    },
-    {
-      "id": 2,
-      "name": "Luz",
-      "edad": 28,
-      "email": "luz28@gmail.com",
-      "phone": 2236554575,
-      "password": "hgt478f10",
-      "publish": {
-        "publish_id": 2,
-        "titulo": "Flaquita completa",
-        "descripcion": "Flaquita completa delgadita de 28 años a tu disposicion",
-        "thumbnails": "https://i.pinimg.com/originals/9a/ed/c3/9aedc37475ddefba72f164fa68801995.jpg"
-      }
+      "email": "sofi19@gmail.com",
+      "password": "123123",
+      "user": "Sofia Denise",
+      "phone": 542236973575,
+      "country": 1,
+      "category": 2,
+      "id": 1
     }
   ],
   "images": [
