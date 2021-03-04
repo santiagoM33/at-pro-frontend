@@ -91,7 +91,7 @@ class Announce extends Component {
                 break;
         }
     }
-
+ 
     isMatch = (param) => {
         if (param.email.length > 0 && param.password.length > 0 && param.user.length > 0 && param.Phone.length > 0 && param.country.length > 0) {
             const {email, password, user, Phone, country, category} = param;

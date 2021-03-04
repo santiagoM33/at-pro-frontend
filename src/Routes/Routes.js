@@ -52,6 +52,7 @@ class Routes extends Component {
         this.login = this.login.bind(this);
         this.clearErrors = this.clearErrors.bind(this);
         this.resetUser = this.resetUser.bind(this);
+        this.onCloseSession = this.onCloseSession.bind(this);
     }
 
     login(email, password) {
@@ -88,12 +89,18 @@ class Routes extends Component {
         return { loginMessage: err };
     }
 
+
+    //Helpers
     clearErrors() {
         this.setState({ errors: [] });
     }
 
     resetUser() {
         this.setState({ user: null });
+    }
+
+    onCloseSession(){
+        this.setState({ to: null });
     }
 
     render() {
@@ -193,6 +200,7 @@ class Routes extends Component {
                                 <Panel
                                     {...routeProps}
                                     user={this.state.user}
+                                    onCloseSession={this.onCloseSession}
                                     resetUser={this.resetUser}
                                 />
                             )}

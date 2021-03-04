@@ -19,7 +19,8 @@ class Panel extends Component {
             loading: false,
             isMenuOpened: false,
             isOpen: false,
-            authenticated: false
+            authenticated: false,
+            isMounted: false
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleHamburguer = this.handleHamburguer.bind(this);
@@ -39,10 +40,17 @@ class Panel extends Component {
      /*------------------- */
 
     componentDidMount(){
-        let data = JSON.parse(localStorage.getItem('user'))
-            if(data.roleId === 2) {
-                this.setState({authenticated: true})
+        this.setState({isMounted: true})
+        if (this.state.isMounted) {
+            let data = JSON.parse(localStorage.getItem('user'))
+                if(data.roleId === 2) {
+                    this.setState({authenticated: true})
+                }
             }
+    }
+
+    componentWillUnmount(){
+        this.setState({isMounted: false})
     }
 
     render() {
@@ -149,10 +157,11 @@ class Panel extends Component {
                                     to='/login'
                                     onClick={()=> {
                                         logout();
-                                        //Funciona pero me detecta el null en roleID al cerrar session
-                                        /*this.props.resetUser();
-                                        <Redirect to='/logout'/>*/
+                                        this.props.onCloseSession();
+                                        
+                                        //<Redirect to='/login'/>
                                         //history.push('/login')
+                                        //history.replace('/login')
                                         window.location.href ='/login';
                                         }
                                     }
