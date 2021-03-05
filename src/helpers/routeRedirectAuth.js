@@ -18,7 +18,7 @@ export const PublicRoute = ({component: Component, authed, rest}) => (
         render = {
             props => authed === false
             ? <Component {...props}/>
-            : <Redirect to='/panel'/>
+            : <Redirect to='/dashboard'/>
         }
     />
 )
