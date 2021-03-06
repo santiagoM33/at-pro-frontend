@@ -40,7 +40,7 @@ class Dashboard extends Component {
 
     componentDidMount(){
         this.setState({isMounted: true})
-        console.log(this.state.isMounted)
+        //console.log(this.state.isMounted)
         if (this.state.isMounted) {
             let data = JSON.parse(localStorage.getItem('user'))
                 if(data.roleId === 2) {

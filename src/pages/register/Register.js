@@ -9,18 +9,13 @@ import {registerDataAccount} from '../../services/api'
 class Register extends Component {
     constructor(...props) {
         super(...props);
-        this.getDataR = this.getDataR.bind(this)
+
+        this.handleSuccessAuth = this.handleSuccessAuth.bind(this)
     }
 
-    getDataR(fName, lName, email, password, category) {
-        const sData = {
-            firstName: fName,
-            lastName: lName,
-            email: email,
-            password: password,
-            roleId: category
-        }
-        registerDataAccount(sData)
+    handleSuccessAuth(data){
+        this.props.handleLogin(data)
+        this.props.history.push('dashboard')
     }
 
 
@@ -28,6 +23,9 @@ class Register extends Component {
         return ( 
             <div className='container'>
                 <div className='offset-md-2 col-md-8 card my-3 mt-sm-5 p-2 shadow rounded-sm'>
+                        {<div className='col-12'>
+                            Status: {this.props.loggedInStatus}
+                        </div>}
                     <Title
                         className='text-center my-3 h5 text-dark'
                     >Registrar Usuario</Title>
@@ -35,7 +33,7 @@ class Register extends Component {
                         className='col-12'
                     >
                         <FormRegister 
-                            getDataR={this.getDataR}
+                            handleSuccessAuth={this.handleSuccessAuth}
                         />
                     </Row>
                 </div>

@@ -21,89 +21,29 @@ import { loginAccountAuth } from "services/api";
 /* import ResetPasswordRoutes from '../pages/reset-password'; */
 
 import { Toaster } from "react-hot-toast";
-
 //import { Redirect as RouterRedirect } from "react-router-dom";
 
-/*function Redirecting({ to }) {
-    if (to) {
-        return <RouterRedirect to={to} />;
-    } else {
-        return null;
-    }
-}*/
+
 
 class Routes extends Component {
     constructor(...props) {
         super(...props);
 
-        const user = localStorage.getItem("user") ?? null;
-        const token = localStorage.getItem("token") ?? null;
-
-        //console.log('Logged in user ', user);
-
         this.state = {
-            authed: false,
-            isHome: false,
             loggedInStatus: 'NOT_LOGGED_IN',
-            user,
-            token,
-            errors: [],
-            //to: null,
+            user: {}
+            //errors: [],
         };
-        this.login = this.login.bind(this);
-        this.setMessage = this.setMessage.bind(this);
-        //this.clearErrors = this.clearErrors.bind(this);
-        //this.resetUser = this.resetUser.bind(this);
-        //this.onCloseSession = this.onCloseSession.bind(this);
+        this.handleLogin = this.handleLogin.bind(this);
+        //this.setMessage = this.setMessage.bind(this);
     }
 
-    login(email, password) {
-        loginAccountAuth({ email, password })
-            .then(({ token, user }) => {
-                localStorage.setItem("token", JSON.stringify(token));
-                localStorage.setItem("user", JSON.stringify(user));
-                //console.log('User data ', token, user);
-                this.setState({
-                    user,
-                    token,
-                    errors: [],
-                    loginMessage: null,
-                    //to: "/panel",
-                });
-            })
-            .catch((err) => {
-                this.setState({
-                    user: null,
-                    errors: err.errors,
-                    //to: null,
-                    ...this.setMessage("Usuario o Password incorrectos."),
-                });
-            });
-        //Se queda pegado el lugin si no se reinicia el state errors
-        setTimeout(() => {
-            this.setState({
-                errors: [],
-            });
-        }, 1500);
+    handleLogin(data) {
+        this.setState({
+            loggedInStatus: 'LOGGED_IN',
+            user: data
+        })
     }
-
-    setMessage(err) {
-        return { loginMessage: err };
-    }
-
-
-    //Helpers
-    /*clearErrors() {
-        this.setState({ errors: [] });
-    }
-
-    resetUser() {
-        this.setState({ user: null });
-    }
-
-    onCloseSession(){
-        this.setState({ to: null });
-    }*/
 
     render() {
         return (
@@ -116,28 +56,29 @@ class Routes extends Component {
                             <Header isHome={this.state.isHome}>AT PRO</Header>
                             <Home />
                         </Route>
-                        <Route path="/register">
-                            <Header>AT PRO</Header>
-                            <Register />
-                        </Route>
+                        <Route 
+                            path="/register"
+                            render={(routeProps) => (
+                                <Fragment>
+                                    <Header>AT PRO</Header>
+                                    <Register {...routeProps} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus}/>
+                                </Fragment>
+                            )}
+                        />
 
-                        <PublicRoute
+                        <Route
                             exact
                             path="/login"
-                            authed={!!this.state.user}
-                            component={(routeProps) => (
+                            //authed={!!this.state.user}
+                            render={(routeProps) => (
                                 <>
-                                    {/*<Redirecting
-                                        to={this.state.to}
-                                    ></Redirecting>*/}
-
                                     <Header>AT PRO</Header>
                                     <Login
-                                        onLogin={this.login}
+                                        {...routeProps}
                                         user={this.state.user}
-                                        errors={this.state.errors}
+                                        //errors={this.state.errors}
+                                        handleLogin={this.handleLogin}
                                         loggedInStatus={this.state.loggedInStatus}
-                                        //clearErrors={this.clearErrors}
                                     />
                                 </>
                             )}

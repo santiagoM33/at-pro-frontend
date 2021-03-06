@@ -4,6 +4,7 @@ import Row from 'partials/row/Row';
 import SpanError from 'partials/help/SpanError';
 import Button from '../../../components/button/Button';
 
+import { registerDataAccount } from "services/api";
 
 class FormRegister extends Component {
     constructor(...props) {
@@ -13,7 +14,7 @@ class FormRegister extends Component {
             lastName: '',
             email: '',
             password: '',
-            category: 3,
+            roleId: 3,
             //Manejo de errores en cada campo
             fNameError: false,
             lNameError: false,
@@ -67,9 +68,6 @@ class FormRegister extends Component {
                 }
                 this.setState({password: e.target.value})
                 break;
-            case 'category':
-                this.setState({category: e.target.value})
-                break;
             default:
                 break;
         }
@@ -78,22 +76,27 @@ class FormRegister extends Component {
 
     isMatch = (param) => {
         if (param.firstName.length > 0 && param.lastName.length > 0 && param.email.length > 0 && param.password.length > 0) {
-            const {firstName, lastName, email, password, category} = param;
-            //console.log(category)
-            this.props.getDataR(
+            const {firstName, lastName, email, password, roleId} = param;
+            //console.log(roleId)
+            registerDataAccount({
                 firstName,
                 lastName,
                 email,
                 password,
-                category,
-            )
+                roleId,
+            }).then(res => {
+                console.log(res)
+                this.props.handleSuccessAuth(res)
+            }).catch(err => {
+                console.log(err)
+            })
         }
     }
 
     onHandleSubmit(e) {
         e.preventDefault();
-        const {firstName, lastName, email, password, category} = this.state;
-        let account = {firstName, lastName, email, password, category};
+        const {firstName, lastName, email, password, roleId} = this.state;
+        let account = {firstName, lastName, email, password, roleId};
         if (account) {
             this.isMatch(account)
         }
@@ -169,19 +172,6 @@ class FormRegister extends Component {
                         { this.state.passError &&
                             <SpanError id='pass-error' styles='form-text text-danger'>El password debe contener numeros, signos, mayúsculas y minúsculas</SpanError>
                         }
-                    </div>
-                </Row>
-                <Row className='col-12'>
-                    <div className='col-12 input-group mb-3'>
-                        
-                        <select
-                            className="custom-select col col-sm-12" 
-                            name='category'
-                            multiple= {false}
-                            
-                        hidden>
-                            <option value={this.state.category}></option>
-                        </select>
                     </div>
                 </Row>
                 <Row className='col'>

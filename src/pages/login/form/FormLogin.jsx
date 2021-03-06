@@ -6,6 +6,8 @@ import Link from 'partials/link/Link';
 import Button from 'components/button/Button';
 import Alert from 'components/alert/Alert';
 
+import { loginAccountAuth } from "services/api";
+
 
 class FormLogin extends Component {
     constructor(...props) {
@@ -40,9 +42,34 @@ class FormLogin extends Component {
         const {email, password} = this.state;
         if (this.state.email.length > 0 && this.state.password.length > 0) {
             //this.props.clearErrors()
-            if (this.props.errors.length == 0) {
-                this.props.onLogin(email,password)
-            } 
+            //if (this.props.errors.length == 0) {
+                //this.props.onLogin(email,password)
+                loginAccountAuth({ email, password })
+                    .then(({ token, user }) => {
+                        
+                        localStorage.setItem("token", JSON.stringify(token));
+                        localStorage.setItem("user", JSON.stringify(user));
+
+                        this.props.handleSuccessAuth({token, user});
+                        
+                        /*this.setState({
+                            user,
+                            token,
+                            errors: [],
+                            loginMessage: null,
+                            //to: "/panel",
+                        });*/
+                    })
+                    .catch((err) => {
+                        console.log('Error: ', err)
+                        /*this.setState({
+                            user: null,
+                            errors: err.errors,
+                            //to: null,
+                            ...this.setMessage("Usuario o Password incorrectos."),
+                        });*/
+                    });
+           // } 
         } 
     }
 
@@ -50,17 +77,14 @@ class FormLogin extends Component {
         return (
             <form onSubmit={this.onHandleSubmit.bind(this)}>
                 <Row className='col-12'>
-                    {<div className='col-12'>
-                        Status: {this.props.loggedInStatus}
-                    </div>}
-                        {
+                        {/*
                             !!this.props.errors.length 
                             ?
                             <Alert 
                                 type='danger'
                             >{this.props.errors[0]}</Alert>
                             : null
-                        }
+                        */}
                     <div className="col-12 form-group">
                         <input
                             type='email'

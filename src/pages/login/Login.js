@@ -4,6 +4,17 @@ import Row from '../../partials/row/Row';
 import Title from '../../partials/title/Title';
 
 class Login extends Component {
+    constructor(...props){
+        super(...props);
+        
+        this.handleSuccessAuth = this.handleSuccessAuth.bind(this)
+        
+    }
+
+    handleSuccessAuth(data){
+        this.props.handleLogin(data)
+        this.props.history.push('dashboard')
+    }
 
     render() { 
         return (  
@@ -14,11 +25,14 @@ class Login extends Component {
                     >Ingresar</Title>
                     
                     <Row className='col-12'>
+                        {<div className='col-12'>
+                            Status: {this.props.loggedInStatus}
+                        </div>}
                         <FormLogin 
                             onLogin={this.props.onLogin}
                             errors={this.props.errors}
+                            handleSuccessAuth={this.handleSuccessAuth}
                             //clearErrors={this.props.clearErrors}
-                            loggedInStatus={this.props.loggedInStatus}
                         />
                     </Row>
                 </div>

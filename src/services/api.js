@@ -30,11 +30,20 @@ export const registerDataAccount = async data => {
         headers: new Headers({'Content-type': 'application/json'})
     }
 
-    try{
-        await fetch(`${BASE_URI}/register`, requestData)
-    } catch(err) {
-        console.log('Problemas para registrar los datos', err)
-    }
+    const promise = new Promise(async (response, reject) => {
+        try{
+            const res = await fetch(`${BASE_URI}/register`, requestData)
+            const body = await res.json();
+                if (res.ok) {
+                    return response(body)
+                } else {
+                    return reject(body)
+                }
+        } catch (err) {
+            reject({errors: [err]})
+        }
+    })
+    return promise;
 }
 
 export const resetPasswordRequest = async email => {
@@ -100,6 +109,9 @@ export const makeCancelable = (promise) => {
     };
   };
 
+
+
+  
   export const getData = async () => {
     const URI = `http://localhost:8005`;
     const promise = new Promise(async (response, reject) => {
