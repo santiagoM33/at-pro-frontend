@@ -7,7 +7,7 @@ import Escort from "pages/escort/Escort";
 import ResetPasswordRequest from "pages/reset-password-request/ResetPasswordRequest";
 import ResetPassword from "pages/reset-password/ResetPassword";
 import Admin from "pages/protected/admin/Admin";
-import Panel from "pages/protected/panel/Panel";
+import Dashboard from "pages/protected/dashboard/Dashboard";
 import Publish from "pages/protected/publish/Publish";
 import Profile from "pages/protected/profile/Profile";
 import Gallery from "pages/protected/gallery/Gallery";
@@ -22,15 +22,15 @@ import { loginAccountAuth } from "services/api";
 
 import { Toaster } from "react-hot-toast";
 
-import { Redirect as RouterRedirect } from "react-router-dom";
+//import { Redirect as RouterRedirect } from "react-router-dom";
 
-function Redirecting({ to }) {
+/*function Redirecting({ to }) {
     if (to) {
         return <RouterRedirect to={to} />;
     } else {
         return null;
     }
-}
+}*/
 
 class Routes extends Component {
     constructor(...props) {
@@ -44,15 +44,17 @@ class Routes extends Component {
         this.state = {
             authed: false,
             isHome: false,
+            loggedInStatus: 'NOT_LOGGED_IN',
             user,
             token,
             errors: [],
-            to: null,
+            //to: null,
         };
         this.login = this.login.bind(this);
-        this.clearErrors = this.clearErrors.bind(this);
-        this.resetUser = this.resetUser.bind(this);
-        this.onCloseSession = this.onCloseSession.bind(this);
+        this.setMessage = this.setMessage.bind(this);
+        //this.clearErrors = this.clearErrors.bind(this);
+        //this.resetUser = this.resetUser.bind(this);
+        //this.onCloseSession = this.onCloseSession.bind(this);
     }
 
     login(email, password) {
@@ -66,14 +68,14 @@ class Routes extends Component {
                     token,
                     errors: [],
                     loginMessage: null,
-                    to: "/panel",
+                    //to: "/panel",
                 });
             })
             .catch((err) => {
                 this.setState({
                     user: null,
                     errors: err.errors,
-                    to: null,
+                    //to: null,
                     ...this.setMessage("Usuario o Password incorrectos."),
                 });
             });
@@ -91,7 +93,7 @@ class Routes extends Component {
 
 
     //Helpers
-    clearErrors() {
+    /*clearErrors() {
         this.setState({ errors: [] });
     }
 
@@ -101,7 +103,7 @@ class Routes extends Component {
 
     onCloseSession(){
         this.setState({ to: null });
-    }
+    }*/
 
     render() {
         return (
@@ -125,16 +127,17 @@ class Routes extends Component {
                             authed={!!this.state.user}
                             component={(routeProps) => (
                                 <>
-                                    <Redirecting
+                                    {/*<Redirecting
                                         to={this.state.to}
-                                    ></Redirecting>
+                                    ></Redirecting>*/}
 
                                     <Header>AT PRO</Header>
                                     <Login
                                         onLogin={this.login}
                                         user={this.state.user}
                                         errors={this.state.errors}
-                                        clearErrors={this.clearErrors}
+                                        loggedInStatus={this.state.loggedInStatus}
+                                        //clearErrors={this.clearErrors}
                                     />
                                 </>
                             )}
@@ -194,14 +197,15 @@ class Routes extends Component {
                             component={Logout}
                         />
                         <PrivateRoute
-                            path="/panel"
+                            path="/dashboard"
                             authed={!!this.state.user}
                             component={(routeProps) => (
-                                <Panel
+                                <Dashboard
                                     {...routeProps}
                                     user={this.state.user}
-                                    onCloseSession={this.onCloseSession}
-                                    resetUser={this.resetUser}
+                                    loggedInStatus={this.state.loggedInStatus}
+                                    //onCloseSession={this.onCloseSession}
+                                    //resetUser={this.resetUser}
                                 />
                             )}
                         />

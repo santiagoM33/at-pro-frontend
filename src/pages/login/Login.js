@@ -17,7 +17,8 @@ class Login extends Component {
                         <FormLogin 
                             onLogin={this.props.onLogin}
                             errors={this.props.errors}
-                            clearErrors={this.props.clearErrors}
+                            //clearErrors={this.props.clearErrors}
+                            loggedInStatus={this.props.loggedInStatus}
                         />
                     </Row>
                 </div>

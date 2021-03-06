@@ -39,17 +39,18 @@ class Dashboard extends Component {
      /*------------------- */
 
     componentDidMount(){
-        /*this.setState({isMounted: true})
+        this.setState({isMounted: true})
+        console.log(this.state.isMounted)
         if (this.state.isMounted) {
             let data = JSON.parse(localStorage.getItem('user'))
                 if(data.roleId === 2) {
                     this.setState({authenticated: true})
                 }
-            }*/
+            }
     }
 
     componentWillUnmount(){
-        //this.setState({isMounted: false})
+        this.setState({isMounted: false})
     }
 
     render() {
@@ -74,9 +75,9 @@ class Dashboard extends Component {
                     className='container'
                     style={{ fontSize: "1.2em" }}
                 >
-                    {/*<div className='col-12'>
+                    {<div className='col-12'>
                         Status: {this.props.loggedInStatus}
-        </div>*/}
+                    </div>}
                     <Comments />
                     <Suggestions />
 
@@ -86,7 +87,7 @@ class Dashboard extends Component {
                     <HeaderMenuOffcanvas />    
                                
                         <ul className="navbar-nav mr-auto">
-                            {this.state .authenticated === true &&
+                            {this.state.authenticated === true &&
                                 <Fragment>
                                     <li className="nav-item active mt-3">
                                         <NavLink

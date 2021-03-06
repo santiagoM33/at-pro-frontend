@@ -15,7 +15,6 @@ class Announce extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            flagImg: 'https://flagpedia.net/data/flags/w580/ar.png',
             email: '',
             password: '',
             user: '',
@@ -32,10 +31,7 @@ class Announce extends Component {
         this.onHandleClick = this.onHandleClick.bind(this)
         this.isMatch = this.isMatch.bind(this)
     }
-
-    //Link banderas del mundo
-    // https://flagpedia.net/data/flags/w580/ar.png
-
+    
     onSelectCountry(e){
         this.setState({country: e.target.value})
     }

@@ -50,6 +50,9 @@ class FormLogin extends Component {
         return (
             <form onSubmit={this.onHandleSubmit.bind(this)}>
                 <Row className='col-12'>
+                    {<div className='col-12'>
+                        Status: {this.props.loggedInStatus}
+                    </div>}
                         {
                             !!this.props.errors.length 
                             ?

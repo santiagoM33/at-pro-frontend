@@ -7,8 +7,8 @@ import { createBrowserHistory } from "history";
 import { OffCanvas, OffCanvasMenu, OffCanvasBody } from "react-offcanvas";
 import { logout } from "../../../data/config";
 
-import HeaderPanel from "../panel/components/HeaderPanel";
-import HeaderMenuOffcanvas from "../panel/components/HeaderMenuOffcanvas";
+import HeaderPanel from "../dashboard/components/HeaderPanel";
+import HeaderMenuOffcanvas from "../dashboard/components/HeaderMenuOffcanvas";
 
 class Publish extends Component {
     constructor(...props) {
