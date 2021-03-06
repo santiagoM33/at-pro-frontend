@@ -45,13 +45,13 @@ class FormLogin extends Component {
             //if (this.props.errors.length == 0) {
                 //this.props.onLogin(email,password)
                 loginAccountAuth({ email, password })
-                    .then(({ token, user }) => {
+                    .then((res) => {
                         
-                        localStorage.setItem("token", JSON.stringify(token));
-                        localStorage.setItem("user", JSON.stringify(user));
+                        localStorage.setItem("token", JSON.stringify(res.token));
+                        localStorage.setItem("user", JSON.stringify(res.user));
 
-                        this.props.handleSuccessAuth({token, user});
-                        
+                        this.props.handleSuccessAuth(res);
+                        //console.log(res)
                         /*this.setState({
                             user,
                             token,

@@ -29,13 +29,51 @@ class Routes extends Component {
     constructor(...props) {
         super(...props);
 
+        const user = JSON.parse(localStorage.getItem("user")) ?? null;
+        const token = localStorage.getItem("token") ?? null;
+
         this.state = {
             loggedInStatus: 'NOT_LOGGED_IN',
-            user: {}
+            user,
+            token
             //errors: [],
         };
         this.handleLogin = this.handleLogin.bind(this);
+        this.checkLoginStatus = this.checkLoginStatus.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
         //this.setMessage = this.setMessage.bind(this);
+    }
+
+    checkLoginStatus(){
+        //console.log(this.state.user)
+        //console.log(localStorage.getItem('token'))
+        const BASE_URI = 'http://159.65.218.115';
+        const newHeaders = {
+            headers: new Headers({
+                'Content-type': 'application/json', 
+                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                'Authorization': 'Bearer ' + this.state.token,
+            })
+        }
+        fetch(`${BASE_URI}/restricted`, {
+            method: 'GET',
+            //credentials: "include",
+            headers: newHeaders,
+        }).then(res => {
+            console.log('Check loggin: ', res)
+            if (res.ok && this.state.loggedInStatus === 'NOT_LOGGED_IN') {
+                this.setState({
+                    loggedInStatus: 'LOGGED_IN',
+                    user: res.json()
+                })
+            } else if (!res.ok && this.state.loggedInStatus === 'LOGGED_IN') {
+                this.setState({
+                    loggedInStatus: 'NOT_LOGGED_IN',
+                    user: null
+                })
+            }
+        })
+        .catch(err => console.log('Check login error', err))
     }
 
     handleLogin(data) {
@@ -43,6 +81,20 @@ class Routes extends Component {
             loggedInStatus: 'LOGGED_IN',
             user: data
         })
+        //console.log(this.state.user)
+    }
+
+    componentDidMount(){
+        console.log(this.state.user)
+        this.checkLoginStatus()
+    }
+
+    handleLogout(){
+        this.setState({
+            loggedInStatus: 'NOT_LOGGED_IN',
+            user: null
+        })
+        localStorage.clear('user')
     }
 
     render() {
@@ -145,6 +197,7 @@ class Routes extends Component {
                                     {...routeProps}
                                     user={this.state.user}
                                     loggedInStatus={this.state.loggedInStatus}
+                                    handleLogout={this.handleLogout}
                                     //onCloseSession={this.onCloseSession}
                                     //resetUser={this.resetUser}
                                 />
