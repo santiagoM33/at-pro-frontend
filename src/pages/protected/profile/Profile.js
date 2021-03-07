@@ -70,14 +70,14 @@ class Profile extends Component {
                                             />
                                         </div>
                                     </Row>
-                                    <Row className="col-12">
+                                    {/*<Row className="col-12">
                                         <div className="input-group mb-3">
                                             <select
                                                 className="custom-select col-11 col-sm-12 ml-3"
                                                 name="provincia"
                                                 multiple={false}
                                             >
-                                                <option selected>
+                                                <option defaultValue>
                                                     -- Nacionalidad --
                                                 </option>
                                                 <option value="1">One</option>
@@ -85,14 +85,14 @@ class Profile extends Component {
                                                 <option value="3">Three</option>
                                             </select>
                                         </div>
-                                    </Row>
+                                    </Row>*/}
                                     <Row className="col-12 mb-3">
                                         <div className="input-group">
                                             <input
                                                 type="number"
                                                 placeholder="Documento"
                                                 className="form-control col-12 ml-3"
-                                                name="documento"
+                                                name="dni"
 
                                                 //aria-describedby={"fName-error"}
                                                 //ref={this.fNameRef}
@@ -108,7 +108,7 @@ class Profile extends Component {
                                                 name="barrio"
                                                 multiple={false}
                                             >
-                                                <option selected>
+                                                <option defaultValue>
                                                     --Edad --
                                                 </option>
                                                 <option value="1">One</option>
@@ -139,7 +139,7 @@ class Profile extends Component {
                                                 name="ciudad"
                                                 multiple={false}
                                             >
-                                                <option selected>
+                                                <option defaultValue>
                                                     -- Medidas Pecho --
                                                 </option>
                                                 <option value="1">One</option>
@@ -155,7 +155,7 @@ class Profile extends Component {
                                                 name="barrio"
                                                 multiple={false}
                                             >
-                                                <option selected>
+                                                <option defaultValue>
                                                     -- Medidas Cintura --
                                                 </option>
                                                 <option value="1">One</option>
@@ -171,7 +171,7 @@ class Profile extends Component {
                                                 name="barrio"
                                                 multiple={false}
                                             >
-                                                <option selected>
+                                                <option defaultValue>
                                                     -- Medidas Cadera --
                                                 </option>
                                                 <option value="1">One</option>

@@ -95,18 +95,18 @@ class Dashboard extends Component {
                     <HeaderMenuOffcanvas />    
                                
                         <ul className="navbar-nav mr-auto">
+                            <li className="nav-item active mt-3">
+                                <NavLink
+                                    className="nav-link text-dark"
+                                    to="/dashboard"
+                                    activeClassName="active"
+                                >
+                                    Dashboard{" "}
+                                        <span className="sr-only">(current)</span>
+                                </NavLink>
+                                    </li>
                             {this.state.authenticated === true &&
                                 <Fragment>
-                                    <li className="nav-item active mt-3">
-                                        <NavLink
-                                            className="nav-link text-dark"
-                                            to="/dashboard"
-                                            activeClassName="active"
-                                        >
-                                            Dashboard{" "}
-                                            <span className="sr-only">(current)</span>
-                                        </NavLink>
-                                    </li>
                                     <li className="nav-item">
                                         <NavLink className="nav-link text-dark" to="/notifications">
                                             Notifications
