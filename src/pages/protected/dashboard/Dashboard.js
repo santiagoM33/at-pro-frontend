@@ -163,12 +163,7 @@ class Dashboard extends Component {
                                     className='nav-link text-dark'
                                     to='/login'
                                     onClick={()=> {
-                                        //logout();
                                         this.props.handleLogout()                             
-                                        //<Redirect to='/login'/>
-                                        //this.props.history.push('/login')
-                                        //this.props.history.replace('/login')
-                                        //window.location.href ='/login';
                                         }
                                     }
                                 >

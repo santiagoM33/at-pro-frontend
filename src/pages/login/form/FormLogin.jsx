@@ -61,7 +61,7 @@ class FormLogin extends Component {
                     .catch((err) => {
                         this.setState({
                             errors: err.errors,
-                            //...this.setMessage("Usuario o Password incorrectos."),
+                            ...this.setMessage("Usuario o Password incorrectos."),
                         });
                     });
            //} 
