@@ -127,10 +127,10 @@ class Admin extends Component {
                                     className="nav-link text-dark"
                                     to="/login"
                                     onClick={() => {
-                                        logout();
+                                        this.props.handleLogout()
                                         //Funciona pero me detecta el null en roleID al cerrar session
                                         //<Redirect to='/login'/>
-                                        window.location.href = "/login";
+                                        //window.location.href = "/login";
                                     }}
                                 >
                                     Logout

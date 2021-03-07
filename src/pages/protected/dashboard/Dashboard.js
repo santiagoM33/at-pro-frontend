@@ -2,7 +2,6 @@ import React, { Fragment, Component } from "react";
 import { NavLink, Redirect } from "react-router-dom";
 //import { createBrowserHistory } from "history";
 import { OffCanvas, OffCanvasMenu, OffCanvasBody } from "react-offcanvas";
-import {logout} from 'data/config'
 
 import Comments from './components/Comments'
 import Suggestions from './components/Suggestions'
@@ -39,18 +38,17 @@ class Dashboard extends Component {
      /*------------------- */
 
     componentDidMount(){
-        this.setState({isMounted: true})
-        //console.log(this.state.isMounted)
+        /*this.setState({isMounted: true})
         if (this.state.isMounted) {
             let data = JSON.parse(localStorage.getItem('user'))
                 if(data.roleId === 2) {
                     this.setState({authenticated: true})
                 }
-            }
+            }*/
     }
 
     componentWillUnmount(){
-        this.setState({isMounted: false})
+        //this.setState({isMounted: false})
     }
 
     render() {

@@ -88,31 +88,8 @@ export const resetPassword = async (email, password, code) => {
     return promise;
 }
 
-//Funciona como isMounted() 
-export const makeCancelable = (promise) => {
-    let hasCanceled_ = false;
   
-    const wrappedPromise = new Promise((resolve, reject) => {
-      promise.then((val) =>
-        hasCanceled_ ? reject({isCanceled: true}) : resolve(val)
-      );
-      promise.catch((error) =>
-        hasCanceled_ ? reject({isCanceled: true}) : reject(error)
-      );
-    });
-  
-    return {
-      promise: wrappedPromise,
-      cancel() {
-        hasCanceled_ = true;
-      },
-    };
-  };
-
-
-
-  
-  export const getData = async () => {
+export const getData = async () => {
     const URI = `http://localhost:8005`;
     const promise = new Promise(async (response, reject) => {
         try{

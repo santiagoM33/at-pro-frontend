@@ -4,8 +4,6 @@ import FormRegister from './form/FormRegister';
 import Row from '../../partials/row/Row';
 import Title from '../../partials/title/Title';
 
-import {registerDataAccount} from '../../services/api'
-
 class Register extends Component {
     constructor(...props) {
         super(...props);
@@ -13,9 +11,10 @@ class Register extends Component {
         this.handleSuccessAuth = this.handleSuccessAuth.bind(this)
     }
 
+
     handleSuccessAuth(data){
         this.props.handleLogin(data)
-        this.props.history.push('dashboard')
+        this.props.history.push('/dashboard')
     }
 
 

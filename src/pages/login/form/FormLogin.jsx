@@ -17,9 +17,11 @@ class FormLogin extends Component {
             password: '',
             emailError: false,
             passwordError: false,
-            hasError: false
+            hasError: false,
+            errors: []
         }
         this.onHandleChange = this.onHandleChange.bind(this)
+        this.setMessage = this.setMessage.bind(this);
     }
   
 
@@ -41,8 +43,8 @@ class FormLogin extends Component {
         e.preventDefault();
         const {email, password} = this.state;
         if (this.state.email.length > 0 && this.state.password.length > 0) {
-            //this.props.clearErrors()
-            //if (this.props.errors.length == 0) {
+
+            //if (this.errors.length === 0) {
                 //this.props.onLogin(email,password)
                 loginAccountAuth({ email, password })
                     .then((res) => {
@@ -51,40 +53,38 @@ class FormLogin extends Component {
                         localStorage.setItem("user", JSON.stringify(res.user));
 
                         this.props.handleSuccessAuth(res);
-                        //console.log(res)
-                        /*this.setState({
-                            user,
-                            token,
+                        this.setState({
                             errors: [],
-                            loginMessage: null,
-                            //to: "/panel",
-                        });*/
+                            //...this.setMessage("Ingreso correcto."),
+                        });
                     })
                     .catch((err) => {
-                        console.log('Error: ', err)
-                        /*this.setState({
-                            user: null,
+                        this.setState({
                             errors: err.errors,
-                            //to: null,
-                            ...this.setMessage("Usuario o Password incorrectos."),
-                        });*/
+                            //...this.setMessage("Usuario o Password incorrectos."),
+                        });
                     });
-           // } 
+           //} 
         } 
     }
+
+    setMessage(err) {
+        return { loginMessage: err };
+    }
+
 
     render() {
         return (
             <form onSubmit={this.onHandleSubmit.bind(this)}>
                 <Row className='col-12'>
-                        {/*
-                            !!this.props.errors.length 
+                        {
+                            !!this.state.errors.length 
                             ?
                             <Alert 
                                 type='danger'
-                            >{this.props.errors[0]}</Alert>
+                            >{this.state.errors}</Alert>
                             : null
-                        */}
+                        }
                     <div className="col-12 form-group">
                         <input
                             type='email'

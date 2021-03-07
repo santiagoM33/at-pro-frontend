@@ -1,4 +1,5 @@
 import React, { Fragment, Component } from "react";
+import Axios from 'axios';
 import Home from "pages/home/Home";
 import Login from "pages/login/Login";
 import Register from "pages/register/Register";
@@ -17,7 +18,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "partials/header/Header";
 
 import { PrivateRoute, PublicRoute } from "helpers/routeRedirectAuth";
-import { loginAccountAuth } from "services/api";
+import { makeCancelable } from "helpers/cancelablePromise";
 /* import ResetPasswordRoutes from '../pages/reset-password'; */
 
 import { Toaster } from "react-hot-toast";
@@ -30,63 +31,64 @@ class Routes extends Component {
         super(...props);
 
         const user = JSON.parse(localStorage.getItem("user")) ?? null;
-        const token = localStorage.getItem("token") ?? null;
+        const token = JSON.parse(localStorage.getItem("token")) ?? null;
 
         this.state = {
             loggedInStatus: 'NOT_LOGGED_IN',
             user,
-            token
-            //errors: [],
+            token,
+            authed: ''
         };
         this.handleLogin = this.handleLogin.bind(this);
         this.checkLoginStatus = this.checkLoginStatus.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
-        //this.setMessage = this.setMessage.bind(this);
     }
 
-    checkLoginStatus(){
-        //console.log(this.state.user)
-        //console.log(localStorage.getItem('token'))
-        const BASE_URI = 'http://159.65.218.115';
-        const newHeaders = {
-            headers: new Headers({
-                'Content-type': 'application/json', 
-                'Access-Control-Allow-Origin': 'http://localhost:3000',
-                'Authorization': 'Bearer ' + this.state.token,
-            })
-        }
-        fetch(`${BASE_URI}/restricted`, {
-            method: 'GET',
-            //credentials: "include",
-            headers: newHeaders,
-        }).then(res => {
-            console.log('Check loggin: ', res)
-            if (res.ok && this.state.loggedInStatus === 'NOT_LOGGED_IN') {
-                this.setState({
-                    loggedInStatus: 'LOGGED_IN',
-                    user: res.json()
-                })
-            } else if (!res.ok && this.state.loggedInStatus === 'LOGGED_IN') {
-                this.setState({
-                    loggedInStatus: 'NOT_LOGGED_IN',
-                    user: null
-                })
-            }
-        })
-        .catch(err => console.log('Check login error', err))
-    }
+    controller = new AbortController();
 
     handleLogin(data) {
         this.setState({
             loggedInStatus: 'LOGGED_IN',
             user: data
         })
-        //console.log(this.state.user)
     }
 
-    componentDidMount(){
-        console.log(this.state.user)
+    checkLoginStatus(){
+        const accessToken = this.state.token;
+        const BASE_URI = 'http://159.65.218.115';
+        const authAxios = Axios.create({
+            baseURL: BASE_URI,
+            withCredentials: false,
+            headers: {
+                authorization: `Bearer ${accessToken}`,
+            }
+        })
+        
+        authAxios.get(`/restricted`, {signal: this.controller.signal})
+            .then(res => {
+                console.log('Check loggin: ', res)
+                if (res.data && this.state.loggedInStatus === 'NOT_LOGGED_IN') {
+                    this.setState({
+                        loggedInStatus: 'LOGGED_IN',
+                        authed: res.data
+                    })
+                    console.log(this.state.user)
+                } else if (!res.data && this.state.loggedInStatus === 'LOGGED_IN') {
+                    this.setState({
+                        loggedInStatus: 'NOT_LOGGED_IN',
+                        authed: res.data
+                    })
+                }
+            })
+            .catch(err => console.log('Check login error', err))
+    }
+
+    componentDidMount(){        
         this.checkLoginStatus()
+    }
+
+    componentWillUnmount(){
+        //this.controller.abort();
     }
 
     handleLogout(){
@@ -128,7 +130,6 @@ class Routes extends Component {
                                     <Login
                                         {...routeProps}
                                         user={this.state.user}
-                                        //errors={this.state.errors}
                                         handleLogin={this.handleLogin}
                                         loggedInStatus={this.state.loggedInStatus}
                                     />
@@ -150,12 +151,17 @@ class Routes extends Component {
                             <Header>AT PRO</Header>
                             <Escort />
                         </Route>
-                        <Route
+                        <PrivateRoute
                             authed={!!this.state.user}
-                            path="/admin"                            
-                        >  
-                            <Admin />
-                        </Route>
+                            path="/admin"
+                            component={privateProps => (
+                                <Admin 
+                                    {...privateProps}
+                                    handleLogout={this.handleLogout}
+                                />
+                            )}                            
+                        />  
+                            
                         <PublicRoute
                             exact
                             authed={!!this.state.user}
