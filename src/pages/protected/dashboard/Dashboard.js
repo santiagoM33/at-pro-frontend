@@ -38,6 +38,8 @@ class Dashboard extends Component {
         if (this.state.isMounted) {
             let data = JSON.parse(localStorage.getItem('user'))
             data.roleId === 3 
+                //? this.props.roleGrabber(data.roleId)
+                //: this.props.roleGrabber(Number('2'))
                 ? this.setState({role: data.roleId}) 
                 : this.setState({role: 2 })
 
@@ -98,7 +100,7 @@ class Dashboard extends Component {
                                     <li className="nav-item active mt-3">
                                         <NavLink
                                             className="nav-link text-dark"
-                                            to="/panel"
+                                            to="/dashboard"
                                             activeClassName="active"
                                         >
                                             Dashboard{" "}
@@ -106,7 +108,7 @@ class Dashboard extends Component {
                                         </NavLink>
                                     </li>
                                     <li className="nav-item">
-                                        <NavLink className="nav-link text-dark" to="#">
+                                        <NavLink className="nav-link text-dark" to="/notifications">
                                             Notifications
                                         </NavLink>
                                     </li>
@@ -123,7 +125,7 @@ class Dashboard extends Component {
                                 </Fragment>
                             }
                             <li className="nav-item">
-                                <NavLink className="nav-link text-dark" to="#">
+                                <NavLink className="nav-link text-dark" to="/favorites">
                                     Favorites
                                 </NavLink>
                             </li>
@@ -144,17 +146,17 @@ class Dashboard extends Component {
                                     Settings
                                 </NavLink>
                                 <div
-                                    className="dropdown-menu"
+                                    className="dropdown-menu bg-light"
                                     aria-labelledby="dropdown01"
                                 >
-                                    <NavLink className="dropdown-item text-dark" to="#">
+                                    <NavLink className="dropdown-item text-dark" to="/wallet">
+                                        Wallet
+                                    </NavLink>
+                                    <NavLink className="dropdown-item text-dark" to="/profile">
                                         Profile
                                     </NavLink>
-                                    <NavLink className="dropdown-item text-dark" to="#">
-                                        Another action
-                                    </NavLink>
-                                    <NavLink className="dropdown-item text-dark" to="#">
-                                        Something else here
+                                    <NavLink className="dropdown-item text-dark" to="/about">
+                                        About
                                     </NavLink>
                                 </div>
                             </li>

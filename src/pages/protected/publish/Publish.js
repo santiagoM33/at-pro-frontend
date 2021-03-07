@@ -150,7 +150,7 @@ class Publish extends Component {
                                     <li className="nav-item active mt-3">
                                         <NavLink
                                             className="nav-link text-dark"
-                                            to="/panel"
+                                            to="/dashboard"
                                             activeClassName="active"
                                         >
                                             Dashboard{" "}
@@ -204,21 +204,21 @@ class Publish extends Component {
                                 >
                                     <NavLink
                                         className="dropdown-item text-dark"
-                                        to="#"
+                                        to="/wallet"
+                                    >
+                                        Wallet
+                                    </NavLink>
+                                    <NavLink
+                                        className="dropdown-item text-dark"
+                                        to="/profile"
                                     >
                                         Profile
                                     </NavLink>
                                     <NavLink
                                         className="dropdown-item text-dark"
-                                        to="#"
+                                        to="/about"
                                     >
-                                        Another action
-                                    </NavLink>
-                                    <NavLink
-                                        className="dropdown-item text-dark"
-                                        to="#"
-                                    >
-                                        Something else here
+                                        About
                                     </NavLink>
                                 </div>
                             </li>
@@ -227,11 +227,7 @@ class Publish extends Component {
                                     className="nav-link text-dark"
                                     to="/login"
                                     onClick={() => {
-                                        logout();
-                                        //Funciona pero me detecta el null en roleID al cerrar session
-                                        //<Redirect to='/login'/>
-                                        history.push('/login')
-                                        //window.location.href = "/login";
+                                        this.props.handleLogout()
                                     }}
                                 >
                                     Logout

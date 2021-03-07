@@ -37,10 +37,12 @@ class Routes extends Component {
             loggedInStatus: 'NOT_LOGGED_IN',
             user,
             token,
+            role: 2,
             authed: false
         };
         this.handleLogin = this.handleLogin.bind(this);
         this.checkLoginStatus = this.checkLoginStatus.bind(this);
+        this.roleGrabber = this.roleGrabber.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
     }
 
@@ -95,6 +97,10 @@ class Routes extends Component {
             user: null
         })
         localStorage.clear('user')
+    }
+
+    roleGrabber(id){
+        this.setState({role: id})
     }
 
     render() {
@@ -152,12 +158,14 @@ class Routes extends Component {
                         <PrivateRoute
                             authed={!!this.state.user}
                             path="/admin"
-                            component={privateProps => (
-                                <Admin 
+                            component={privateProps=> (
+                                <Admin
                                     {...privateProps}
+                                    user={this.state.user}
+                                    loggedInStatus={this.state.loggedInStatus}
                                     handleLogout={this.handleLogout}
                                 />
-                            )}                            
+                            )}                    
                         />  
                             
                         <PublicRoute
@@ -176,34 +184,57 @@ class Routes extends Component {
                         <PrivateRoute
                             authed={!!this.state.user}
                             path="/publish"
-                            component={Publish}
-                        />
-                        <PrivateRoute
-                            authed={!!this.state.user}
-                            path="/profile"
-                            component={Profile}
-                        />
-                        <PrivateRoute
-                            authed={!!this.state.user}
-                            path="/gallery"
-                            component={Gallery}
-                        />
-                        <PrivateRoute
-                            authed={!!this.state.user}
-                            path="/logout"
-                            component={Logout}
-                        />
-                        <PrivateRoute
-                            path="/dashboard"
-                            authed={!!this.state.user}
-                            component={(routeProps) => (
-                                <Dashboard
-                                    {...routeProps}
+                            component={privateProps=> (
+                                <Publish
+                                    {...privateProps}
                                     user={this.state.user}
                                     loggedInStatus={this.state.loggedInStatus}
                                     handleLogout={this.handleLogout}
                                 />
                             )}
+                        />
+                        <PrivateRoute
+                            authed={!!this.state.user}
+                            path="/profile"
+                            component={privateProps=> (
+                                <Profile
+                                    {...privateProps}
+                                    user={this.state.user}
+                                    loggedInStatus={this.state.loggedInStatus}
+                                    handleLogout={this.handleLogout}
+                                />
+                            )}
+                        />
+                        <PrivateRoute
+                            authed={!!this.state.user}
+                            path="/gallery"
+                            component={privateProps=> (
+                                <Gallery
+                                    {...privateProps}
+                                    user={this.state.user}
+                                    loggedInStatus={this.state.loggedInStatus}
+                                    handleLogout={this.handleLogout}
+                                />
+                            )}
+                        />
+                        <PrivateRoute
+                            path="/dashboard"
+                            authed={!!this.state.user}
+                            component={(privateProps) => (
+                                <Dashboard
+                                    {...privateProps}
+                                    user={this.state.user}
+                                    loggedInStatus={this.state.loggedInStatus}
+                                    roleGrabber={this.roleGrabber}
+                                    role={this.state.role}
+                                    handleLogout={this.handleLogout}
+                                />
+                            )}
+                        />
+                        <PrivateRoute
+                            authed={!!this.state.user}
+                            path="/logout"
+                            component={Logout}
                         />
                         <Route component={Error404} />
                     </Switch>

@@ -104,21 +104,21 @@ class Admin extends Component {
                                 >
                                     <NavLink
                                         className="dropdown-item text-dark"
-                                        to="#"
+                                        to="/wallet"
+                                    >
+                                        Wallet
+                                    </NavLink>
+                                    <NavLink
+                                        className="dropdown-item text-dark"
+                                        to="/profile"
                                     >
                                         Profile
                                     </NavLink>
                                     <NavLink
                                         className="dropdown-item text-dark"
-                                        to="#"
+                                        to="/about"
                                     >
-                                        Another action
-                                    </NavLink>
-                                    <NavLink
-                                        className="dropdown-item text-dark"
-                                        to="#"
-                                    >
-                                        Something else here
+                                        About
                                     </NavLink>
                                 </div>
                             </li>
@@ -128,9 +128,6 @@ class Admin extends Component {
                                     to="/login"
                                     onClick={() => {
                                         this.props.handleLogout()
-                                        //Funciona pero me detecta el null en roleID al cerrar session
-                                        //<Redirect to='/login'/>
-                                        //window.location.href = "/login";
                                     }}
                                 >
                                     Logout
