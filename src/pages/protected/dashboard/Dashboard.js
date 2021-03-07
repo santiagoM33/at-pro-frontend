@@ -17,11 +17,13 @@ class Dashboard extends Component {
             loading: false,
             isMenuOpened: false,
             isOpen: false,
+            role: 2,
             authenticated: false,
-            isMounted: false
+            isMounted: true
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleHamburguer = this.handleHamburguer.bind(this);
+        this.handleRole = this.handleRole.bind(this);
     }
 
     handleClick() {
@@ -32,27 +34,33 @@ class Dashboard extends Component {
         this.setState({isOpen: !this.state.isOpen})
     }
 
-    
+    handleRole(){
+        if (this.state.isMounted) {
+            let data = JSON.parse(localStorage.getItem('user'))
+            data.roleId === 3 
+                ? this.setState({role: data.roleId}) 
+                : this.setState({role: 2 })
+
+            if(this.state.role === data.roleId) {
+                    this.setState({authenticated: true})
+            }
+               
+        }
+            
+    }
     /*------------------- */
     //
      /*------------------- */
 
     componentDidMount(){
-        /*this.setState({isMounted: true})
-        if (this.state.isMounted) {
-            let data = JSON.parse(localStorage.getItem('user'))
-                if(data.roleId === 2) {
-                    this.setState({authenticated: true})
-                }
-            }*/
+        this.handleRole()
     }
 
     componentWillUnmount(){
-        //this.setState({isMounted: false})
+        this.setState({isMounted: false})
     }
 
     render() {
-        //const history = createBrowserHistory();
         return this.state.loading === true
         ? <h2>Cargando...</h2>
         : (

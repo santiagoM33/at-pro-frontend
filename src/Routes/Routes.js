@@ -37,7 +37,7 @@ class Routes extends Component {
             loggedInStatus: 'NOT_LOGGED_IN',
             user,
             token,
-            authed: ''
+            authed: false
         };
         this.handleLogin = this.handleLogin.bind(this);
         this.checkLoginStatus = this.checkLoginStatus.bind(this);
@@ -66,17 +66,15 @@ class Routes extends Component {
         
         authAxios.get(`/restricted`, {signal: this.controller.signal})
             .then(res => {
-                console.log('Check loggin: ', res)
                 if (res.data && this.state.loggedInStatus === 'NOT_LOGGED_IN') {
                     this.setState({
                         loggedInStatus: 'LOGGED_IN',
                         authed: res.data
                     })
-                    console.log(this.state.user)
                 } else if (!res.data && this.state.loggedInStatus === 'LOGGED_IN') {
                     this.setState({
                         loggedInStatus: 'NOT_LOGGED_IN',
-                        authed: res.data
+                        authed: false
                     })
                 }
             })
@@ -88,7 +86,7 @@ class Routes extends Component {
     }
 
     componentWillUnmount(){
-        //this.controller.abort();
+        this.controller.abort();
     }
 
     handleLogout(){
@@ -204,8 +202,6 @@ class Routes extends Component {
                                     user={this.state.user}
                                     loggedInStatus={this.state.loggedInStatus}
                                     handleLogout={this.handleLogout}
-                                    //onCloseSession={this.onCloseSession}
-                                    //resetUser={this.resetUser}
                                 />
                             )}
                         />
