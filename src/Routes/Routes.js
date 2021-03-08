@@ -38,11 +38,13 @@ class Routes extends Component {
             user,
             token,
             role: 2,
-            authed: false
+            authed: false,
+            file: null
         };
         this.handleLogin = this.handleLogin.bind(this);
         this.checkLoginStatus = this.checkLoginStatus.bind(this);
         this.roleGrabber = this.roleGrabber.bind(this);
+        this.fileGrabber = this.fileGrabber.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
     }
 
@@ -103,7 +105,14 @@ class Routes extends Component {
         this.setState({role: id})
     }
 
+    fileGrabber(name){
+        const arrayName = name.split(' ')
+        const pathName = arrayName.join('-')
+        this.setState({file: pathName})
+    }
+
     render() {
+        console.log(this.state.file)
         return (
             <BrowserRouter>
                 <Fragment></Fragment>
@@ -119,7 +128,12 @@ class Routes extends Component {
                             render={(routeProps) => (
                                 <Fragment>
                                     <Header>AT PRO</Header>
-                                    <Register {...routeProps} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus}/>
+                                    <Register 
+                                        {...routeProps} 
+                                        handleLogin={this.handleLogin} 
+                                        loggedInStatus={this.state.loggedInStatus}
+                                        fileGrabber={this.fileGrabber}
+                                    />
                                 </Fragment>
                             )}
                         />

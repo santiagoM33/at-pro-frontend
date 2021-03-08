@@ -33,6 +33,7 @@ class Register extends Component {
                     >
                         <FormRegister 
                             handleSuccessAuth={this.handleSuccessAuth}
+                            fileGrabber={this.props.fileGrabber}
                         />
                     </Row>
                 </div>

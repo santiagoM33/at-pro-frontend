@@ -77,7 +77,8 @@ class FormRegister extends Component {
     isMatch = (param) => {
         if (param.firstName.length > 0 && param.lastName.length > 0 && param.email.length > 0 && param.password.length > 0) {
             const {firstName, lastName, email, password, roleId} = param;
-            //console.log(roleId)
+            let fileName = `${firstName} ${lastName}`;
+            this.props.fileGrabber(fileName)
             registerDataAccount({
                 firstName,
                 lastName,
@@ -85,7 +86,8 @@ class FormRegister extends Component {
                 password,
                 roleId,
             }).then(res => {
-                console.log(res)
+                localStorage.setItem('token', JSON.stringify(res.token));
+                localStorage.setItem('user', JSON.stringify(res.user));
                 this.props.handleSuccessAuth(res)
             }).catch(err => {
                 console.log(err)
@@ -160,7 +162,7 @@ class FormRegister extends Component {
                     <div className="col-12 form-group">
                         <input 
                             type='password'
-                            placeholder='Ingrese su password'
+                            placeholder='Escriba un password'
                             className='form-control col'
 
                             name='password'

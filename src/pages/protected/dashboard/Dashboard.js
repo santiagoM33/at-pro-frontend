@@ -14,7 +14,7 @@ class Dashboard extends Component {
     constructor(...props){
         super(...props)
         this.state= {
-            loading: false,
+            loading: true,
             isMenuOpened: false,
             isOpen: false,
             role: 2,
@@ -36,17 +36,20 @@ class Dashboard extends Component {
 
     handleRole(){
         if (this.state.isMounted) {
-            let data = JSON.parse(localStorage.getItem('user'))
-            data.roleId === 3 
-                //? this.props.roleGrabber(data.roleId)
-                //: this.props.roleGrabber(Number('2'))
-                ? this.setState({role: data.roleId}) 
-                : this.setState({role: 2 })
+            setTimeout(() => {
+                let data = JSON.parse(localStorage.getItem('user'))
+            
+                data.roleId === 3 
+                    //? this.props.roleGrabber(data.roleId)
+                    //: this.props.roleGrabber(Number('2'))
+                    ? this.setState({role: data.roleId}) 
+                    : this.setState({role: 2 })
 
-            if(this.state.role === data.roleId) {
-                    this.setState({authenticated: true})
-            }
-               
+                if(this.state.role === data.roleId || this.state.role === 3) {
+                        this.setState({authenticated: true})
+                }
+                this.setState({loading: false})
+            }, 1000);
         }
             
     }
