@@ -36,20 +36,20 @@ class Dashboard extends Component {
 
     handleRole(){
         if (this.state.isMounted) {
-            setTimeout(() => {
+            //setTimeout(() => {
                 let data = JSON.parse(localStorage.getItem('user'))
-            
+                console.log(data.roleId)
                 data.roleId === 3 
                     //? this.props.roleGrabber(data.roleId)
                     //: this.props.roleGrabber(Number('2'))
                     ? this.setState({role: data.roleId}) 
                     : this.setState({role: 2 })
 
-                if(this.state.role === data.roleId || this.state.role === 3) {
+                if(this.state.role === data.roleId) {
                         this.setState({authenticated: true})
                 }
                 this.setState({loading: false})
-            }, 1000);
+            //}, 500);
         }
             
     }

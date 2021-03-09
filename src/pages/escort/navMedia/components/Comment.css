@@ -1,0 +1,10 @@
+.xs-circle{
+    width: 10%;
+    height: 10%;
+    border-radius: 50%;
+}
+
+.md-circle{
+    width: 4rem;
+    height: 4rem;
+}

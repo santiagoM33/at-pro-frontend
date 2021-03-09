@@ -5,6 +5,10 @@ import {AiOutlineComment} from 'react-icons/ai'
 
 import Photo from './components/photo'
 
+import Comments from './components/Comments'
+import FormComments from './components/FormComments'
+
+
 const NavMedia = (props) => {
     return ( 
         <div>
@@ -40,8 +44,13 @@ const NavMedia = (props) => {
                     <p>Some content in menu 2.</p>
                 </div>
                 <div id="comments" className="tab-pane fade mt-3" role="tabpanel" aria-labelledby="comments-tab">
-                    <h4>comments</h4>
-                    <p>Some content in menu 2.</p>
+                    <h4 className='h5'>Escribe un comentario</h4>
+                    {
+                        <>
+                            <FormComments />
+                            <Comments />
+                        </>
+                    }
                 </div>
             </div>
         </div>

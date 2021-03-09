@@ -1,16 +1,14 @@
 import React from 'react'
-import './photo'
+import './photo.css'
 
 const Photo = (props) => {
     //console.log(props.dataImg)
     return (  
-        <div className='row'>
+        <div className='gallery'>
             {props.dataImg.map(img=> {
                 return (
-                        <div className='col-4 photo' key={img.id} >
-                            <img  src={img.url} className="img-fluid mb-2"/>
-                        </div>
-                        )
+                    <img  key={img.id} src={img.url}/>
+                )
             }) 
             }
         </div>
