@@ -112,7 +112,7 @@ class Routes extends Component {
     }
 
     render() {
-        console.log(this.state.file)
+        //console.log(this.state.file)
         return (
             <BrowserRouter>
                 <Fragment></Fragment>
