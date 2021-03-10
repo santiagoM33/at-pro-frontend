@@ -25,7 +25,6 @@ import { Toaster } from "react-hot-toast";
 //import { Redirect as RouterRedirect } from "react-router-dom";
 
 
-
 class Routes extends Component {
     constructor(...props) {
         super(...props);
@@ -104,7 +103,7 @@ class Routes extends Component {
     roleGrabber(id){
         this.setState({role: id})
     }
-
+  
     fileGrabber(name){
         const arrayName = name.split(' ')
         const pathName = arrayName.join('-')
@@ -167,7 +166,10 @@ class Routes extends Component {
                             path="/escort"                            
                         >  
                             <Header>AT PRO</Header>
-                            <Escort />
+                            <Escort 
+                                user={this.state.user}
+                                authed={this.state.authed}
+                            />
                         </Route>
                         <PrivateRoute
                             authed={!!this.state.user}

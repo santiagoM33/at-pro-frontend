@@ -63,6 +63,8 @@ class Escort extends Component {
                         <NavMedia 
                             dataImg={this.state.dataImg}
                             loading={this.state.loading}
+                            user={this.props.user}
+                            authed={this.props.authed}
                         />
                     </Row>
                 </div>
