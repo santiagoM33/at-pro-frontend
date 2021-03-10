@@ -36,9 +36,9 @@ class Dashboard extends Component {
 
     handleRole(){
         if (this.state.isMounted) {
-            //setTimeout(() => {
+            //Probablemente sea bueno un condicional que verifique si hay info, traela sino no hagas nada
                 let data = JSON.parse(localStorage.getItem('user'))
-                console.log(data.roleId)
+                //console.log(data.roleId)
                 data.roleId === 3 
                     //? this.props.roleGrabber(data.roleId)
                     //: this.props.roleGrabber(Number('2'))
@@ -49,7 +49,6 @@ class Dashboard extends Component {
                         this.setState({authenticated: true})
                 }
                 this.setState({loading: false})
-            //}, 500);
         }
             
     }

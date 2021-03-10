@@ -14,7 +14,7 @@ function Redirect({ to }) {
     return null;
   }
 }
-
+ 
 export default class ResetPassword extends Component {
 
   constructor() {

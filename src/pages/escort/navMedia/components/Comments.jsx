@@ -7,22 +7,26 @@ class Comments extends Component {
         super(...props);
         this.state = {  }
     }
+
+    
+
     render() { 
         return ( 
             <div className="my-3 p-3 bg-white rounded shadow-sm">
                 <h6 className="border-bottom border-gray pb-2 mb-0">
                             Comentarios
                 </h6>
-                <Comment 
+                {}
+                <Comment  
                     user='santiagoM'
-                    message='Esto es una prueba de componente comment'
+                    message={this.props.comment}
                     colorImg='#007bff'
                 />
-                <Comment 
+                {/*<Comment 
                     user='Mc Nano'
                     message='Que onda vieja, haciendo componentes con React?'
                     colorImg='#32a84e'
-                />
+                />*/}
             </div>
          );
     }
