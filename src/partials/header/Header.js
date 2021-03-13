@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import Hamburguer from './components/Hamburguer';
 import {Link} from 'react-router-dom';
 import { GoSearch } from "react-icons/go";
@@ -42,13 +42,15 @@ class Header extends Component {
                 </Hamburguer>
                 <div className="collapse navbar-collapse row" id='navbarNav'>
                     <div className='navbar-nav offset-lg-8'>
-                        {/*<Link className='text-dark col-lg-4' to='/'>Home</Link>*/}
-                        <Link className='text-dark col-4 col-lg-4' to='/login'>Login</Link>  
-                        <Link className='text-dark col-4 col-lg-4' to='/register'>Register</Link>
-                        <div className='col-4 col-lg-4'>
-                            <Link className='text-light btn btn-danger pl-1' to='/announce'>Announce</Link>
-                        </div>                      
-                                                
+                        {//this.props.authed &&
+                        <>
+                            <Link className='text-dark col-4 col-lg-4' to='/login'>Login</Link>  
+                            <Link className='text-dark col-4 col-lg-4' to='/register'>Register</Link>
+                            <div className='col-4 col-lg-4'>
+                                <Link className='text-light btn btn-danger pl-1' to='/announce'>Announce</Link>
+                            </div> 
+                        </>                     
+                        }                
                     </div>
                 </div>
             </div>

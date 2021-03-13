@@ -1,4 +1,4 @@
-const BASE_URI = 'http://159.65.218.115';
+ const BASE_URI = 'http://159.65.218.115';
 
 export const loginAccountAuth = async data => {
         const requestData = {

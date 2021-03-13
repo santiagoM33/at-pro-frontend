@@ -7,7 +7,7 @@ const Photo = (props) => {
         <div className='gallery'>
             {props.dataImg.map(img=> {
                 return (
-                    <img  key={img.id} src={img.url}/>
+                    <img key={img.id} src={img.url} />
                 )
             }) 
             }

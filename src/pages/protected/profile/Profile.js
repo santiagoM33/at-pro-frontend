@@ -5,7 +5,7 @@ import Row from "../../../partials/row/Row";
 import { NavLink, Redirect } from "react-router-dom";
 
 import { OffCanvas, OffCanvasMenu, OffCanvasBody } from "react-offcanvas";
-import { logout } from "../../../data/config";
+import { medidas } from "./data/medidas.json";
 
 import HeaderPanel from "../dashboard/components/HeaderPanel";
 import HeaderMenuOffcanvas from "../dashboard/components/HeaderMenuOffcanvas";
@@ -18,6 +18,14 @@ class Profile extends Component {
             isMenuOpened: false,
             isOpen: false,
             authenticated: false,
+
+
+            documento: null,
+            age: null,
+            pecho: null,
+            cintura: null,
+            cadera: null,
+
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleHamburguer = this.handleHamburguer.bind(this);
@@ -55,21 +63,6 @@ class Profile extends Component {
                             </Title>
                             <Row className="col">
                                 <form>
-                                    <Row className="col-12 mb-3">
-                                        <div className="input-group">
-                                            <input
-                                                type="text"
-                                                placeholder="Ingresa tu Alias"
-                                                className="form-control col-12 ml-3"
-                                                name="alias"
-
-                                                //aria-describedby={"fName-error"}
-                                                //ref={this.fNameRef}
-
-                                                //onChange={this.onHandleChange}
-                                            />
-                                        </div>
-                                    </Row>
                                     {/*<Row className="col-12">
                                         <div className="input-group mb-3">
                                             <select
@@ -90,44 +83,22 @@ class Profile extends Component {
                                         <div className="input-group">
                                             <input
                                                 type="number"
-                                                placeholder="Documento"
+                                                placeholder="Documento*"
                                                 className="form-control col-12 ml-3"
                                                 name="dni"
-
                                                 //aria-describedby={"fName-error"}
-                                                //ref={this.fNameRef}
-
                                                 //onChange={this.onHandleChange}
                                             />
-                                        </div>
-                                    </Row>
-                                    <Row className="col-12">
-                                        <div className="input-group mb-3">
-                                            <select
-                                                className="custom-select col-11 col-sm-12 ml-3"
-                                                name="barrio"
-                                                multiple={false}
-                                            >
-                                                <option defaultValue>
-                                                    --Edad --
-                                                </option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
                                         </div>
                                     </Row>
                                     <Row className="col-12 mb-3">
                                         <div className="input-group">
                                             <input
                                                 type="number"
-                                                placeholder="Ingresa tu numero de contacto"
+                                                placeholder="Ingresa su edad"
                                                 className="form-control col-12 ml-3"
-                                                name="celular"
-
+                                                name="age"
                                                 //aria-describedby={"fName-error"}
-                                                //ref={this.fNameRef}
-
                                                 //onChange={this.onHandleChange}
                                             />
                                         </div>
@@ -136,15 +107,15 @@ class Profile extends Component {
                                         <div className="input-group mb-3">
                                             <select
                                                 className="custom-select col-11 col-sm-12 ml-3"
-                                                name="ciudad"
+                                                name="pecho"
                                                 multiple={false}
                                             >
                                                 <option defaultValue>
                                                     -- Medidas Pecho --
                                                 </option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
+                                                {/*medidas.pecho.map(pecho => {
+                                                    
+                                                })*/}
                                             </select>
                                         </div>
                                     </Row>
@@ -178,6 +149,109 @@ class Profile extends Component {
                                                 <option value="2">Two</option>
                                                 <option value="3">Three</option>
                                             </select>
+                                        </div>
+                                    </Row>
+                                    <Row className="col-12 mb-3">
+                                        <h4 className='h5 col'>Horarios</h4>
+                                        <div class="input-group col mb-3">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    <input type="checkbox" />
+                                                </div>
+                                            </div>
+                                            <label className='col'>Fulltime</label>
+                                        </div>
+                                        <div className="col-12 input-group">
+                                            <label className='h6'>Lunes a Viernes</label>
+                                            <input
+                                                type="number"
+                                                placeholder="----------"
+                                                className="form-control col ml-3"
+                                                name="sHorarioInicio"
+                                                //aria-describedby={"fName-error"}
+                                                //onChange={this.onHandleChange}
+                                            />
+                                            <input
+                                                type="number"
+                                                placeholder="----------"
+                                                className="form-control col ml-3"
+                                                name="sHorarioFin"
+                                                //aria-describedby={"fName-error"}
+                                                //onChange={this.onHandleChange}
+                                            />
+                                        </div>
+                                    </Row>
+                                    <Row className="col-12 mb-3">
+                                        <div className="col-12 input-group">
+                                            <label className='h6'>Sabado</label>
+                                            <input
+                                                type="number"
+                                                placeholder="----------"
+                                                className="form-control col ml-3"
+                                                name="sabadohorarioInicio"
+                                                //aria-describedby={"fName-error"}
+                                                //onChange={this.onHandleChange}
+                                            />
+                                            <input
+                                                type="number"
+                                                placeholder="----------"
+                                                className="form-control col ml-3"
+                                                name="sabadoHorarioFin"
+                                                //aria-describedby={"fName-error"}
+                                                //onChange={this.onHandleChange}
+                                            />
+                                        </div>
+                                    </Row>
+                                    <Row className="col-12 mb-3">
+                                        <div className="col-12 input-group">
+                                            <label className='h6'>Domingos</label>
+                                            <input
+                                                type="number"
+                                                placeholder="----------"
+                                                className="form-control col ml-3"
+                                                name="DomingoHorarioInicio"
+                                                //aria-describedby={"fName-error"}
+                                                //onChange={this.onHandleChange}
+                                            />
+                                            <input
+                                                type="number"
+                                                placeholder="----------"
+                                                className="form-control col ml-3"
+                                                name="DomingoHorarioFin"
+                                                //aria-describedby={"fName-error"}
+                                                //onChange={this.onHandleChange}
+                                            />
+                                        </div>
+                                    </Row>
+                                    <Row className="col-12 mb-3">
+                                        <div class="input-group col mb-3">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    <input type="checkbox" />
+                                                </div>
+                                            </div>
+                                            <label className='col'>Feriados</label>
+                                        </div>
+                                    </Row>
+                                    <Row className="col-12 mb-3">
+                                    <h4 className='h5 col'>Información extra</h4>
+                                        <div class="input-group col mb-3">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    <input type="checkbox" />
+                                                </div>
+                                            </div>
+                                            <label className='col'>Acepta tarjeta?</label>
+                                        </div>
+                                    </Row>
+                                    <Row className="col-12 mb-3">
+                                        <div class="input-group col mb-3">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    <input type="checkbox" />
+                                                </div>
+                                            </div>
+                                            <label className='col'>Whatsapp</label>
                                         </div>
                                     </Row>
                                 </form>

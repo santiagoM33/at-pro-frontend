@@ -47,6 +47,7 @@ class Dashboard extends Component {
 
                 if(this.state.role === data.roleId) {
                         this.setState({authenticated: true})
+                        //this.props.authGrabber(true)
                 }
                 this.setState({loading: false})
         }

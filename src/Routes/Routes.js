@@ -1,4 +1,5 @@
 import React, { Fragment, Component } from "react";
+import { withRouter } from "react-router-dom";
 import Axios from 'axios';
 import Home from "pages/home/Home";
 import Login from "pages/login/Login";
@@ -12,13 +13,12 @@ import Dashboard from "pages/protected/dashboard/Dashboard";
 import Publish from "pages/protected/publish/Publish";
 import Profile from "pages/protected/profile/Profile";
 import Gallery from "pages/protected/gallery/Gallery";
-import Logout from "pages/protected/logout/Logout";
 import Error404 from "pages/404/Error404";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "partials/header/Header";
 
 import { PrivateRoute, PublicRoute } from "helpers/routeRedirectAuth";
-import { makeCancelable } from "helpers/cancelablePromise";
+//import { makeCancelable } from "helpers/cancelablePromise";
 /* import ResetPasswordRoutes from '../pages/reset-password'; */
 
 import { Toaster } from "react-hot-toast";
@@ -38,11 +38,13 @@ class Routes extends Component {
             token,
             role: 2,
             authed: false,
-            file: null
+            file: null,
+            authenticated: false
         };
         this.handleLogin = this.handleLogin.bind(this);
         this.checkLoginStatus = this.checkLoginStatus.bind(this);
-        this.roleGrabber = this.roleGrabber.bind(this);
+        //this.roleGrabber = this.roleGrabber.bind(this);
+        //this.authGrabber = this.authGrabber.bind(this);
         this.fileGrabber = this.fileGrabber.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
     }
@@ -100,9 +102,9 @@ class Routes extends Component {
         localStorage.clear('user')
     }
 
-    roleGrabber(id){
+    /*roleGrabber(id){
         this.setState({role: id})
-    }
+    }*/
   
     fileGrabber(name){
         const arrayName = name.split(' ')
@@ -110,8 +112,12 @@ class Routes extends Component {
         this.setState({file: pathName})
     }
 
+    /*authGrabber(data){
+        this.setState({authenticated: data})
+    }*/
+
     render() {
-        //console.log(this.state.file)
+        //console.log(this.state.authenticated)
         return (
             <BrowserRouter>
                 <Fragment></Fragment>
@@ -122,30 +128,25 @@ class Routes extends Component {
                             <Header isHome={this.state.isHome}>AT PRO</Header>
                             <Home />
                         </Route>
-                        <Route 
-                            path="/register"
-                            render={(routeProps) => (
-                                <Fragment>
-                                    <Header>AT PRO</Header>
-                                    <Register 
-                                        {...routeProps} 
-                                        handleLogin={this.handleLogin} 
-                                        loggedInStatus={this.state.loggedInStatus}
-                                        fileGrabber={this.fileGrabber}
-                                    />
-                                </Fragment>
-                            )}
-                        />
-
+                        <Route
+                            path="/escort/:alias"
+                            id={this.props.match} 
+                            authed={this.state.authed}                         
+                        >  
+                            <Header>AT PRO</Header>
+                            <Escort 
+                                user={this.state.user}
+                            />
+                        </Route>
                         <Route
                             exact
                             path="/login"
-                            //authed={!!this.state.user}
-                            render={(routeProps) => (
+                            authed={!!this.state.user}
+                            render={(publicProps) => (
                                 <>
-                                    <Header>AT PRO</Header>
+                                    <Header authed={this.state.authed}>AT PRO</Header>
                                     <Login
-                                        {...routeProps}
+                                        {...publicProps}
                                         user={this.state.user}
                                         handleLogin={this.handleLogin}
                                         loggedInStatus={this.state.loggedInStatus}
@@ -153,27 +154,52 @@ class Routes extends Component {
                                 </>
                             )}
                         />
-
                         <Route
+                            path="/register"
                             authed={!!this.state.user}
-                            path="/announce"                            
-                        >  
-                            <Header>AT PRO</Header>
-                            <Announce />
-                        </Route>
+                            render={(publicProps) => (
+                                <Fragment>
+                                    <Header authed={this.state.authed}>AT PRO</Header>
+                                    <Register 
+                                        {...publicProps} 
+                                        handleLogin={this.handleLogin} 
+                                        loggedInStatus={this.state.loggedInStatus}
+                                        fileGrabber={this.fileGrabber}
+                                    />
+                                </Fragment> 
+                            )}
+                        />
                         <Route
+                            exact  
+                            path="/announce" 
                             authed={!!this.state.user}
-                            path="/escort"                            
-                        >  
-                            <Header>AT PRO</Header>
-                            <Escort 
-                                user={this.state.user}
-                                authed={this.state.authed}
-                            />
-                        </Route>
+                            render={(publicProps) => (
+                                <>
+                                    <Header authed={this.state.authed}>AT PRO</Header>
+                                    <Announce
+                                        {...publicProps}
+                                        user={this.state.user}
+                                        handleLogin={this.handleLogin}
+                                        loggedInStatus={this.state.loggedInStatus}
+                                    />
+                                </>
+                            )}                         
+                        />  
+                        <PublicRoute
+                            exact
+                            path="/reset-password-request"
+                            authed={!!this.state.user}
+                            component={ResetPasswordRequest}
+                        />
+                        <PublicRoute
+                            exact
+                            path="/reset-password"
+                            authed={!!this.state.user}
+                            component={ResetPassword}
+                        />
                         <PrivateRoute
-                            authed={!!this.state.user}
                             path="/admin"
+                            authed={!!this.state.user}
                             component={privateProps=> (
                                 <Admin
                                     {...privateProps}
@@ -183,23 +209,9 @@ class Routes extends Component {
                                 />
                             )}                    
                         />  
-                            
-                        <PublicRoute
-                            exact
-                            authed={!!this.state.user}
-                            path="/reset-password-request"
-                            component={ResetPasswordRequest}
-                        />
-                        <PublicRoute
-                            exact
-                            authed={!!this.state.user}
-                            path="/reset-password"
-                            component={ResetPassword}
-                        />
-
                         <PrivateRoute
-                            authed={!!this.state.user}
                             path="/publish"
+                            authed={!!this.state.user}
                             component={privateProps=> (
                                 <Publish
                                     {...privateProps}
@@ -210,8 +222,8 @@ class Routes extends Component {
                             )}
                         />
                         <PrivateRoute
-                            authed={!!this.state.user}
                             path="/profile"
+                            authed={!!this.state.user}
                             component={privateProps=> (
                                 <Profile
                                     {...privateProps}
@@ -222,8 +234,8 @@ class Routes extends Component {
                             )}
                         />
                         <PrivateRoute
-                            authed={!!this.state.user}
                             path="/gallery"
+                            authed={!!this.state.user}
                             component={privateProps=> (
                                 <Gallery
                                     {...privateProps}
@@ -242,15 +254,11 @@ class Routes extends Component {
                                     user={this.state.user}
                                     loggedInStatus={this.state.loggedInStatus}
                                     roleGrabber={this.roleGrabber}
+                                    authGrabber={this.authGrabber}
                                     role={this.state.role}
                                     handleLogout={this.handleLogout}
                                 />
                             )}
-                        />
-                        <PrivateRoute
-                            authed={!!this.state.user}
-                            path="/logout"
-                            component={Logout}
                         />
                         <Route component={Error404} />
                     </Switch>

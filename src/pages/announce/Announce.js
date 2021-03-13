@@ -4,7 +4,7 @@ import "./announce.css";
 import Title from "../../partials/title/Title";
 import Row from "../../partials/row/Row";
 import SpanError from 'partials/help/SpanError';
-import {Numbers} from 'helpers/filters'
+//import {Numbers} from 'helpers/filters'
 import {saveUsers} from 'services/fakeApi'
 
 import PhoneInput from 'react-phone-input-2'
@@ -19,7 +19,7 @@ class Announce extends Component {
             password: '',
             user: '',
             phone:'',
-            country: '',
+            country: null,
             category: 2,
             emailError: false,
             passError: false,
@@ -83,14 +83,20 @@ class Announce extends Component {
     isMatch = (param) => {
         if (param.email.length > 0 && param.password.length > 0 && param.user.length > 0 && param.phone.length > 0 && param.country.length > 0) {
             const {email, password, user, phone, country, category} = param;
-            saveUsers(
+            saveUsers({
                 email,
                 password,
                 user,
                 phone,
                 country,
                 category
-            )
+            }).then(res => {
+                //console.log(res)
+                localStorage.setItem('escort', JSON.stringify(res));
+            }).catch(err => {
+                console.log(err)
+            })
+
             /*registerDataAccount(
                 email,
                 password,
@@ -111,18 +117,32 @@ class Announce extends Component {
     }
 
     render() {
-        //console.log(this.state.category)
         return (
             <div className="container">
                 <div className='offset-md-2 col-md-8 card my-3 mt-sm-5 p-2 shadow-sm rounded-sm'>
                     <Title className="text-center my-3 h4">Crea tu anuncio</Title>
                     <Row className="col-12">
                         <form>
+                            <Row className="col-12 mb-3">
+                                <div className="col-12 input-group">
+                                    <input
+                                        type="user"
+                                        placeholder="Ingrese un nombre de usuario"
+                                        className="form-control col"
+                                        name="user"
+
+                                        onChange={this.onHandleChange}
+                                    />
+                                    { this.state.userError &&
+                                        <SpanError id='user-error' styles='form-text text-danger'>El nombre y apellido tiene que tener mas de 8 letras</SpanError>
+                                    }
+                                </div>
+                            </Row>
                             <Row className="col-12 mb-3 input-group">
                                 <div className="col-12 form-group">
                                     <input
                                         type="email"
-                                        placeholder="Ingrese su email"
+                                        placeholder="Ingrese un email"
                                         className="form-control col"
                                         name="email"
 
@@ -145,21 +165,6 @@ class Announce extends Component {
                                     />
                                     { this.state.passError &&
                                         <SpanError id='password-error' styles='form-text text-danger'>El password tiene que tener mas de 6 letras</SpanError>
-                                    }
-                                </div>
-                            </Row>
-                            <Row className="col-12 mb-3">
-                                <div className="col-12 input-group">
-                                    <input
-                                        type="user"
-                                        placeholder="Ingrese nombre y apellido para el anuncio"
-                                        className="form-control col"
-                                        name="user"
-
-                                        onChange={this.onHandleChange}
-                                    />
-                                    { this.state.userError &&
-                                        <SpanError id='user-error' styles='form-text text-danger'>El nombre y apellido tiene que tener mas de 8 letras</SpanError>
                                     }
                                 </div>
                             </Row>
@@ -187,7 +192,7 @@ class Announce extends Component {
                                         onChange={this.onSelectCountry}
                                     >
                                         <option defaultValue>
-                                            -- Selecciona tu País --
+                                            -- Nacionalidad --
                                         </option>
                                         <option value="1">Argentina</option>
                                         <option value="2">Bolivia</option>

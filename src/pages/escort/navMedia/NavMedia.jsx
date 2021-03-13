@@ -3,6 +3,7 @@ import {IoMdPhotos} from 'react-icons/io'
 import {FaVideo, FaRegMap} from 'react-icons/fa'
 import {AiOutlineComment} from 'react-icons/ai'
 
+import {NavLink} from 'react-router-dom'
 import Photo from './components/photo'
 
 import Comments from './components/Comments'

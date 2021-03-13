@@ -8,6 +8,33 @@
       "country": 1,
       "category": 2,
       "id": 1
+    },
+    {
+      "email": "mLucia@gmail.com",
+      "password": "123123",
+      "user": "Mariana Lucia",
+      "phone": "542236757580",
+      "country": "1",
+      "category": 2,
+      "id": 2
+    },
+    {
+      "email": "vCanosa@gmail.com",
+      "password": "123123",
+      "user": "Viviana Canosa",
+      "phone": "542236787890",
+      "country": "1",
+      "category": 2,
+      "id": 3
+    },
+    {
+      "email": "lAvila@gmail.com",
+      "password": "123123",
+      "user": "Lara Avila",
+      "phone": "542235757595",
+      "country": "1",
+      "category": 2,
+      "id": 4
     }
   ],
   "images": [

@@ -32,7 +32,8 @@ class Escort extends Component {
             <div className='container'>
                 <div className='offset-md-2 col-md-8 mt-3 mt-sm-5 p-2'>                    
                     <Row className='col-12'>
-                       <Avatar 
+                       <Avatar
+                        user={this.props.user}
                         dataImg={this.state.dataImg}
                         loading={this.state.loading}
                        />
@@ -55,6 +56,7 @@ class Escort extends Component {
                 </div>
                 <div className='offset-md-2 col-md-8 my-1 mt-sm-5 p-2 shadow-sm rounded-sm'>                    
                     <Row className='col-12'>
+                        <h2>{console.log(this.props.match)}</h2>
                         <Description />
                     </Row>
                 </div>
