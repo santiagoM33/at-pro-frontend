@@ -1,39 +1,23 @@
 import React, { Component } from 'react'
-
 import './Comment.css'
 
 import Row from 'partials/row/Row';
 import SpanError from 'partials/help/SpanError';
-import Link from 'partials/link/Link';
-import Button from 'components/button/Button';
-import Alert from 'components/alert/Alert';
  
 class FormComments extends Component {
     constructor(...props){
         super(...props)
-        this.state= {
-            
-        }
-        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     commentRef = React.createRef();
 
-    handleChange(){
-
-    }
-
     handleSubmit(e){
         e.preventDefault()
         this.props.onHandleComment(this.commentRef.current.value)
-        //this.props.saveComments(this.commentRef.current.value)
     }
 
-
-
     render() {
-        
         return ( 
             <>
                 <form onSubmit={this.handleSubmit}>

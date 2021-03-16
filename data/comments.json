@@ -8,14 +8,24 @@
   ],
   "comments": [
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "postId": "b1060553d3d",
+      "comment": "Prueba de comentario",
+      "id": 1
     },
     {
-      "postId": "0576a03dbfc",
-      "comment": "Que onda con esto",
+      "postId": "498216e0bab",
+      "comment": "fuaaa",
       "id": 2
+    },
+    {
+      "postId": "b99f1508cd9",
+      "comment": "Comentario guiado",
+      "id": 3
+    },
+    {
+      "postId": "99f1508cd9f",
+      "comment": "Comentario guiado dos",
+      "id": 4
     }
   ],
   "profile": {

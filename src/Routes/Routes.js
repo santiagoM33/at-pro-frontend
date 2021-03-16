@@ -16,11 +16,9 @@ import Gallery from "pages/protected/gallery/Gallery";
 import Error404 from "pages/404/Error404";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "partials/header/Header";
-
 import { PrivateRoute, PublicRoute } from "helpers/routeRedirectAuth";
 //import { makeCancelable } from "helpers/cancelablePromise";
 /* import ResetPasswordRoutes from '../pages/reset-password'; */
-
 import { Toaster } from "react-hot-toast";
 //import { Redirect as RouterRedirect } from "react-router-dom";
 
@@ -43,8 +41,6 @@ class Routes extends Component {
         };
         this.handleLogin = this.handleLogin.bind(this);
         this.checkLoginStatus = this.checkLoginStatus.bind(this);
-        //this.roleGrabber = this.roleGrabber.bind(this);
-        //this.authGrabber = this.authGrabber.bind(this);
         this.fileGrabber = this.fileGrabber.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
     }
@@ -56,6 +52,8 @@ class Routes extends Component {
             loggedInStatus: 'LOGGED_IN',
             user: data
         })
+        const name = `${data.user.firstName} ${data.user.lastName}`;
+        this.fileGrabber(name)
     }
 
     checkLoginStatus(){
@@ -86,13 +84,8 @@ class Routes extends Component {
             .catch(err => console.log('Check login error', err))
     }
 
-    componentDidMount(){        
-        this.checkLoginStatus()
-    }
-
-    componentWillUnmount(){
-        this.controller.abort();
-    }
+    componentDidMount(){this.checkLoginStatus()}
+    componentWillUnmount(){this.controller.abort()}
 
     handleLogout(){
         this.setState({
@@ -101,23 +94,12 @@ class Routes extends Component {
         })
         localStorage.clear('user')
     }
-
-    /*roleGrabber(id){
-        this.setState({role: id})
-    }*/
-  
     fileGrabber(name){
         const arrayName = name.split(' ')
         const pathName = arrayName.join('-')
         this.setState({file: pathName})
     }
-
-    /*authGrabber(data){
-        this.setState({authenticated: data})
-    }*/
-
     render() {
-        //console.log(this.state.authenticated)
         return (
             <BrowserRouter>
                 <Fragment></Fragment>
@@ -129,7 +111,7 @@ class Routes extends Component {
                             <Home />
                         </Route>
                         <Route
-                            path="/escort/:alias"
+                            path={`/escort/:${this.state.file}`}
                             id={this.props.match} 
                             authed={this.state.authed}                         
                         >  
@@ -150,6 +132,7 @@ class Routes extends Component {
                                         user={this.state.user}
                                         handleLogin={this.handleLogin}
                                         loggedInStatus={this.state.loggedInStatus}
+                                        fileGrabber={this.fileGrabber}
                                     />
                                 </>
                             )}
@@ -181,6 +164,7 @@ class Routes extends Component {
                                         user={this.state.user}
                                         handleLogin={this.handleLogin}
                                         loggedInStatus={this.state.loggedInStatus}
+                                        fileGrabber={this.fileGrabber}
                                     />
                                 </>
                             )}                         

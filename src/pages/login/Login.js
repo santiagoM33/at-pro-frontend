@@ -6,9 +6,7 @@ import Title from '../../partials/title/Title';
 class Login extends Component {
     constructor(...props){
         super(...props);
-        
         this.handleSuccessAuth = this.handleSuccessAuth.bind(this)
-        
     }
 
     handleSuccessAuth(data){

@@ -5,10 +5,35 @@ import Comment from './Comment'
 class Comments extends Component {
     constructor(...props) {
         super(...props);
-        this.state = {  }
+        this.state = { 
+            comments: []
+        }
+        this.pullComments = this.pullComments.bind(this)
     }
 
-    
+    pullComments(){
+        const BASE_URI = 'http://localhost:8010';
+        
+        fetch(`${BASE_URI}/comments`).then(res=> {return res.json()})
+            .then(resJson => 
+                this.setState({comments: resJson})
+            )
+            .catch(err=>console.log('No es posible traer los datos de la db comments', err))
+    }
+
+    componentDidMount(){
+        this.pullComments()
+    }
+
+    componentDidUpdate(prevProps,prevState){
+        console.log('State: ',this.state.comments)
+        console.log('Prev: ',prevState)
+        //if(this.state.comments[0].id !== prevState.comments.id){
+            //this.pullComments()
+        //}
+        /*console.log(this.state.comments[0].id)
+        console.log(prevState.comments.id)*/
+    }
 
     render() { 
         return ( 
@@ -16,17 +41,14 @@ class Comments extends Component {
                 <h6 className="border-bottom border-gray pb-2 mb-0">
                             Comentarios
                 </h6>
-                {}
-                <Comment  
-                    user='santiagoM'
-                    message={this.props.comment}
-                    colorImg='#007bff'
-                />
-                {/*<Comment 
-                    user='Mc Nano'
-                    message='Que onda vieja, haciendo componentes con React?'
-                    colorImg='#32a84e'
-                />*/}
+                {this.state.comments.map(data => {
+                    return <Comment 
+                        key={data.id} 
+                        user='santiagoM'
+                        message={data.comment}
+                        colorImg='#007bff'
+                    />
+                })}
             </div>
          );
     }

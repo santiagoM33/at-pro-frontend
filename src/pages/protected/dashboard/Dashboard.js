@@ -1,11 +1,9 @@
 import React, { Fragment, Component } from "react";
-import { NavLink, Redirect } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 //import { createBrowserHistory } from "history";
 import { OffCanvas, OffCanvasMenu, OffCanvasBody } from "react-offcanvas";
-
 import Comments from './components/Comments'
 import Suggestions from './components/Suggestions'
-
 import HeaderPanel from './components/HeaderPanel'
 import HeaderMenuOffcanvas from './components/HeaderMenuOffcanvas'
 
@@ -26,44 +24,27 @@ class Dashboard extends Component {
         this.handleRole = this.handleRole.bind(this);
     }
 
-    handleClick() {
-        // toggles the menu opened state
-        this.setState({ isMenuOpened: !this.state.isMenuOpened });
-      }
-    handleHamburguer() {
-        this.setState({isOpen: !this.state.isOpen})
-    }
+    handleClick(){this.setState({ isMenuOpened: !this.state.isMenuOpened })}
+    handleHamburguer(){this.setState({isOpen: !this.state.isOpen})}
 
     handleRole(){
         if (this.state.isMounted) {
             //Probablemente sea bueno un condicional que verifique si hay info, traela sino no hagas nada
                 let data = JSON.parse(localStorage.getItem('user'))
-                //console.log(data.roleId)
                 data.roleId === 3 
-                    //? this.props.roleGrabber(data.roleId)
-                    //: this.props.roleGrabber(Number('2'))
                     ? this.setState({role: data.roleId}) 
                     : this.setState({role: 2 })
 
                 if(this.state.role === data.roleId) {
                         this.setState({authenticated: true})
-                        //this.props.authGrabber(true)
                 }
                 this.setState({loading: false})
         }
             
     }
-    /*------------------- */
-    //
-     /*------------------- */
 
-    componentDidMount(){
-        this.handleRole()
-    }
-
-    componentWillUnmount(){
-        this.setState({isMounted: false})
-    }
+    componentDidMount(){this.handleRole()}
+    componentWillUnmount(){this.setState({isMounted: false})}
 
     render() {
         return this.state.loading === true
@@ -89,6 +70,7 @@ class Dashboard extends Component {
                     {<div className='col-12'>
                         Status: {this.props.loggedInStatus}
                     </div>}
+                    
                     <Comments />
                     <Suggestions />
 

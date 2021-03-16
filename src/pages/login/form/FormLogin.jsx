@@ -35,6 +35,7 @@ class FormLogin extends Component {
             } else {
                 this.setState({passwordError: false})
                 this.setState({password: e.target.value})
+                this.setState({errors: []})
             }
         }
     }
@@ -43,19 +44,14 @@ class FormLogin extends Component {
         e.preventDefault();
         const {email, password} = this.state;
         if (this.state.email.length > 0 && this.state.password.length > 0) {
-
-            //if (this.errors.length === 0) {
-                //this.props.onLogin(email,password)
+            if (this.state.errors.length === 0) {
                 loginAccountAuth({ email, password })
                     .then((res) => {
-                        
                         localStorage.setItem("token", JSON.stringify(res.token));
                         localStorage.setItem("user", JSON.stringify(res.user));
-
                         this.props.handleSuccessAuth(res);
                         this.setState({
                             errors: [],
-                            //...this.setMessage("Ingreso correcto."),
                         });
                     })
                     .catch((err) => {
@@ -64,16 +60,14 @@ class FormLogin extends Component {
                             ...this.setMessage("Usuario o Password incorrectos."),
                         });
                     });
-           //} 
+            } 
         } 
     }
 
-    setMessage(err) {
-        return { loginMessage: err };
-    }
-
+    setMessage(err){return { loginMessage: err }}
 
     render() {
+        console.log(this.state.errors)
         return (
             <form onSubmit={this.onHandleSubmit.bind(this)}>
                 <Row className='col-12'>

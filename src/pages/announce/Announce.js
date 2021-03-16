@@ -92,6 +92,7 @@ class Announce extends Component {
                 category
             }).then(res => {
                 //console.log(res)
+                //this.props.fileGrabber(res.user)
                 localStorage.setItem('escort', JSON.stringify(res));
             }).catch(err => {
                 console.log(err)
