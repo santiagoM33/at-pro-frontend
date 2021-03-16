@@ -35,9 +35,9 @@ class Profile extends Component {
             cadera: '',
 
             fullTime: false,
-            semana: '',
-            sabado: '',
-            domingo: '',
+            semana: [],
+            sabado: [],
+            domingo: [],
             feriado: false
 
         };
@@ -80,8 +80,10 @@ class Profile extends Component {
         })
     }
 
-    onChangeTime(){
-
+   onChangeTime(value, dateString){
+        console.log(value)
+        console.log(dateString)
+        this.setState({semana: dateString})
     }
 
     updateCheckboxFullTime(e){
@@ -100,7 +102,7 @@ class Profile extends Component {
 
     render() {
         const format = 'HH:mm';
-        //console.log(this.state.nacimiento)
+        console.log(this.state.semana)
         //console.log(this.state.feriado)
         return (
             <Fragment>
