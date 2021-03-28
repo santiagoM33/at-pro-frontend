@@ -42,6 +42,7 @@ class Routes extends Component {
         this.handleLogin = this.handleLogin.bind(this);
         this.checkLoginStatus = this.checkLoginStatus.bind(this);
         this.fileGrabber = this.fileGrabber.bind(this);
+        this.roleGrabber = this.roleGrabber.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
     }
 
@@ -99,7 +100,13 @@ class Routes extends Component {
         const pathName = arrayName.join('-')
         this.setState({file: pathName})
     }
+
+    roleGrabber(id){
+        this.setState({role: id})
+    }
+
     render() {
+        
         return (
             <BrowserRouter>
                 <Fragment></Fragment>
@@ -109,16 +116,6 @@ class Routes extends Component {
                         <Route exact path="/">
                             <Header isHome={this.state.isHome}>AT PRO</Header>
                             <Home />
-                        </Route>
-                        <Route
-                            path={`/escort/:${this.state.file}`}
-                            id={this.props.match} 
-                            authed={this.state.authed}                         
-                        >  
-                            <Header>AT PRO</Header>
-                            <Escort 
-                                user={this.state.user}
-                            />
                         </Route>
                         <Route
                             exact
@@ -238,12 +235,21 @@ class Routes extends Component {
                                     user={this.state.user}
                                     loggedInStatus={this.state.loggedInStatus}
                                     roleGrabber={this.roleGrabber}
-                                    authGrabber={this.authGrabber}
                                     role={this.state.role}
                                     handleLogout={this.handleLogout}
                                 />
                             )}
                         />
+                        <Route
+                            path={'/:escort'}
+                            id={this.props.match} 
+                            authed={this.state.authed}                         
+                        >  
+                            <Header>AT PRO</Header>
+                            <Escort 
+                                user={this.state.user}
+                            />
+                        </Route>
                         <Route component={Error404} />
                     </Switch>
                 </main>

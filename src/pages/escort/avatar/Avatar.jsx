@@ -4,7 +4,7 @@ import './Avatar.css'
 import Title, {SubTitle} from 'partials/title/Title';
 
 const Avatar = (props) => {
-    //console.log(props.user)
+    console.log(props.user)
     return ( 
         <div className='row'>
             <div className='pl-5 mx-auto'>
