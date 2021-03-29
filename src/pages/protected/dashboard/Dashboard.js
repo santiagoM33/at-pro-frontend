@@ -33,11 +33,11 @@ class Dashboard extends Component {
                 let data = JSON.parse(localStorage.getItem('user'))
                 data.roleId === 3 
                     ? (
-                        this.setState({role: data.RoleId}),
+                        ///this.setState({role: data.RoleId}),
                         this.props.roleChanger(3)
                       )
                     : (
-                        this.setState({role: 2}),
+                        //this.setState({role: 2}),
                         this.props.roleChanger(2)
                       )
 
@@ -56,7 +56,7 @@ class Dashboard extends Component {
     componentDidUpdate(prevProps, prevState){
         console.log('PrevProps: ', prevProps)
         console.log('PrevState: ', prevState)
-        if(prevProps.role !== this.props.role){
+        if(prevProps.role !== this.state.role){
             this.handleRole()
         }
     }
