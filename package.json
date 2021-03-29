@@ -28,6 +28,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
     "react-spring": "^8.0.27",
+    "reactstrap": "^8.9.0",
     "uid": "^2.0.0"
   },
   "scripts": {
