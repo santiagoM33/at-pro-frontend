@@ -102,7 +102,7 @@ class Routes extends Component {
     render() {
         return (
             <BrowserRouter>
-                <Header authed={this.state.authed}>AT PRO</Header>
+                <Header authed={this.state.authed} handleLogout={this.handleLogout}>AT PRO</Header>
                 <main>
                     <Toaster></Toaster>
                     <Switch>
