@@ -50,7 +50,12 @@ class Header extends React.Component {
                     </div>
                 </header>
             break;
-    
+            case '/dashboard':
+            case '/profile':
+            case '/publish':
+            case '/gallery':
+                component = <div></div>
+            break;
             default:
                 component = <header className='border-bottom border-danger'>
                     <div className="navbar navbar-expand-lg navbar-light bg-light">
