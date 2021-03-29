@@ -34,7 +34,7 @@ class Routes extends Component {
             loggedInStatus: 'NOT_LOGGED_IN',
             user,
             token,
-            role: 2,
+            role: null,
             authed: false,
             authenticated: false
         };
@@ -42,6 +42,7 @@ class Routes extends Component {
         this.checkLoginStatus = this.checkLoginStatus.bind(this);
         //this.fileGrabber = this.fileGrabber.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
+        this.roleChanger = this.roleChanger.bind(this);
     }
 
     controller = new AbortController();
@@ -93,6 +94,11 @@ class Routes extends Component {
         })
         localStorage.clear('user')
     }
+
+    roleChanger(id){
+        console.log('Role Changer: ', id);
+        this.setState({role: id})
+    }
     /*fileGrabber(name){
         const arrayName = name.split(',')
         const pathName = arrayName.join('-');
@@ -100,7 +106,7 @@ class Routes extends Component {
         //this.setState({file: pathName})
     }*/
     render() {
-        
+        console.log('Routes - State_role: ', this.state.role)
         return (
             <BrowserRouter>
                 <Header authed={this.state.authed} handleLogout={this.handleLogout}>AT PRO</Header>
@@ -237,8 +243,8 @@ class Routes extends Component {
                                     {...privateProps}
                                     user={this.state.user}
                                     loggedInStatus={this.state.loggedInStatus}
-                                    roleGrabber={this.roleGrabber}
                                     role={this.state.role}
+                                    roleChanger={this.roleChanger}
                                     handleLogout={this.handleLogout}
                                 />
                             )}

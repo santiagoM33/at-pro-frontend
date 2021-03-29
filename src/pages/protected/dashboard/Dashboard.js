@@ -32,10 +32,16 @@ class Dashboard extends Component {
             //Probablemente sea bueno un condicional que verifique si hay info, traela sino no hagas nada
                 let data = JSON.parse(localStorage.getItem('user'))
                 data.roleId === 3 
-                    ? this.setState({role: data.roleId}) 
-                    : this.setState({role: 2 })
+                    ? (
+                        this.setState({role: data.RoleId}),
+                        this.props.roleChanger(3)
+                      )
+                    : (
+                        this.setState({role: 2}),
+                        this.props.roleChanger(2)
+                      )
 
-                if(this.state.role === data.roleId) {
+                if(this.props.role === data.roleId) {
                         this.setState({authenticated: true})
                 }
                 this.setState({loading: false})
@@ -43,7 +49,17 @@ class Dashboard extends Component {
             
     }
 
-    componentDidMount(){this.handleRole()}
+    componentDidMount(){
+
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        console.log('PrevProps: ', prevProps)
+        console.log('PrevState: ', prevState)
+        if(prevProps.role !== this.props.role){
+            this.handleRole()
+        }
+    }
     componentWillUnmount(){this.setState({isMounted: false})}
 
     render() {
