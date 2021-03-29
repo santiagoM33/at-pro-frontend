@@ -18,14 +18,17 @@ class Escort extends Component {
          }
     }
     
+    controller = new AbortController();
+
     async componentDidMount(){
-        const controller = new AbortController();
-        const signal = controller.signal;
+        const signal = this.controller.signal;
 
         const res = await fetch('http://localhost:8005/images', { signal })
         const data = await res.json()
         this.setState({dataImg: data, loading:false});
     }
+
+    componentWillUnmount(){this.controller.abort()}
 
     render() { 
         return ( 

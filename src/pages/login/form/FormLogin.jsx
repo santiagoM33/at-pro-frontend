@@ -67,7 +67,7 @@ class FormLogin extends Component {
     setMessage(err){return { loginMessage: err }}
 
     render() {
-        console.log(this.state.errors)
+        
         return (
             <form onSubmit={this.onHandleSubmit.bind(this)}>
                 <Row className='col-12'>
