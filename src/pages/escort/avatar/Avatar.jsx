@@ -4,7 +4,7 @@ import './Avatar.css'
 import Title, {SubTitle} from 'partials/title/Title';
 
 const Avatar = (props) => {
-    console.log(props.user)
+    //console.log(props.user)
     return ( 
         <div className='row'>
             <div className='pl-5 mx-auto'>
@@ -17,7 +17,7 @@ const Avatar = (props) => {
                     }  
                 <Title
                     className='text-center mt-3 h3 text-dark'
-                >{props.user.firstName}  {props.user.lastName}</Title>
+                >{props.user ? props.user.firstName : 'Invitado'}  {props.user ? props.user.lastName : ''}</Title>
                 <SubTitle
                     className='text-danger text-center h5'
                 >+54 2236 458787</SubTitle>

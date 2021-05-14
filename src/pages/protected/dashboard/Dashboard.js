@@ -33,33 +33,33 @@ class Dashboard extends Component {
                 let data = JSON.parse(localStorage.getItem('user'))
                 data.roleId === 3 
                     ? (
-                        ///this.setState({role: data.RoleId}),
-                        this.props.roleChanger(3)
+                        this.setState({role: data.RoleId})
+                        //this.props.roleChanger(3)
                       )
                     : (
-                        //this.setState({role: 2}),
-                        this.props.roleChanger(2)
+                        this.setState({role: 2})
+                        //this.props.roleChanger(2)
                       )
 
-                if(this.props.role === data.roleId) {
+                if(this.state.role === data.roleId) {
                         this.setState({authenticated: true})
                 }
                 this.setState({loading: false})
         }
-            
+             
     }
 
     componentDidMount(){
-
+        this.handleRole()
     }
 
-    componentDidUpdate(prevProps, prevState){
+    /*componentDidUpdate(prevProps, prevState){
         console.log('PrevProps: ', prevProps)
         console.log('PrevState: ', prevState)
         if(prevProps.role !== this.state.role){
-            this.handleRole()
+           
         }
-    }
+    }*/
     componentWillUnmount(){this.setState({isMounted: false})}
 
     render() {
