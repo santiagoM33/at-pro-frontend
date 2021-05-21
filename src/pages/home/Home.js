@@ -17,7 +17,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        this.props.getEscorts()
+        this.props.getUsers()
     }
     
     lowerCaseFirstLetter(string) {
@@ -30,7 +30,7 @@ class Home extends Component {
         const enMinuscula = this.lowerCaseFirstLetter(nombresToString)
         const file = enMinuscula.split(' ').join('-').split(',');*/
 
-        const escorts = this.props.escorts
+        const escorts = this.props.users.filter(e=>e.roleId === 2) || []
         
         return ( 
             <Fragment>
@@ -41,7 +41,7 @@ class Home extends Component {
                             escorts.map((data,i)=> {                             
                                 return <section className='col-12 col-sm-6 col-md-4 my-1' key={data.id}>
                                     <Card key={data.id}>
-                                        <CardImg top width="100%" src="http://res.cloudinary.com/imagesatpro/image/upload/v1614468768/ithb4gqycy9hlwkrgm5y.jpg" alt="Card image cap" />
+                                        <CardImg top width="100%" src={this.props.photos} alt="Card image cap" />
                                         <CardBody>
                                             <CardTitle tag="h5">{data.alias}</CardTitle>
                                             <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>

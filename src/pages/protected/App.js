@@ -10,6 +10,8 @@ import { BrowserRouter, Route, Switch, Redirect as RouterRedirect } from 'react-
 import { PrivateRoute } from 'helpers/routeRedirectAuth';
 import { Toaster } from 'react-hot-toast';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function Redirecting({ to }) {
   if (to) {
