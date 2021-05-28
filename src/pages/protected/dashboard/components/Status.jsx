@@ -39,13 +39,12 @@ class Status extends React.Component {
         };
         fetch(`${URI}/users/${id}`, requestOptions)
             .then(res => {
-                this.toggleModal()
-                if (res.ok === true){
+                if (res.ok === true && res.status === 200){
+                    this.toggleModal()
                     this.props.getUsers()
                 }
                 console.log('Response update: ', res)
             }).catch(err => console.log('Error al tratar de actualizar: ', err))
-            //.then(data => console.log('Data: ', data));
     }
 
     componentDidUpdate(prevState, prevProps){

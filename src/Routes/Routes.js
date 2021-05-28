@@ -89,7 +89,6 @@ class Routes extends Component {
                         loggedInStatus: 'LOGGED_IN',
                         authed: res.data
                     });
-                    console.log('Res data: ', res.data)
                 } else if (!res.data && this.state.loggedInStatus === 'LOGGED_IN') {
                     this.setState({
                         loggedInStatus: 'NOT_LOGGED_IN',
