@@ -88,7 +88,7 @@ class Dashboard extends Component {
                         Status: {this.props.loggedInStatus}
                     </div>}
                     
-                    <Status users={this.props.users} getUsers={this.props.getUsers}/>
+                    <Status users={this.props.users} getUsers={this.props.getUsers} pagination={this.props.pagination}/>
                     
 
                 </OffCanvasBody>

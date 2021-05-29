@@ -50,6 +50,7 @@ class Routes extends Component {
             authenticated: false,
             users: [],
             photos: [],
+            pagination: ''
         };
         this.handleLogin = this.handleLogin.bind(this);
         this.checkLoginStatus = this.checkLoginStatus.bind(this);
@@ -125,7 +126,7 @@ class Routes extends Component {
         const URI = 'http://159.65.218.115';
         fetch(`${URI}/users`, { signal })
             .then(res => res.json())
-            .then(resJson => this.setState({users: resJson.data || []})) 
+            .then(resJson => this.setState({users: resJson.data || [], pagination: resJson})) 
             .catch(e=>console.log('Error fetch Escorts: ', e)) 
     }
     getPhotos(){
@@ -291,6 +292,7 @@ class Routes extends Component {
                                         users={this.state.users}
                                         loggedInStatus={this.state.loggedInStatus}
                                         role={this.state.role}
+                                        pagination={this.state.pagination}
                                         //roleChanger={this.roleChanger}
                                         handleLogout={this.handleLogout}
                                     />
