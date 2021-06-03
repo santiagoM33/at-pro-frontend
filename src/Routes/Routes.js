@@ -293,7 +293,7 @@ class Routes extends Component {
                                         loggedInStatus={this.state.loggedInStatus}
                                         role={this.state.role}
                                         pagination={this.state.pagination}
-                                        //roleChanger={this.roleChanger}
+                                        token={this.state.token}
                                         handleLogout={this.handleLogout}
                                     />
                                 )}
