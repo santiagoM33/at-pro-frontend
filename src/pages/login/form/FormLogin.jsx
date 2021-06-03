@@ -53,6 +53,7 @@ class FormLogin extends Component {
                         this.setState({
                             errors: [],
                         });
+                        console.log('Respuesta Login', res)
                     })
                     .catch((err) => {
                         this.setState({

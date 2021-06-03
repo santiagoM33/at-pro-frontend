@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, NavLink, withRouter } from 'react-router-dom';
 import Hamburguer from './components/Hamburguer';
-
+import classNames from 'classnames'
 import { GoSearch } from "react-icons/go";
 import { logout } from "data/config";
 
@@ -9,7 +9,8 @@ class Header extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            isHome: false
+            isHome: false,
+            isMobile: true
         }
     }   
         
@@ -37,11 +38,11 @@ class Header extends React.Component {
                         >
                         </Hamburguer>
                         <div className="collapse navbar-collapse row" id='navbarNav'>
-                            <div className='navbar-nav offset-lg-8'>
+                            <div className={`navbar-nav offset-lg-8 container`} >
                             {this.props.authed === true 
                                 ?    <>
-                                    <NavLink activeClassName='active' className='text-dark col-4 col-lg-4' to='/dashboard'>Dashboard</NavLink>  
-                                    <div className='col-4 col-lg-4'>
+                                    <NavLink activeClassName='active' className='text-dark col-4 offset-md-3 col-md-3' to='/dashboard'>Dashboard</NavLink>  
+                                    <div className='col-4 col-md-6'>
                                         <NavLink className='nav-link text-dark' to='/login'
                                             onClick={()=> {
                                                 this.props.handleLogout()                             

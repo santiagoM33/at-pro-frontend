@@ -1,4 +1,5 @@
- const BASE_URI = 'http://159.65.218.115';
+const BASE_URI = 'http://159.65.218.115';
+const token = JSON.parse(localStorage.getItem("token")) ?? null;
 
 export const loginAccountAuth = async data => {
         const requestData = {
@@ -89,13 +90,39 @@ export const resetPassword = async (email, password, code) => {
 }
 
   
-export const getData = async () => {
-    const URI = `http://localhost:8005`;
+export const getUserStatus = async () => {
+    const URI = `http://159.65.218.115`;
     const promise = new Promise(async (response, reject) => {
         try{
-            const res = await fetch(`${URI}/images`)
+            const res = await fetch(`${URI}/users`)
             const body = await res.json();
                 if (res !== 0) {
+                    return response(body)
+                } else {
+                    return reject(body)
+                }
+        } catch (err) {
+            reject({errors: [err]})
+        }
+    })
+return promise;
+}
+
+export const updateUserData = async (id,data) => {
+    const accessToken = token;
+    const requestData = {
+        method: 'PUT',
+        body: JSON.stringify(data),
+        headers: new Headers({
+            'authorization': `Bearer ${accessToken}`, 
+            'Content-type': 'application/json'
+        })
+    }
+    const promise = new Promise(async (response, reject) => {
+        try{
+            const res = await fetch(`${BASE_URI}/users/${id}`, requestData)
+            const body = await res.json();
+                if (res.ok) {
                     return response(body)
                 } else {
                     return reject(body)

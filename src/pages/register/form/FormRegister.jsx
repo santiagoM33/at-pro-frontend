@@ -10,14 +10,12 @@ class FormRegister extends Component {
     constructor(...props) {
         super(...props)
         this.state= {
-            firstName: '',
-            lastName: '',
+            alias: '',
             email: '',
             password: '',
             roleId: 3,
             //Manejo de errores en cada campo
-            fNameError: false,
-            lNameError: false,
+            aliasError: false,
             emailError: false,
             passError: false,
             //Manejo de errores generales
@@ -25,29 +23,21 @@ class FormRegister extends Component {
             //Login
             isLogin: false
         }
-        this.onHandleChange = this.onHandleChange.bind(this)
+        this._onHandleChange = this._onHandleChange.bind(this)
+        this._handleChange = this._handleChange.bind(this)
         this.isMatch = this.isMatch.bind(this)
     } 
  
-    onHandleChange(e) {
+    _onHandleChange(e) {
         switch (e.target.name) {
-            case 'firstName':
-                if (e.target.value.length < 3 ){
-                    this.setState({fNameError: true})
-                    
-                } else {
-                    this.setState({fNameError: false})
-                }
-                this.setState({firstName: e.target.value})
-                break;
-            case 'lastName':
+            case 'alias':
                 if (e.target.value.length < 4 ){
-                    this.setState({lNameError: true})
+                    this.setState({aliasError: true})
                     
                 } else {
-                    this.setState({lNameError: false})
+                    this.setState({aliasError: false})
                 }
-                this.setState({lastName: e.target.value})
+                this.setState({alias: e.target.value})
                 break;
             case 'email':
                 const patternEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -75,13 +65,12 @@ class FormRegister extends Component {
  
 
     isMatch = (param) => {
-        if (param.firstName.length > 0 && param.lastName.length > 0 && param.email.length > 0 && param.password.length > 0) {
-            const {firstName, lastName, email, password, roleId} = param;
+        if (param.alias.length > 0 && param.email.length > 0 && param.password.length > 0) {
+            const {alias, email, password, roleId} = param;
             //let fileName = `${firstName} ${lastName}`;
             //this.props.fileGrabber(fileName)
             registerDataAccount({
-                firstName,
-                lastName,
+                alias,
                 email,
                 password,
                 roleId,
@@ -97,46 +86,37 @@ class FormRegister extends Component {
 
     onHandleSubmit(e) {
         e.preventDefault();
-        const {firstName, lastName, email, password, roleId} = this.state;
-        let account = {firstName, lastName, email, password, roleId};
+        const {alias, email, password, roleId} = this.state;
+        let account = {alias, email, password, roleId};
         if (account) {
             this.isMatch(account)
         }
     }
 
+    _handleChange(e){
+        this.setState({roleId: e.target.value})
+    }
+
     render() {
+        console.log('Role: ', this.state.roleId)
         return (
             <form onSubmit={this.onHandleSubmit.bind(this)}>
                 <Row className='col-12 input-group'>
                     <div className="col-12 form-group">
                         <input 
                             type='text'
-                            placeholder='Ingrese su nombre'
+                            placeholder='Ingrese su nombre de usuario'
                             className='form-control col'
 
-                            name='firstName'
-                            aria-describedby={'fName-error'} 
+                            name='alias'
+                            aria-describedby={'alias-error'} 
 
                             value={this.name}
-                            onChange={this.onHandleChange}
+                            onChange={this._onHandleChange}
                         />
             
-                        { this.state.fNameError &&
-                            <SpanError id='fName-error' styles='form-text text-danger'>Su nombre debe contener mas de 3 letras.</SpanError>
-                        }
-                        <input
-                            type='text'
-                            placeholder='Ingrese su apellido'
-                            className='form-control mt-3 col'
-
-                            name='lastName'
-                            aria-describedby={'lName-error'} 
-
-                            value={this.name}
-                            onChange={this.onHandleChange}
-                        />
-                        { this.state.lNameError &&
-                            <SpanError id='lName-error' styles='form-text text-danger'>Su apellido debe contener mas de 4 letras.</SpanError>
+                        { this.state.aliasError &&
+                            <SpanError id='alias-error' styles='form-text text-danger'>Su nombre debe contener mas de 4 letras.</SpanError>
                         }
                     </div>
                 </Row>
@@ -151,7 +131,7 @@ class FormRegister extends Component {
                             aria-describedby={'email-error'} 
 
                             value={this.name}
-                            onChange={this.onHandleChange}
+                            onChange={this._onHandleChange}
                         />
                         { this.state.emailError &&
                             <SpanError id='email-error' styles='form-text text-danger'>El email es invalido.</SpanError>
@@ -169,12 +149,25 @@ class FormRegister extends Component {
                             aria-describedby={'pass-error'} 
 
                             value={this.name}
-                            onChange={this.onHandleChange}
+                            onChange={this._onHandleChange}
                         />
                         { this.state.passError &&
                             <SpanError id='pass-error' styles='form-text text-danger'>El password debe contener numeros, signos, mayúsculas y minúsculas</SpanError>
                         }
                     </div>
+                </Row>
+                <Row className='col-12'>
+                    <div className="col-12 input-group mb-3">
+                        <div className="input-group-prepend">
+                            <label className="input-group-text" htmlFor="inputGroupSelect01">Role</label>
+                        </div>
+                        <select className="custom-select" id="inputGroupSelect01" onChange={this._handleChange}>
+                            <option defaultValue>Choose...</option>
+                            <option value="1">Admin</option>
+                            <option value="2">Escort</option>
+                            <option value="3">User</option>
+                        </select>
+                     </div>
                 </Row>
                 <Row className='col'>
                     <div className='col-12 mb-3'>

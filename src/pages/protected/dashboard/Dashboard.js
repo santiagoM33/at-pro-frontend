@@ -6,6 +6,7 @@ import Comments from './components/Comments'
 import Suggestions from './components/Suggestions'
 import HeaderPanel from './components/HeaderPanel'
 import HeaderMenuOffcanvas from './components/HeaderMenuOffcanvas'
+import Status from "./components/Status";
 
 class Dashboard extends Component {
 
@@ -87,8 +88,8 @@ class Dashboard extends Component {
                         Status: {this.props.loggedInStatus}
                     </div>}
                     
-                    <Comments />
-                    <Suggestions />
+                    <Status users={this.props.users} getUsers={this.props.getUsers} pagination={this.props.pagination} token={this.props.token}/>
+                    
 
                 </OffCanvasBody>
                 <OffCanvasMenu className='container'>

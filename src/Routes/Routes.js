@@ -2,10 +2,10 @@ import React, { Fragment, Component } from "react";
 import { withRouter } from "react-router-dom";
 import Axios from 'axios';
 import Home from "pages/home/Home";
-import Login from "pages/login/Login";
-import Register from "pages/register/Register";
-import Announce from "pages/announce/Announce";
-//import Escort from "pages/escort/Escort";
+//import Login from "pages/login/Login";
+//import Register from "pages/register/Register";
+//import Announce from "pages/announce/Announce";
+import Escort from "pages/escort/Escort";
 import ResetPasswordRequest from "pages/reset-password-request/ResetPasswordRequest";
 import ResetPassword from "pages/reset-password/ResetPassword";
 //import Admin from "pages/protected/admin/Admin";
@@ -22,11 +22,11 @@ import { PrivateRoute, PublicRoute } from "helpers/routeRedirectAuth";
 import { Toaster } from "react-hot-toast";
 //import { Redirect as RouterRedirect } from "react-router-dom";
 
-/*const Home = React.lazy(() => import("pages/home/Home"));
+//const Home = React.lazy(() => import("pages/home/Home"));
 const Login = React.lazy(() => import("pages/login/Login"));
 const Register = React.lazy(() => import("pages/register/Register"));
-const Announce = React.lazy(() => import("pages/announce/Announce"));*/
-const Escort = React.lazy(() => import("pages/escort/Escort"));
+const Announce = React.lazy(() => import("pages/announce/Announce"));
+//const Escort = React.lazy(() => import("pages/escort/Escort"));
 const Admin = React.lazy(() => import("pages/protected/admin/Admin"));
 const Dashboard = React.lazy(() => import("pages/protected/dashboard/Dashboard"));
 const Publish = React.lazy(() => import("pages/protected/publish/Publish"));
@@ -48,14 +48,17 @@ class Routes extends Component {
             role: null,
             authed: false,
             authenticated: false,
-            escorts: []
+            users: [],
+            photos: [],
+            pagination: ''
         };
         this.handleLogin = this.handleLogin.bind(this);
         this.checkLoginStatus = this.checkLoginStatus.bind(this);
         //this.fileGrabber = this.fileGrabber.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
         this.roleChanger = this.roleChanger.bind(this);
-        this.getEscorts = this.getEscorts.bind(this);
+        this.getUsers = this.getUsers.bind(this);
+        this.getPhotos = this.getPhotos.bind(this);
     }
 
     controller = new AbortController();
@@ -86,7 +89,7 @@ class Routes extends Component {
                     this.setState({
                         loggedInStatus: 'LOGGED_IN',
                         authed: res.data
-                    })
+                    });
                 } else if (!res.data && this.state.loggedInStatus === 'LOGGED_IN') {
                     this.setState({
                         loggedInStatus: 'NOT_LOGGED_IN',
@@ -98,7 +101,9 @@ class Routes extends Component {
     }
 
     componentDidMount(){
-        this.checkLoginStatus()
+        this.checkLoginStatus();
+        this.getUsers();
+        this.getPhotos()
     }
     
     componentWillUnmount(){this.controller.abort()}
@@ -112,16 +117,29 @@ class Routes extends Component {
     }
 
     roleChanger(id){
-        console.log('Role Changer: ', id);
+        //console.log('Role Changer: ', id);
         this.setState({role: id})
     }
 
-    getEscorts(){
+    getUsers(){
         const signal = this.controller.signal;
         const URI = 'http://159.65.218.115';
         fetch(`${URI}/users`, { signal })
             .then(res => res.json())
-            .then(resJson => this.setState({escorts: resJson.data.filter(e=>e.roleId === 2) || []}))
+            .then(resJson => this.setState({users: resJson.data || [], pagination: resJson})) 
+            .catch(e=>console.log('Error fetch Escorts: ', e)) 
+    }
+    getPhotos(){
+        const signal = this.controller.signal;
+        const URI = 'https://picsum.photos';
+        fetch(`${URI}/200/300`, { signal })
+            .then(res => {
+                    if (res.status === 200) {
+                        this.setState({photos: res.url})
+                    }
+                }
+            )
+            .catch(e=>console.log('Error fetch photos: ', e)) 
     }
     /*fileGrabber(name){
         const arrayName = name.split(',')
@@ -130,7 +148,7 @@ class Routes extends Component {
         this.setState({file: pathName})
     }*/
     render() {
-        //console.log('Escorts: ', this.state.escorts)
+        //console.log('Users State: ', this.state.users)
         return (
             <BrowserRouter>
                 <Header authed={this.state.authed} handleLogout={this.handleLogout}>AT PRO</Header>
@@ -142,12 +160,27 @@ class Routes extends Component {
                                 <>
                                     <Home
                                         {...props}
-                                        getEscorts={this.getEscorts}
-                                        escorts={this.state.escorts}
+                                        getUsers={this.getUsers}
+                                        users={this.state.users}
+                                        photos={this.state.photos}
                                     />
                                 </>
                             )}
                         />
+                        <PublicRoute
+                            exact
+                            path="/reset-password-request"
+                            authed={!!this.state.user}
+                            component={ResetPasswordRequest}
+                        />
+                        <PublicRoute
+                            exact
+                            path="/reset-password"
+                            authed={!!this.state.user}
+                            component={ResetPassword}
+                        />
+                        
+                        <React.Suspense fallback={<p>Loading...</p>}>
                         <Route
                             exact
                             path="/login"
@@ -174,7 +207,6 @@ class Routes extends Component {
                                         {...publicProps} 
                                         handleLogin={this.handleLogin} 
                                         loggedInStatus={this.state.loggedInStatus}
-                                        //fileGrabber={this.fileGrabber}
                                     />
                                 </Fragment> 
                             )}
@@ -190,24 +222,11 @@ class Routes extends Component {
                                         user={this.state.user}
                                         handleLogin={this.handleLogin}
                                         loggedInStatus={this.state.loggedInStatus}
-                                        //fileGrabber={this.fileGrabber}
                                     />
                                 </>
                             )}                         
                         />  
-                        <PublicRoute
-                            exact
-                            path="/reset-password-request"
-                            authed={!!this.state.user}
-                            component={ResetPasswordRequest}
-                        />
-                        <PublicRoute
-                            exact
-                            path="/reset-password"
-                            authed={!!this.state.user}
-                            component={ResetPassword}
-                        />
-                        <React.Suspense fallback={<p>Loading...</p>}>
+                        
                         <PrivateRoute
                             exact
                             path="/admin"
@@ -269,14 +288,17 @@ class Routes extends Component {
                                     <Dashboard
                                         {...privateProps}
                                         user={this.state.user}
+                                        getUsers={this.getUsers}
+                                        users={this.state.users}
                                         loggedInStatus={this.state.loggedInStatus}
                                         role={this.state.role}
-                                        //roleChanger={this.roleChanger}
+                                        pagination={this.state.pagination}
+                                        token={this.state.token}
                                         handleLogout={this.handleLogout}
                                     />
                                 )}
                             />
-                        
+                         </React.Suspense>
                         <Route
                             path={'/:alias'}
                             id={this.props.match} 
@@ -288,7 +310,7 @@ class Routes extends Component {
                                 />
                             </>
                         </Route>
-                        </React.Suspense>
+                       
                         <Route component={Error404} />
                     </Switch>
                 </main>
