@@ -4,68 +4,67 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import Table from 'react-bootstrap/Table';
 
-import { updateUserData } from '../../../../services/api'
+import { updateUserData, getUserStatus } from '../../../../services/api'
 
-import ModalAdmin from '../../../../components/modal/ModalAdmin'
 import Pagination from './Pagination';
+import ModalAdminManager from './ModalAdminManager';
 
 class Status extends React.Component {
     constructor(props) {
         super(props);
+        this._isMounted = false;
         this.state = { 
            key: 'pending',
            updateData: false,
            show: false,
            form: {
-               id: this.props.users.id,
-               user: '',
+               username: '',
                email: '',
                status: '',
                role: '',
            },
-           pending: [],
-           approved: [],
-           reject: [],
-           banned: []
-         }
-        this.getUsersFromStatusPending = this.getUsersFromStatusPending.bind(this);
+           status: {
+                pending: [],
+                approved: [],
+                reject: [],
+                banned: []
+           },
+           data: {
+            items: 0,
+            pages: 0
+           }
+        }
+           
+        /*this.getUsersFromStatusPending = this.getUsersFromStatusPending.bind(this);
         this.getUsersFromStatusApproved = this.getUsersFromStatusApproved.bind(this);
         this.getUsersFromStatusReject = this.getUsersFromStatusReject.bind(this);
-        this.getUsersFromStatusBanned = this.getUsersFromStatusBanned.bind(this);
+        this.getUsersFromStatusBanned = this.getUsersFromStatusBanned.bind(this);*/
         this.toggleModal = this.toggleModal.bind(this);
         this.handleChange = this.handleChange.bind(this);
-    }
-
-    controller = new AbortController();
-
-    componentDidMount(){
-        //this._isMounted = true;
-        this.getUsersFromStatusPending();
-        this.getUsersFromStatusApproved();
-        this.getUsersFromStatusReject();
-        this.getUsersFromStatusBanned();
-    }
-
-    componentDidUpdate(prevState, prevProps){ 
-        if(prevState.users !== this.props.users){
-            //this.props.getUsers();
-        }
-    }
-
-    componentWillUnmount(){
-        this.controller.abort()
+        this.getDataStatus = this.getDataStatus.bind(this);
     }
 
     toggleModal(){
         this.setState({show: !this.state.show})
     }
 
-    async handleChange(e){
+    handleChange(e){
         e.persist();
-        await this.setState({form:{...this.state.form, [e.target.name]: e.target.value}})
+        this.setState({form:{...this.state.form, [e.target.name]: e.target.value}})
     }
 
-    getUsersFromStatusPending(){
+    getDataStatus(status){
+        this.setState({status: {
+            pending: status.data.filter(e=> e.status === 'pending'),
+            approved: status.data.filter(e=> e.status === 'approved'),
+            reject: status.data.filter(e=> e.status === 'reject'),
+            banned: status.data.filter(e=> e.status === 'banned'),
+        },
+        data: {items: status.itemsRemaining, pages: status.pagesRemaining}
+        })
+    }
+
+    /*getUsersFromStatusPending(){
         const signal = this.controller.signal;
         const URI = 'http://159.65.218.115';
         fetch(`${URI}/users`, { signal })
@@ -99,15 +98,15 @@ class Status extends React.Component {
             .then(res => res.json())
             .then(resJson => {this.setState({banned: resJson.data.filter(e=> e.status === 'banned')})}) 
             .catch(e=>console.log('Error fetch Pending Status: ', e)) 
-    }
+    }*/
 
     render() { 
         /*let pending = this.props.users.filter(e=> e.status === 'pending');
         let approved = this.props.users.filter(e=> e.status === 'approved');
         let reject = this.props.users.filter(e=> e.status === 'reject');
         let banned = this.props.users.filter(e=> e.status === 'banned');*/
-
-        const {pending, approved, reject, banned} = this.state;
+        const {pending, approved, reject, banned} = this.state.status;
+        
         return ( 
             <React.Fragment>
             <Tabs activeKey={this.state.key} onSelect={k => this.setState({key: k})} id="controlled-tab-example">
@@ -147,7 +146,7 @@ class Status extends React.Component {
                             })}
                         </tbody>
                     </Table>
-                    <Pagination />
+                    <Pagination data={this.state.data} pending={this.state.pending}/>
                 </Tab>
                 <Tab eventKey="approved" title="Approved">
                     <Table striped bordered hover responsive>
@@ -169,7 +168,7 @@ class Status extends React.Component {
                                 <td>{user.email}</td>
                                 <td>{user.status}</td>
                                 <td className='text-center'>{user.roleId}</td>
-                                <td className='text-center'><button color="info" onClick={()=>this.toggleModal()}>
+                                <td className='text-center'><button color="btn btn-info" onClick={()=> this.setState({show: !this.state.show})}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                         <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
@@ -198,7 +197,7 @@ class Status extends React.Component {
                                 <td>{user.alias}</td>
                                 <td>{user.email}</td>
                                 <td>{user.status}</td>
-                                <td><button className="btn btn-info" onClick={()=>this.toggleModal()}>
+                                <td><button className="btn btn-info" onClick={()=> this.setState({show: !this.state.show})}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                         <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
@@ -227,7 +226,7 @@ class Status extends React.Component {
                                 <td>{user.alias}</td>
                                 <td>{user.email}</td>
                                 <td>{user.status}</td>
-                                <td className='text-center'><button className="btn btn-info" onClick={()=>this.toggleModal()}>
+                                <td className='text-center'><button className="btn btn-info" onClick={()=> this.setState({show: !this.state.show})}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-three-dots" viewBox="0 0 16 16">
                                         <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
                                     </svg>
@@ -238,7 +237,7 @@ class Status extends React.Component {
                     </Table>          
                 </Tab>
             </Tabs>
-            <ModalAdmin isOpen={this.state.show} handleChange={this.handleChange} toggleModal={this.toggleModal} updateStatus={this.updateUserData}/>
+            <ModalAdminManager open={this.state.show} handleChange={this.handleChange} toggleModal={()=> this.setState({show: !this.state.show})} updateStatus={this.updateUserData} form={this.state.form} status={this.state.status} getDataStatus={this.getDataStatus} dataUsers={this.getDataUsers}/>
         </React.Fragment>
          );
     }

@@ -4,26 +4,45 @@ class Pagination extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            pages: this.props.pages
+            itemsPerPage: 8
         }
     }
 
     render() {
-        //console.log('Paginas: ', this.state.pages)
+        /*const { items, pages } = this.props.data;
+        const pending = this.props.status;
+        const hasPrevious = pages > 1
+        
+        const pageNumbers = [];
+        for (let i = 1; i <= Math.ceil(pending.length / this.state.itemsPerPage); i++) {
+            pageNumbers.push(i);
+        }*/
         return (
-            <nav aria-label="Page navigation example">
+            <React.Fragment>
+            {/*<nav aria-label="Page navigation example">
                 <ul className="pagination justify-content-center">
-                    <li className="page-item disabled">
-                    <a className="page-link" href="#" tabIndex="-1" aria-disabled="true">Previous</a>
-                    </li>
-                    <li className="page-item"><a className="page-link" href="#">1</a></li>
-                    <li className="page-item"><a className="page-link" href="#">2</a></li>
-                    <li className="page-item"><a className="page-link" href="#">3</a></li>
+                    {hasPrevious ? 
+                        <li className="page-item">
+                            <a className="page-link" href="#" tabIndex={pages-1} aria-disabled="false">Previous</a>
+                        </li>
+                    :   <li className="page-item disabled">
+                            <a className="page-link" href="#" tabIndex='-1' aria-disabled="true">Previous</a>
+                        </li>
+                    }
+                    {!!pages &&
+                    <React.Fragment>
+                        <li className="page-item"><a className="page-link" href="#">{pages-1}</a></li>
+                        <li className="page-item"><a className="page-link" href="#">{pages}</a></li>
+                        <li className="page-item"><a className="page-link" href="#">{pages+1}</a></li>
+                    </React.Fragment>
+                    }
                     <li className="page-item">
                     <a className="page-link" href="#">Next</a>
                     </li>
                 </ul>
-            </nav>
+                </nav>*/}
+                <div></div>
+                </React.Fragment>
         )
     }
 }

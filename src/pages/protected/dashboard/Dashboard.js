@@ -11,7 +11,8 @@ import Status from "./components/Status";
 class Dashboard extends Component {
 
     constructor(...props){
-        super(...props)
+        super(...props);
+        this._isMounted = false;
         this.state= {
             loading: true,
             isMenuOpened: false,
@@ -29,29 +30,27 @@ class Dashboard extends Component {
     handleHamburguer(){this.setState({isOpen: !this.state.isOpen})}
 
     handleRole(){
-        if (this.state.isMounted) {
-            //Probablemente sea bueno un condicional que verifique si hay info, traela sino no hagas nada
-                let data = JSON.parse(localStorage.getItem('user'))
-                data.roleId === 3 
-                    ? (
-                        this.setState({role: data.RoleId})
-                        //this.props.roleChanger(3)
-                      )
-                    : (
-                        this.setState({role: 2})
-                        //this.props.roleChanger(2)
-                      )
+        let data = JSON.parse(localStorage.getItem('user'))
+        data.roleId === 3 
+            ? (
+                this.setState({role: data.RoleId}) 
+            )
+            : (
+                this.setState({role: 2})
+            )
 
-                if(this.state.role === data.roleId) {
-                        this.setState({authenticated: true})
-                }
-                this.setState({loading: false})
-        }
-             
+            if(this.state.role === data.roleId) {
+                    this.setState({authenticated: true})
+            }
+            this.setState({loading: false})
     }
 
     componentDidMount(){
-        this.handleRole()
+        this._isMounted = true;
+        if( this._isMounted){
+            this.handleRole()
+        }
+        
     }
 
     /*componentDidUpdate(prevProps, prevState){
@@ -61,8 +60,9 @@ class Dashboard extends Component {
            
         }
     }*/
-    componentWillUnmount(){this.setState({isMounted: false})}
+    componentWillUnmount(){this._isMounted = false;}
 
+    
     render() {
         return this.state.loading === true
         ? <h2>Cargando...</h2>

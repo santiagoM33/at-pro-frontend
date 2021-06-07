@@ -91,10 +91,9 @@ export const resetPassword = async (email, password, code) => {
 
   
 export const getUserStatus = async () => {
-    const URI = `http://159.65.218.115`;
     const promise = new Promise(async (response, reject) => {
         try{
-            const res = await fetch(`${URI}/users`)
+            const res = await fetch(`${BASE_URI}/users`)
             const body = await res.json();
                 if (res !== 0) {
                     return response(body)
@@ -110,13 +109,17 @@ return promise;
 
 export const updateUserData = async (id,data) => {
     const accessToken = token;
+    console.log('Data update: ', data)
     const requestData = {
         method: 'PUT',
-        body: JSON.stringify(data),
+        //withCredentials: true,
+        //credentials: 'include',
         headers: new Headers({
-            'authorization': `Bearer ${accessToken}`, 
+            'Authorization': `Bearer ${accessToken}`, 
             'Content-type': 'application/json'
-        })
+        }),
+        body: JSON.stringify(data)
+        
     }
     const promise = new Promise(async (response, reject) => {
         try{
