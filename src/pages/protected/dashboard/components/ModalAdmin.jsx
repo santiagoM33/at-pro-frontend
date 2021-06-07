@@ -19,29 +19,34 @@ class ModalAdmin extends React.Component {
         if(!!this.props.formData === true){
             formData = this.props.formData;
         }
+        const { form } = this.props;
         return (
             <>
                 <Modal isOpen={this.props.isOpen} toggle={this.props.onToggleModal}>
                     <ModalHeader toggle={this.props.onToggleModal}>Modal title</ModalHeader>
                     <ModalBody>
                         <Form>
+                            <FormGroup>
+                                <Label for="id" hidden>ID</Label>
+                                <Input type="text" name="id" id="id" value={form.id} readOnly/>
+                            </FormGroup>
                             <Row form>
                                 <Col md={6}>
                                     <FormGroup>
-                                        <Label for="username">Username</Label>
-                                        <Input type="text" name="username" id="username" onChange={this.props.handleChange} placeholder="with a placeholder" value={this.props.formData.username}/>
+                                        <Label for="alias">Username</Label>
+                                        <Input type="text" name="alias" id="alias" onChange={this.props.handleChange} placeholder="with a placeholder" value={form.alias}/>
                                     </FormGroup>
                                 </Col>
                                 <Col md={6}>
                                     <FormGroup>
                                         <Label for="email">Email</Label>
-                                        <Input type="email" name="email" id="email" onChange={this.props.handleChange} placeholder="email placeholder" />
+                                        <Input type="email" name="email" id="email" onChange={this.props.handleChange} placeholder="email placeholder" value={form.email}/>
                                     </FormGroup>
                                 </Col>
                             </Row>
                             <FormGroup>
                                 <Label for="status">Status</Label>
-                                <Input type="select" name="status" id="status" onChange={this.props.handleChange}>
+                                <Input type="select" name="status" id="status" onChange={this.props.handleChange} value={form.status}>
                                 <option>Pending</option>
                                 <option>Approved</option>
                                 <option>Reject</option>
@@ -51,7 +56,7 @@ class ModalAdmin extends React.Component {
                             </FormGroup>
                             <FormGroup>
                                 <Label for="role">Role</Label>
-                                <Input type="select" name="role" id="role" onChange={this.props.handleChange}>
+                                <Input type="select" name="role" id="role" onChange={this.props.handleChange} value={form.roleId}>
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -60,7 +65,7 @@ class ModalAdmin extends React.Component {
                         </Form> 
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={()=>updateUserData(formData.id, formData)}>Do Something</Button>{' '}
+                        <Button color="primary" onClick={()=>updateUserData(formData.id, formData)}>Update</Button>{' '}
                         <Button color="secondary" onClick={this.props.onToggleModal}>Cancel</Button>
                     </ModalFooter>
                 </Modal>

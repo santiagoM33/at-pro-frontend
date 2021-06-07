@@ -16,7 +16,9 @@ class ModalAdminManager extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {  }
+        this.state = { 
+            users: []
+         }
     }
 
     componentDidMount(){
@@ -24,6 +26,7 @@ class ModalAdminManager extends React.Component {
         if(this._isMounted){
             getUserStatus().then(res => {
                     this.props.getDataStatus(res)
+                    this.setState({users: res.data})
                 })
                 .catch(e=>console.log('Error fetch Status: ', e)) 
             }
@@ -42,6 +45,7 @@ class ModalAdminManager extends React.Component {
                 updateStatus={this.props.updateUserData}
                 formData={this.props.form}
                 status={this.props.status}
+                form={this.props.form}
             />
          );
     }
