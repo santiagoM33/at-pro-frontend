@@ -114,9 +114,9 @@ export const updateUserData = async (id,data) => {
         
         headers: new Headers({
             'Authorization': `Bearer ${accessToken}`, 
-            //'Content-type': 'application/json'
+            'Content-type': 'application/json'
         }),
-        body: data
+        body: JSON.stringify(data)
         
     }
     console.log('Request Data: ', requestData.body)

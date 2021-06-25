@@ -41,9 +41,9 @@ class ModalAdminManager extends React.Component {
         return ( 
             <ModalAdmin 
                 isOpen={this.props.open} 
-                handleChange={this.props.handleChange} 
                 onToggleModal={this.props.toggleModal} 
-                updateStatus={this.props.updateUserData}
+                handleChange={this.props.handleChange} 
+                updateUserData={this.props.updateUserData}
                 status={this.props.status}
                 form={this.props.form}
             />
