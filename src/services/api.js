@@ -107,18 +107,16 @@ export const getUserStatus = async () => {
 return promise;
 }
 
-export const updateUserData = async (id,data) => {
+export const updateUserData = async (id,status) => {
     const accessToken = token;
-    console.log('Data update: ', data)
     const requestData = {
-        method: 'PUT',
-        //withCredentials: true,
-        //credentials: 'include',
+        method: 'PUT', 
+        
         headers: new Headers({
             'Authorization': `Bearer ${accessToken}`, 
-            'Content-type': 'application/json'
+            //'Content-type': 'application/json'
         }),
-        body: JSON.stringify(data)
+        body: { status }
         
     }
     const promise = new Promise(async (response, reject) => {
@@ -126,6 +124,23 @@ export const updateUserData = async (id,data) => {
             const res = await fetch(`${BASE_URI}/users/${id}`, requestData)
             const body = await res.json();
                 if (res.ok) {
+                    return response(body)
+                } else {
+                    return reject(body)
+                }
+        } catch (err) {
+            reject({errors: [err]})
+        }
+    })
+return promise;
+}
+
+export const getEscorts = async () => {
+    const promise = new Promise(async (response, reject) => {
+        try{
+            const res = await fetch(`${BASE_URI}/escorts`)
+            const body = await res.json();
+                if (res !== 0) {
                     return response(body)
                 } else {
                     return reject(body)

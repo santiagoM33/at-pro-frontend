@@ -6,6 +6,8 @@ import {
     CardTitle, CardSubtitle, Button
   } from 'reactstrap';
 
+import { getEscorts } from '../../services/api'
+
 class Home extends Component {
     constructor(...props) {
         super(...props)
@@ -17,7 +19,8 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        this.props.getUsers()
+        this.props.getUsers();
+        getEscorts().then(res=>console.log('Get Escort: ',res))
     }
     
     lowerCaseFirstLetter(string) {
@@ -31,7 +34,7 @@ class Home extends Component {
         const file = enMinuscula.split(' ').join('-').split(',');*/
 
         const escorts = this.props.users.filter(e=>e.roleId === 2) || []
-        
+
         return ( 
             <Fragment>
                 <main className='container-fluid'>

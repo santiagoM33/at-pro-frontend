@@ -1,8 +1,6 @@
 /* eslint-disable */
 import React from 'react';
 import { updateUserData } from 'services/api'
-//import Modal from 'react-bootstrap/Modal';
-//import Form from 'react-bootstrap/Form';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Col, Row, Form, FormGroup, Label, Input } from 'reactstrap';
 
@@ -13,17 +11,14 @@ class ModalAdmin extends React.Component {
             
         }
     }
+    
 
     render() {
-        let formData;
-        if(!!this.props.formData === true){
-            formData = this.props.formData;
-        }
         const { form } = this.props;
         return (
             <>
                 <Modal isOpen={this.props.isOpen} toggle={this.props.onToggleModal}>
-                    <ModalHeader toggle={this.props.onToggleModal}>Modal title</ModalHeader>
+                    <ModalHeader toggle={this.props.onToggleModal}>Update User Info</ModalHeader>
                     <ModalBody>
                         <Form>
                             <FormGroup>
@@ -65,7 +60,7 @@ class ModalAdmin extends React.Component {
                         </Form> 
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={()=>updateUserData(formData.id, formData)}>Update</Button>{' '}
+                        <Button color="primary" onClick={()=>updateUserData(form.id, form)}>Update</Button>{' '}
                         <Button color="secondary" onClick={this.props.onToggleModal}>Cancel</Button>
                     </ModalFooter>
                 </Modal>

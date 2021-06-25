@@ -14,6 +14,8 @@ class ModalProvider extends React.Component {
         }
      }
 
+     _isMounted = false;
+
     componentDidMount(){
         this._isMounted = true;
         if(this._isMounted){

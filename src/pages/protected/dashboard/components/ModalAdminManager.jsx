@@ -21,6 +21,7 @@ class ModalAdminManager extends React.Component {
          }
     }
 
+    _isMounted = false;
     componentDidMount(){
         this._isMounted = true;
         if(this._isMounted){
@@ -43,7 +44,6 @@ class ModalAdminManager extends React.Component {
                 handleChange={this.props.handleChange} 
                 onToggleModal={this.props.toggleModal} 
                 updateStatus={this.props.updateUserData}
-                formData={this.props.form}
                 status={this.props.status}
                 form={this.props.form}
             />
