@@ -107,7 +107,7 @@ export const getUserStatus = async () => {
 return promise;
 }
 
-export const updateUserData = async (id,status) => {
+export const updateUserData = async (id,data) => {
     const accessToken = token;
     const requestData = {
         method: 'PUT', 
@@ -116,9 +116,11 @@ export const updateUserData = async (id,status) => {
             'Authorization': `Bearer ${accessToken}`, 
             //'Content-type': 'application/json'
         }),
-        body: { status }
+        body: data
         
     }
+    console.log('Request Data: ', requestData.body)
+    console.log('Request Data Type: ', typeof data)
     const promise = new Promise(async (response, reject) => {
         try{
             const res = await fetch(`${BASE_URI}/users/${id}`, requestData)
