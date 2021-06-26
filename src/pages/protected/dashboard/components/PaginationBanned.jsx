@@ -18,11 +18,11 @@ class PaginationBanned extends React.Component {
         }
         const hasPrevious = pages > 1;
         const hasNext = pageNumbers.length >= 2;
-        console.log('Banned: ', banned)
+        {/*console.log('Banned: ', banned)
         console.log('Pages Remaining Banned: ', pages)
         console.log('Items Remaining Banned: ', items)
         console.log('hasPrevious Page Banned: ', hasPrevious)
-        console.log('pagesNumbers? Banned: ', pageNumbers.length)
+    console.log('pagesNumbers? Banned: ', pageNumbers.length)*/}
         return (
             <React.Fragment>
                 <nav aria-label="Page navigation example">

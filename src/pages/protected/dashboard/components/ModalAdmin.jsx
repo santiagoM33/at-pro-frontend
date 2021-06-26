@@ -23,25 +23,25 @@ class ModalAdmin extends React.Component {
                         <Form>
                             <FormGroup>
                                 <Label for="id" hidden>ID</Label>
-                                <Input type="text" name="id" id="id" value={form.id} readOnly/>
+                                <Input type="text" name="id" id="id" readOnly/>
                             </FormGroup>
                             <Row form>
                                 <Col md={6}>
                                     <FormGroup>
                                         <Label for="alias">Username</Label>
-                                        <Input type="text" name="alias" id="alias" onChange={this.props.handleChange} placeholder="with a placeholder" value={form.alias}/>
+                                        <Input type="text" name="alias" id="alias" onChange={this.props.handleChange} placeholder="with a placeholder"/>
                                     </FormGroup>
                                 </Col>
                                 <Col md={6}>
                                     <FormGroup>
                                         <Label for="email">Email</Label>
-                                        <Input type="email" name="email" id="email" onChange={this.props.handleChange} placeholder="email placeholder" value={form.email}/>
+                                        <Input type="email" name="email" id="email" onChange={this.props.handleChange} placeholder="email placeholder"/>
                                     </FormGroup>
                                 </Col>
                             </Row>
                             <FormGroup>
                                 <Label for="status">Status</Label>
-                                <Input type="select" name="status" id="status" onChange={this.props.handleChange} value={form.status}>
+                                <Input type="select" name="status" id="status" onChange={this.props.handleChange}>
                                 <option>Pending</option>
                                 <option>Approved</option>
                                 <option>Reject</option>

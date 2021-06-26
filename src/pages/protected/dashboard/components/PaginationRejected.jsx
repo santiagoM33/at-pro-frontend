@@ -19,11 +19,11 @@ class Pagination extends React.Component {
 
         const hasPrevious = pages > 1
         const hasNext = pageNumbers.length >= 2;
-        console.log('Rejected: ', rejected)
+        {/*console.log('Rejected: ', rejected)
         console.log('Pages Remaining Rejected: ', pages)
         console.log('Items Remaining Rejected: ', items)
         console.log('hasPrevious Page Rejected: ', hasPrevious)
-        console.log('pagesNumbers?:  Rejected', pageNumbers.length)
+    console.log('pagesNumbers?:  Rejected', pageNumbers.length)*/}
         return (
             <React.Fragment>
                 <nav aria-label="Page navigation example">

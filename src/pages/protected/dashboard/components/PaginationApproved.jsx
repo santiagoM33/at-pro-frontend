@@ -19,22 +19,19 @@ class PaginationApproved extends React.Component {
 
         const hasPrevious = pages > 1;
         const hasNext = pageNumbers.length >= 2;
-        console.log('Approved: ', approved)
+        {/*console.log('Approved: ', approved)
         console.log('Pages Remaining Approved: ', pages)
         console.log('Items Remaining Approved: ', items)
         console.log('hasPrevious Page Approved: ', hasPrevious)
         console.log('hasNext Page Approved: ', hasNext)
-        console.log('pagesNumbers? Approved: ', pageNumbers)
+    console.log('pagesNumbers? Approved: ', pageNumbers)*/}
         return (
             <React.Fragment>
                 <nav aria-label="Page navigation example">
                     <ul className="pagination justify-content-center">
-                        {hasPrevious ?
+                        {hasPrevious &&
                             <li className="page-item">
-                                <a className="page-link" href="#" tabIndex={pages - 1} aria-disabled="false">Previous</a>
-                            </li>
-                            : <li className="page-item disabled">
-                                <a className="page-link" href="#" tabIndex='-1' aria-disabled="true">Previous</a>
+                                <a className="page-link" href="#" tabIndex={!!pages ? pages - 1 : -1} aria-disabled="false">Previous</a>
                             </li>
                         }
                         {!!pages &&

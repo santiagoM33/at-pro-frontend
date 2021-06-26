@@ -19,11 +19,11 @@ class PaginationPending extends React.Component {
 
         const hasPrevious = pages > 1;
         const hasNext = pageNumbers.length >= 2;
-        console.log('Pending: ', pending)
+        {/*console.log('Pending: ', pending)
         console.log('Pages Remaining Peding: ', pages)
         console.log('Items Remaining Peding: ', items)
         console.log('hasPrevious Page Peding: ', hasPrevious)
-        console.log('pagesNumbers? Peding: ', pageNumbers.length)
+    console.log('pagesNumbers? Peding: ', pageNumbers.length)*/}
         return (
             <React.Fragment>
                 <nav aria-label="Page navigation example">
