@@ -104,10 +104,10 @@ export const getUserStatus = async () => {
             reject({errors: [err]})
         }
     })
-return promise;
+    return promise;
 }
 
-export const updateUserData = async (id,data) => {
+export const updateStatus = async (id, status) => {
     const accessToken = token;
     const requestData = {
         method: 'PUT', 
@@ -116,11 +116,9 @@ export const updateUserData = async (id,data) => {
             'Authorization': `Bearer ${accessToken}`, 
             'Content-type': 'application/json'
         }),
-        body: JSON.stringify(data)
+        body: JSON.stringify(status)
         
     }
-    console.log('Request Data: ', requestData.body)
-    console.log('Request Data Type: ', typeof data)
     const promise = new Promise(async (response, reject) => {
         try{
             const res = await fetch(`${BASE_URI}/users/${id}`, requestData)
@@ -134,7 +132,54 @@ export const updateUserData = async (id,data) => {
             reject({errors: [err]})
         }
     })
-return promise;
+    return promise;
+}
+
+export const updateUserData = async (user) => {
+    const accessToken = token;
+    const requestData = {
+        method: 'PUT', 
+        
+        headers: new Headers({
+            'Authorization': `Bearer ${accessToken}`, 
+            'Content-type': 'application/json'
+        }),
+        body: JSON.stringify(user)
+        
+    }
+    console.log('Request Data: ', requestData.body)
+    console.log('Request Data Type: ', typeof user)
+    const promise = new Promise(async (response, reject) => {
+        try{
+            const res = await fetch(`${BASE_URI}/users/${user.id}`, requestData)
+            const body = await res.json();
+                if (res.ok) {
+                    return response(body)
+                } else {
+                    return reject(body)
+                }
+        } catch (err) {
+            reject({errors: [err]})
+        }
+    })
+    return promise;
+}
+
+export const getUsers = async () => {
+    const promise = new Promise(async (response, reject) => {
+        try{
+            const res = await fetch(`${BASE_URI}/users`)
+            const body = await res.json();
+                if (res !== 0) {
+                    return response(body)
+                } else {
+                    return reject(body)
+                }
+        } catch (err) {
+            reject({errors: [err]})
+        }
+    })
+    return promise;
 }
 
 export const getEscorts = async () => {
@@ -151,5 +196,22 @@ export const getEscorts = async () => {
             reject({errors: [err]})
         }
     })
-return promise;
+    return promise;
+}
+
+export const getServices = async () => {
+    const promise = new Promise(async (response, reject) => {
+        try{
+            const res = await fetch(`${BASE_URI}/services`)
+            const body = await res.json();
+                if (res !== 0) {
+                    return response(body)
+                } else {
+                    return reject(body)
+                }
+        } catch (err) {
+            reject({errors: [err]})
+        }
+    })
+    return promise;
 }

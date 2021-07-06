@@ -4,14 +4,12 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import Table from 'react-bootstrap/Table';
 
-import { updateUserData } from '../../../../services/api'
-
 import ModalAdminManager from './ModalAdminManager';
 
-import PaginationPending from './PaginationPending';
+/*import PaginationPending from './PaginationPending';
 import PaginationApproved from './PaginationApproved';
 import PaginationRejected from './PaginationRejected';
-import PaginationBanned from './PaginationBanned';
+import PaginationBanned from './PaginationBanned';*/
 import StatusRow from './StatusRow';
 
 class Status extends React.Component {
@@ -27,8 +25,8 @@ class Status extends React.Component {
                alias: '',
                email: '',
                status: '',
-               role: '',
-           },
+               roleId: '',
+           },  
            status: {
                 pending: [],
                 approved: [],
@@ -38,7 +36,8 @@ class Status extends React.Component {
            data: {
             items: 0,
             pages: 0
-           }
+           },
+           statusUpdate: ''
         }
            
         /*this.getUsersFromStatusPending = this.getUsersFromStatusPending.bind(this);
@@ -58,6 +57,8 @@ class Status extends React.Component {
         e.persist();
         this.setState({form:{...this.state.form, [e.target.name]: e.target.value}})
     }
+    //Idea fumado: Hacer un swith de cada getStatus en cada case y compara con el valor que deseo buscar,
+    //la idea es que solo llame a la api dependiendo de la llamada que desea realizar
 
     getDataStatus(status){
         this.setState({status: {
@@ -70,7 +71,16 @@ class Status extends React.Component {
         })
     }
 
-    catchUser=(user)=>{
+    /*switch (status) {
+        case 'pending':
+
+            break;
+    
+        default:
+            break;
+    }*/
+
+    catchUser= user => {
         this.setState({form:{
             id: user.id, 
             alias: user.alias, 
@@ -78,11 +88,6 @@ class Status extends React.Component {
             status: user.status, 
             roleId: user.roleId}
         })
-    }
-
-    removeRow = (id,users) => {
-        const row = users.filter(user => user.id === id);
-        //this.setState({status: {...status, row}})
     }
 
     /*getUsersFromStatusPending(){
@@ -127,12 +132,14 @@ class Status extends React.Component {
         let reject = this.props.users.filter(e=> e.status === 'reject');
         let banned = this.props.users.filter(e=> e.status === 'banned');*/
         const {pending, approved, rejected, banned} = this.state.status;
-        //console.log('Rejected: ', !!rejected.length)
+        /*const citas = [...this.props.users]
+        console.log('Usuarios', citas)*/
+        //console.log('Form catch user data: ', this.state.form)
         return ( 
             <React.Fragment>
             <Tabs activeKey={this.state.key} onSelect={k => this.setState({key: k})} id="controlled-tab-example">
                 <Tab eventKey="pending" title="Pending">
-                { !!approved ?
+                { !!pending.length ?
                     <React.Fragment>
                         <Table striped bordered hover responsive>
                             <thead>
@@ -150,19 +157,18 @@ class Status extends React.Component {
                                 return <StatusRow 
                                             user={user} 
                                             index={i}
-                                            updateUserData={this.updateUserData}
                                             catchUser={this.catchUser}
                                             toggleShow={this.toggleModal}
                                         />
                                 })}
                             </tbody>
                         </Table>
-                        <PaginationPending data={this.state.data} status={this.state.status}/>
+                        {/*<PaginationPending data={this.state.data} status={this.state.status}/>*/}
                     </React.Fragment>
                     : <div className='text-center'>No hay elementos que mostrar</div>} 
                 </Tab>
                 <Tab eventKey="approved" title="Approved">
-                { !!approved ?
+                { !!approved.length ?
                     <React.Fragment>
                     <Table striped bordered hover responsive>
                         <thead>
@@ -180,19 +186,18 @@ class Status extends React.Component {
                             return <StatusRow 
                                         user={user} 
                                         index={i}
-                                        updateUserData={this.updateUserData}
                                         catchUser={this.catchUser}
                                         toggleShow={this.toggleModal}
                                     />
                             })}
                         </tbody>
                     </Table>
-                    <PaginationApproved data={this.state.data} status={this.state.status}/>
+                    {/*<PaginationApproved data={this.state.data} status={this.state.status}/>*/}
                     </React.Fragment>
                     : <div className='text-center'>No hay elementos que mostrar</div>} 
                 </Tab>
                 <Tab eventKey="rejected" title="Rejected">
-                { !!rejected ?
+                { !!rejected.length ?
                     <React.Fragment>
                     <Table striped bordered hover responsive>
                         <thead>
@@ -210,14 +215,13 @@ class Status extends React.Component {
                                 return <StatusRow 
                                             user={user} 
                                             index={i}
-                                            updateUserData={this.updateUserData}
                                             catchUser={this.catchUser}
                                             toggleShow={this.toggleModal}
                                         />
                             })}
                         </tbody>
                     </Table>
-                    <PaginationRejected data={this.state.data} status={this.state.status}/> 
+                    {/*<PaginationRejected data={this.state.data} status={this.state.status}/> */}
                     </React.Fragment>
                     : <div className='text-center'>No hay elementos que mostrar</div>}         
                 </Tab>
@@ -240,7 +244,6 @@ class Status extends React.Component {
                                         return <StatusRow 
                                                     user={user} 
                                                     index={i}
-                                                    updateUserData={this.updateUserData}
                                                     catchUser={this.catchUser}
                                                     toggleShow={this.toggleModal}
                                                 />
@@ -248,7 +251,7 @@ class Status extends React.Component {
                                     }
                                 </tbody>
                             </Table>
-                            <PaginationBanned data={this.state.data} status={this.state.status}/>
+                           {/*} <PaginationBanned data={this.state.data} status={this.state.status}/>*/}
                         </React.Fragment>
                     : <div className='text-center'>No hay elementos que mostrar</div>}        
                 </Tab>

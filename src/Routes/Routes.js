@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from "react";
-import { withRouter } from "react-router-dom";
+//import { withRouter } from "react-router-dom";
 import Axios from 'axios';
 import Home from "pages/home/Home";
 //import Login from "pages/login/Login";
@@ -21,17 +21,19 @@ import { PrivateRoute, PublicRoute } from "helpers/routeRedirectAuth";
 /* import ResetPasswordRoutes from '../pages/reset-password'; */
 import { Toaster } from "react-hot-toast";
 //import { Redirect as RouterRedirect } from "react-router-dom";
+import { getEscorts, getUsers } from '../services/api'
 
 //const Home = React.lazy(() => import("pages/home/Home"));
+//const Escort = React.lazy(() => import("pages/escort/Escort"));
 const Login = React.lazy(() => import("pages/login/Login"));
 const Register = React.lazy(() => import("pages/register/Register"));
 const Announce = React.lazy(() => import("pages/announce/Announce"));
-//const Escort = React.lazy(() => import("pages/escort/Escort"));
 const Admin = React.lazy(() => import("pages/protected/admin/Admin"));
 const Dashboard = React.lazy(() => import("pages/protected/dashboard/Dashboard"));
 const Publish = React.lazy(() => import("pages/protected/publish/Publish"));
 const Profile = React.lazy(() => import("pages/protected/profile/Profile"));
 const Gallery = React.lazy(() => import("pages/protected/gallery/Gallery"));
+
 
 
 class Routes extends Component {
@@ -49,6 +51,7 @@ class Routes extends Component {
             authed: false,
             authenticated: false,
             users: [],
+            escorts: [],
             photos: [],
             pagination: ''
         };
@@ -57,7 +60,7 @@ class Routes extends Component {
         //this.fileGrabber = this.fileGrabber.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
         this.roleChanger = this.roleChanger.bind(this);
-        this.getUsers = this.getUsers.bind(this);
+        //this.getUsers = this.getUsers.bind(this);
         this.getPhotos = this.getPhotos.bind(this);
     }
 
@@ -102,7 +105,8 @@ class Routes extends Component {
 
     componentDidMount(){
         this.checkLoginStatus();
-        this.getUsers();
+        getEscorts().then( res=>this.setState({escorts: res.data || []}) );
+        getUsers().then( res=>this.setState({users: res.data || []}) );
         this.getPhotos()
     }
     
@@ -121,14 +125,14 @@ class Routes extends Component {
         this.setState({role: id})
     }
 
-    getUsers(){
+    /*getUsers(){
         const signal = this.controller.signal;
         const URI = 'http://159.65.218.115';
         fetch(`${URI}/users`, { signal })
             .then(res => res.json())
             .then(resJson => this.setState({users: resJson.data || [], pagination: resJson})) 
             .catch(e=>console.log('Error fetch Escorts: ', e)) 
-    }
+    }*/
     getPhotos(){
         const signal = this.controller.signal;
         const URI = 'https://picsum.photos';
@@ -148,7 +152,7 @@ class Routes extends Component {
         this.setState({file: pathName})
     }*/
     render() {
-        //console.log('Users State: ', this.state.users)
+        console.log('Escorts: ', this.state.escorts)
         return (
             <BrowserRouter>
                 <Header authed={this.state.authed} handleLogout={this.handleLogout}>AT PRO</Header>
@@ -160,7 +164,7 @@ class Routes extends Component {
                                 <>
                                     <Home
                                         {...props}
-                                        getUsers={this.getUsers}
+                                        getUsers={getUsers}
                                         users={this.state.users}
                                         photos={this.state.photos}
                                     />
@@ -306,6 +310,8 @@ class Routes extends Component {
                         >  
                             <>    
                                 <Escort 
+                                    getEscorts={getEscorts}
+                                    escorts={this.state.escorts}
                                     user={this.state.user}
                                 />
                             </>

@@ -20,7 +20,7 @@ class Home extends Component {
 
     componentDidMount() {
         this.props.getUsers();
-        getEscorts().then(res=>console.log('Get Escort: ',res))
+        //getEscorts().then(res=>console.log('Get Escort: ',res))
     }
     
     lowerCaseFirstLetter(string) {
