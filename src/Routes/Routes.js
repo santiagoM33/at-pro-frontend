@@ -2,25 +2,17 @@ import React, { Fragment, Component } from "react";
 //import { withRouter } from "react-router-dom";
 import Axios from 'axios';
 import Home from "pages/home/Home";
-//import Login from "pages/login/Login";
-//import Register from "pages/register/Register";
-//import Announce from "pages/announce/Announce";
 import Escort from "pages/escort/Escort";
 import ResetPasswordRequest from "pages/reset-password-request/ResetPasswordRequest";
 import ResetPassword from "pages/reset-password/ResetPassword";
-//import Admin from "pages/protected/admin/Admin";
-//import Dashboard from "pages/protected/dashboard/Dashboard";
-//import Publish from "pages/protected/publish/Publish";
-//import Profile from "pages/protected/profile/Profile";
-//import Gallery from "pages/protected/gallery/Gallery";
 import Error404 from "pages/404/Error404";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "partials/header/Header";
 import { PrivateRoute, PublicRoute } from "helpers/routeRedirectAuth";
 //import { makeCancelable } from "helpers/cancelablePromise";
 /* import ResetPasswordRoutes from '../pages/reset-password'; */
-import { Toaster } from "react-hot-toast";
 //import { Redirect as RouterRedirect } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import { getEscorts, getUsers } from '../services/api'
 
 //const Home = React.lazy(() => import("pages/home/Home"));
@@ -152,7 +144,8 @@ class Routes extends Component {
         this.setState({file: pathName})
     }*/
     render() {
-        console.log('Escorts: ', this.state.escorts)
+        //console.log('Escorts: ', this.state.escorts)
+        //console.log('Users: ', this.state.users)
         return (
             <BrowserRouter>
                 <Header authed={this.state.authed} handleLogout={this.handleLogout}>AT PRO</Header>
@@ -169,6 +162,20 @@ class Routes extends Component {
                                         photos={this.state.photos}
                                     />
                                 </>
+                            )}
+                        />
+                         <Route
+                            exact
+                            path={'/:alias'}
+                            //authed={!!this.state.user}  
+                            component={publicProps=> (                       
+                                <Escort 
+                                    {...publicProps}
+                                    getEscorts={getEscorts}
+                                    escorts={this.state.escorts}
+                                    users={this.state.users}
+                                    id={this.props.location} 
+                                />
                             )}
                         />
                         <PublicRoute
@@ -303,19 +310,7 @@ class Routes extends Component {
                                 )}
                             />
                          </React.Suspense>
-                        <Route
-                            path={'/:alias'}
-                            id={this.props.match} 
-                            authed={this.state.authed}                         
-                        >  
-                            <>    
-                                <Escort 
-                                    getEscorts={getEscorts}
-                                    escorts={this.state.escorts}
-                                    user={this.state.user}
-                                />
-                            </>
-                        </Route>
+                       
                        
                         <Route component={Error404} />
                     </Switch>

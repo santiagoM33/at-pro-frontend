@@ -3,24 +3,24 @@ import './Avatar.css'
 
 import Title, {SubTitle} from 'partials/title/Title';
 
-const Avatar = (props) => {
-    //console.log(props.user)
+const Avatar = ({user, loading, dataImg, escort}) => {
+   
     return ( 
         <div className='row'>
             <div className='pl-5 mx-auto'>
-                {props.loading 
+                {loading 
                         ? <div>Loading...</div>
                         :   <img 
                                 className='is-small circle'
-                                src={props.dataImg[0].url}
+                                src={!!escort && escort.profilePicture || dataImg }
                             />
-                    }  
+                }  
                 <Title
                     className='text-center mt-3 h3 text-dark'
-                >{props.user ? props.user.firstName : 'Invitado'}  {props.user ? props.user.lastName : ''}</Title>
+                >{!!user && user[0].alias || 'Invitado'}</Title>
                 <SubTitle
                     className='text-danger text-center h5'
-                >+54 2236 458787</SubTitle>
+                >{!!escort && escort[0].phone || 'N/A'}</SubTitle>
                 <SubTitle
                     className='text-center h6 text-dark'
                 >80-55-85</SubTitle>

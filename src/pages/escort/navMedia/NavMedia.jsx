@@ -96,7 +96,7 @@ class NavMedia extends Component {
                         }
                     </div>
                 </div>
-            </div>
+            </div> 
         );
     }
 }

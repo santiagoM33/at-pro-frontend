@@ -18,7 +18,7 @@ class Escort extends Component {
          }
     }
     
-    controller = new AbortController();
+    /*controller = new AbortController();
 
     async componentDidMount(){
         const signal = this.controller.signal;
@@ -27,24 +27,33 @@ class Escort extends Component {
         const data = await res.json()
         this.setState({dataImg: data, loading:false});
     }
-
-    componentWillUnmount(){this.controller.abort()}
+ 
+    componentWillUnmount(){this.controller.abort()}*/
 
     render() { 
+        const {users, escorts} = this.props
+        let user, escort;
+        if(!!users.length && !!escorts.length) {
+            user= users.filter(e=>e.id === 16);
+            escort = escorts.filter(e=>e.userId === 33)
+        }
+        console.log('Users: ', users)
+        console.log('Escorts', escorts)
         return ( 
             <div className='container'>
                 <div className='offset-md-2 col-md-8 mt-3 mt-sm-5 p-2'>                    
                     <Row className='col-12'>
                        <Avatar
-                        user={this.props.user}
-                        dataImg={this.state.dataImg}
-                        loading={this.state.loading}
+                            user={user}
+                            escort={escort}
+                            dataImg={this.state.dataImg}
+                            loading={!this.state.loading}
                        />
                     </Row>
                 </div>
-                <div className='offset-md-2 col-md-8 my-1 mt-sm-5 p-2 shadow-sm rounded-sm'>                    
+                <div className='offset-md-2 col-md-8 mb-1 mt-sm-5 p-2 shadow-sm rounded-sm'>                    
                     <Row className='col-12'>
-                       <Contact />
+                       <Contact escort={escort}/>
                     </Row>
                 </div>
                 <div className='offset-md-2 col-md-8 my-1 mt-sm-5 p-2 shadow-sm rounded-sm'>                    
@@ -52,7 +61,7 @@ class Escort extends Component {
                        <PersonalData />
                     </Row>
                 </div>
-                <div className='offset-md-2 col-md-8 my-1 mt-sm-5 p-2 shadow-sm rounded-sm'>                    
+                {/*<div className='offset-md-2 col-md-8 my-1 mt-sm-5 p-2 shadow-sm rounded-sm'>                    
                     <Row className='col-12'>
                         <Social />
                     </Row>
@@ -71,9 +80,8 @@ class Escort extends Component {
                             authed={this.props.authed}
                         />
                     </Row>
-                </div>
-        </div>
-
+        </div>*/}
+            </div>
          );
     }
 }
